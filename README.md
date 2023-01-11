@@ -7,7 +7,6 @@ A clone from Sludge Life's Crypt Crepper for iOS
 - Swift 5
 
 ## Libraries
-- CoreMotion
 - SpriteKit
 - SwiftUI
 
