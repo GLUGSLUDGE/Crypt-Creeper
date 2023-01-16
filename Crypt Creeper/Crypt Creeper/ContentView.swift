@@ -10,12 +10,13 @@ import SpriteKit
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(test: "unchanged")
+        ContentView()
     }
 }
 
-// A simple game scene with falling boxes
-class GameScene: SKScene {
+class GameScene: SKScene, ObservableObject {
+    @Published var coins:String = "19"
+    
     override func didMove(to view: SKView) {
         physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
         
@@ -26,12 +27,13 @@ class GameScene: SKScene {
         let location = touch.location(in: self)
         let box = SKSpriteNode(color: .red, size: CGSize(width: 10, height: 10))
         box.position = location
+        createGrid()
         
         addChild(box)
     }
     
     func createGrid(){
-        print("heloo")
+        coins = "IT IS WORKING"
         let startX = CGFloat(17)
         let startY = CGFloat(17)
         var x, y: CGFloat
@@ -48,15 +50,15 @@ class GameScene: SKScene {
 }
 
 struct ContentView: View {
-    @State var test: String
     
-    var scene: GameScene {
+    @ObservedObject var scene: GameScene = {
         let scene = GameScene()
         scene.size = CGSize(width: 100, height: 100)
         scene.scaleMode = .aspectFit
         scene.backgroundColor = .blue
         return scene
-    }
+    }()
+
 
     var body: some View {
         ZStack(){
@@ -85,7 +87,7 @@ struct ContentView: View {
                             Spacer()
                         }
                         HStack{
-                            Text(test)
+                            Text(scene.coins)
                             Spacer()
                         }
                         Spacer()
