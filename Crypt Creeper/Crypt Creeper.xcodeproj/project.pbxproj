@@ -11,6 +11,7 @@
 		284FBEA3296C61ED0029C958 /* Crypt_CreeperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284FBEA2296C61ED0029C958 /* Crypt_CreeperApp.swift */; };
 		284FBEA5296C61ED0029C958 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284FBEA4296C61ED0029C958 /* ContentView.swift */; };
 		284FBEA7296C61EE0029C958 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 284FBEA6296C61EE0029C958 /* Assets.xcassets */; };
+		28D274E02975C5EB00E2CA16 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D274DF2975C5EB00E2CA16 /* ColorExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		284FBEA2296C61ED0029C958 /* Crypt_CreeperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypt_CreeperApp.swift; sourceTree = "<group>"; };
 		284FBEA4296C61ED0029C958 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		284FBEA6296C61EE0029C958 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		28D274DF2975C5EB00E2CA16 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,12 +61,21 @@
 		284FBEA1296C61ED0029C958 /* Crypt Creeper */ = {
 			isa = PBXGroup;
 			children = (
+				28D274DE2975C5D100E2CA16 /* Extensions */,
 				284FBEA2296C61ED0029C958 /* Crypt_CreeperApp.swift */,
 				284FBEA4296C61ED0029C958 /* ContentView.swift */,
 				284FBEA6296C61EE0029C958 /* Assets.xcassets */,
 				283F5533296C8CBF0055AF58 /* Preview Content */,
 			);
 			path = "Crypt Creeper";
+			sourceTree = "<group>";
+		};
+		28D274DE2975C5D100E2CA16 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				28D274DF2975C5EB00E2CA16 /* ColorExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +148,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28D274E02975C5EB00E2CA16 /* ColorExtension.swift in Sources */,
 				284FBEA5296C61ED0029C958 /* ContentView.swift in Sources */,
 				284FBEA3296C61ED0029C958 /* Crypt_CreeperApp.swift in Sources */,
 			);

@@ -55,7 +55,7 @@ struct ContentView: View {
         let scene = GameScene()
         scene.size = CGSize(width: 100, height: 100)
         scene.scaleMode = .aspectFit
-        scene.backgroundColor = .blue
+        scene.backgroundColor = UIColor(named: "ColorGameBackground")!
         return scene
     }()
 
@@ -64,20 +64,26 @@ struct ContentView: View {
         ZStack(){
             GeometryReader { geo in
                 ZStack{
-                    Color.gray
+                    VStack{
+                        Color.ui.gameBackground
+                        Color.ui.UIBackground
+                    }
+                    
                     VStack{
                         Spacer()
                         HStack{
                             Spacer()
                             Text("SCORE")
+                                .foregroundColor(Color.ui.text)
                         }
                         SpriteView(scene: scene)
                             .frame(width: geo.size.width, height: geo.size.width)
-                            .border(Color.green)
                         HStack{
                             Text("HEALTH")
+                                .foregroundColor(Color.ui.text)
                             Spacer()
                             Text("LEVEL")
+                                .foregroundColor(Color.ui.text)
                         }
                         HStack{
                             Rectangle()
@@ -88,6 +94,7 @@ struct ContentView: View {
                         }
                         HStack{
                             Text(scene.coins)
+                                .foregroundColor(Color.ui.text)
                             Spacer()
                         }
                         Spacer()
