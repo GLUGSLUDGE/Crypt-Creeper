@@ -14,5 +14,9 @@ extension Color {
         let gameBackground = Color("ColorGameBackground")
         let UIBackground = Color("ColorUIBackground")
         let text = Color("ColorText")
+        let colorBGBlack = Color("ColorBGBlack")
+        let colorBGPink = Color("ColorBGPink")
+        let colorBGPinkDark = Color("ColorBGPinkDark")
+        let colorBGPurple = Color("ColorBGPurple")
     }
 }
