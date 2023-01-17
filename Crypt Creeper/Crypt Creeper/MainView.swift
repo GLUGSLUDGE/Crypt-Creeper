@@ -11,7 +11,12 @@ struct MainView: View {
     var body: some View {
         GeometryReader { geo in
             ZStack{
-                Color.ui.colorBGPinkDark
+                VStack{
+                    Color.ui.colorBGPinkDark
+                        .padding(-10)
+                    Color.ui.colorBGBlack
+                }
+               
                 Image(uiImage: UIImage(named: "ImageBGTitle03")!)
                     .resizable()
                     .scaledToFill()
@@ -28,6 +33,7 @@ struct MainView: View {
                         .frame(width: geo.size.width)
                         .padding(-10)
                     Rectangle()
+                        .foregroundColor(Color.ui.colorBGBlack)
                         .frame(width: geo.size.width, height: geo.size.width/4)
                 }
                 

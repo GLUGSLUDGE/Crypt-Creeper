@@ -64,11 +64,7 @@ struct ContentView: View {
         ZStack(){
             GeometryReader { geo in
                 ZStack{
-                    VStack{
                         Color.ui.gameBackground
-                        Color.ui.UIBackground
-                    }
-                    
                     VStack{
                         Spacer()
                         HStack{
