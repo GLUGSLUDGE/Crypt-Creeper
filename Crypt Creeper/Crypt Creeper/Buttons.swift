@@ -15,9 +15,27 @@ struct Buttons: View {
             } label: {
                 buttonLabel(title: "CORRECTO")
             }
-            
+            HStack{
+                Button {
+                    //
+                } label: {
+                    buttonImageLabel(SFSymbolName: "person.fill")
+                }
+                Button {
+                    //
+                } label: {
+                    buttonImageLabel(SFSymbolName: "trophy.fill")
+                }
+                Button {
+                    //
+                } label: {
+                    buttonImageLabel(SFSymbolName: "gearshape.fill")
+                }
+
+            }
             Rectangle()
                 .foregroundColor(Color.red)
+            
         }
         
         
@@ -31,16 +49,32 @@ struct buttonLabel: View {
             Rectangle()
                 .frame(width: UIScreen.main.bounds.size.width/1.1, height: UIScreen.main.bounds.size.height/11.1)
                 .foregroundColor(Color.ui.textYellow)
-            
-            
             Rectangle()
                 .frame(width: UIScreen.main.bounds.size.width/1.1-10, height: UIScreen.main.bounds.height/11.1-10)
-                .foregroundColor(Color.black)
+                .foregroundColor(Color.ui.colorBGBlack)
             
             Text(title)
                 .foregroundColor(Color.ui.textYellow)
                 .font(.system(size: 30))
                 .fontWeight(.black)
+        }
+    }
+}
+
+struct buttonImageLabel: View {
+    @State var SFSymbolName:String
+    var body: some View {
+        ZStack{
+            Rectangle()
+                .frame(width: UIScreen.main.bounds.size.width/3.45, height: UIScreen.main.bounds.height/11.1)
+                .foregroundColor(Color.ui.textYellow)
+            Rectangle()
+                .frame(width: UIScreen.main.bounds.size.width/3.45-10, height: UIScreen.main.bounds.height/11.1-10)
+                .foregroundColor(Color.ui.colorBGBlack)
+           
+            Image(systemName: SFSymbolName)
+                .foregroundColor(Color.ui.textYellow)
+                .font(Font.system(.largeTitle).bold())
         }
     }
 }
