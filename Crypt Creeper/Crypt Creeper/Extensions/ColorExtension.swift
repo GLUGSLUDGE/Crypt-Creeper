@@ -18,5 +18,6 @@ extension Color {
         let colorBGPink = Color("ColorBGPink")
         let colorBGPinkDark = Color("ColorBGPinkDark")
         let colorBGPurple = Color("ColorBGPurple")
+        let textYellow = Color("ColorTextYellow")
     }
 }
