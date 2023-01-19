@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MainView: View {
+struct HomeView: View {
     var body: some View {
         GeometryReader { geo in
             ZStack{
