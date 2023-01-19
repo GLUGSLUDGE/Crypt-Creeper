@@ -12,7 +12,7 @@
 		284FBEA3296C61ED0029C958 /* Crypt_CreeperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284FBEA2296C61ED0029C958 /* Crypt_CreeperApp.swift */; };
 		284FBEA5296C61ED0029C958 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284FBEA4296C61ED0029C958 /* ContentView.swift */; };
 		284FBEA7296C61EE0029C958 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 284FBEA6296C61EE0029C958 /* Assets.xcassets */; };
-		28712E672976F04000E74C52 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28712E662976F04000E74C52 /* MainView.swift */; };
+		28712E672976F04000E74C52 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28712E662976F04000E74C52 /* HomeView.swift */; };
 		28D274E02975C5EB00E2CA16 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D274DF2975C5EB00E2CA16 /* ColorExtension.swift */; };
 		28FAF85129799F4E0006BB60 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FAF85029799F4E0006BB60 /* Buttons.swift */; };
 /* End PBXBuildFile section */
@@ -25,7 +25,7 @@
 		284FBEA2296C61ED0029C958 /* Crypt_CreeperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypt_CreeperApp.swift; sourceTree = "<group>"; };
 		284FBEA4296C61ED0029C958 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		284FBEA6296C61EE0029C958 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		28712E662976F04000E74C52 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		28712E662976F04000E74C52 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		28D274DF2975C5EB00E2CA16 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		28FAF85029799F4E0006BB60 /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -82,7 +82,7 @@
 				284FBEA2296C61ED0029C958 /* Crypt_CreeperApp.swift */,
 				284FBEA4296C61ED0029C958 /* ContentView.swift */,
 				284FBEA6296C61EE0029C958 /* Assets.xcassets */,
-				28712E662976F04000E74C52 /* MainView.swift */,
+				28712E662976F04000E74C52 /* HomeView.swift */,
 				28FAF85029799F4E0006BB60 /* Buttons.swift */,
 				283F5533296C8CBF0055AF58 /* Preview Content */,
 			);
@@ -170,7 +170,7 @@
 			files = (
 				28FAF85129799F4E0006BB60 /* Buttons.swift in Sources */,
 				28D274E02975C5EB00E2CA16 /* ColorExtension.swift in Sources */,
-				28712E672976F04000E74C52 /* MainView.swift in Sources */,
+				28712E672976F04000E74C52 /* HomeView.swift in Sources */,
 				284FBEA5296C61ED0029C958 /* ContentView.swift in Sources */,
 				284FBEA3296C61ED0029C958 /* Crypt_CreeperApp.swift in Sources */,
 			);
@@ -309,8 +309,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -320,9 +321,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.glug.Crypt-Creeper";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -342,8 +346,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -353,9 +358,12 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.glug.Crypt-Creeper";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
