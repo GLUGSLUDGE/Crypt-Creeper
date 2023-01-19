@@ -37,11 +37,50 @@ struct HomeView: View {
                         .frame(width: geo.size.width, height: geo.size.width/4)
                 }
                 
-
                 Image(uiImage: UIImage(named: "ImageKeyHero")!)
                     .resizable()
                     .scaledToFit()
                     .aspectRatio(contentMode: .fit)
+                VStack{
+                    Spacer()
+                    Image("ImageCryptCreeperLogo")
+                        .resizable()
+                        .scaledToFit()
+                        .padding(.horizontal, 10)
+                    Spacer()
+                    Spacer()
+                    Spacer()
+                    Button {
+                        //Play
+                    } label: {
+                        buttonLabel(title: "PLAY")
+                    }
+                    Button {
+                        //How to Play
+                    } label: {
+                        buttonLabel(title: "HOW TO PLAY")
+                    }
+                    HStack{
+                        Button {
+                            //Profile
+                        } label: {
+                            buttonImageLabel(SFSymbolName: "person.fill")
+                        }
+                        Button {
+                            //Leaderboards
+                        } label: {
+                            buttonImageLabel(SFSymbolName: "trophy.fill")
+                        }
+                        Button {
+                            //Settings
+                        } label: {
+                            buttonImageLabel(SFSymbolName: "gearshape.fill")
+                        }
+
+                    }
+                }.padding(.bottom, 30)
+                
+
                 
             }
             .ignoresSafeArea()
@@ -51,6 +90,6 @@ struct HomeView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        HomeView()
     }
 }
