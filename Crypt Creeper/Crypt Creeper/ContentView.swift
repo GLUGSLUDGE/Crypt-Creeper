@@ -64,7 +64,11 @@ struct ContentView: View {
         ZStack(){
             GeometryReader { geo in
                 ZStack{
+                    VStack{
                         Color.ui.gameBackground
+                        Color.ui.UIBackground
+                    }
+                        
                     VStack{
                         Spacer()
                         HStack{
@@ -74,6 +78,7 @@ struct ContentView: View {
                         }
                         SpriteView(scene: scene)
                             .frame(width: geo.size.width, height: geo.size.width)
+                            .border(Color.ui.gameBackground)
                         HStack{
                             Text("HEALTH")
                                 .foregroundColor(Color.ui.text)
@@ -100,7 +105,9 @@ struct ContentView: View {
                     }
                 }
                 .ignoresSafeArea()
+                
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
