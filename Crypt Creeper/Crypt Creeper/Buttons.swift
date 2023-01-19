@@ -9,34 +9,41 @@ import SwiftUI
 
 struct Buttons: View {
     var body: some View {
-        VStack{
-            Button {
-                //
-            } label: {
-                buttonLabel(title: "CORRECTO")
-            }
-            HStack{
+        ZStack{
+            Color.blue
+                .ignoresSafeArea()
+            VStack{
+               
                 Button {
                     //
                 } label: {
-                    buttonImageLabel(SFSymbolName: "person.fill")
+                    buttonLabel(title: "CORRECTO")
                 }
-                Button {
-                    //
-                } label: {
-                    buttonImageLabel(SFSymbolName: "trophy.fill")
-                }
-                Button {
-                    //
-                } label: {
-                    buttonImageLabel(SFSymbolName: "gearshape.fill")
+                HStack{
+                    Button {
+                        //
+                    } label: {
+                        buttonImageLabel(SFSymbolName: "person.fill")
+                    }
+                    Button {
+                        //
+                    } label: {
+                        buttonImageLabel(SFSymbolName: "trophy.fill")
+                    }
+                    Button {
+                        //
+                    } label: {
+                        buttonImageLabel(SFSymbolName: "gearshape.fill")
+                    }
+
                 }
 
+                Rectangle()
+                    .foregroundColor(Color.red)
+                
             }
-            Rectangle()
-                .foregroundColor(Color.red)
-            
         }
+       
         
         
     }
@@ -78,8 +85,6 @@ struct buttonImageLabel: View {
         }
     }
 }
-
-
 
 struct Buttons_Previews: PreviewProvider {
     static var previews: some View {
