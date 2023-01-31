@@ -9,10 +9,13 @@
 /* Begin PBXBuildFile section */
 		283F5532296C8CAA0055AF58 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 283F5531296C8CAA0055AF58 /* Preview Assets.xcassets */; };
 		2842ECA72979A83400C4B6A3 /* m6x11.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2842ECA62979A83400C4B6A3 /* m6x11.ttf */; };
+		2845F73A2982E8F600236405 /* m5x7.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2845F7382982E8F600236405 /* m5x7.ttf */; };
+		2845F73B2982E8F600236405 /* m3x6.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2845F7392982E8F600236405 /* m3x6.ttf */; };
 		284FBEA3296C61ED0029C958 /* Crypt_CreeperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284FBEA2296C61ED0029C958 /* Crypt_CreeperApp.swift */; };
 		284FBEA5296C61ED0029C958 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284FBEA4296C61ED0029C958 /* ContentView.swift */; };
 		284FBEA7296C61EE0029C958 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 284FBEA6296C61EE0029C958 /* Assets.xcassets */; };
 		28712E672976F04000E74C52 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28712E662976F04000E74C52 /* HomeView.swift */; };
+		28AA776D29819AC400953AD3 /* SanMarinoBeach.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28AA776C29819AC400953AD3 /* SanMarinoBeach.ttf */; };
 		28D274E02975C5EB00E2CA16 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D274DF2975C5EB00E2CA16 /* ColorExtension.swift */; };
 		28FAF85129799F4E0006BB60 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FAF85029799F4E0006BB60 /* Buttons.swift */; };
 /* End PBXBuildFile section */
@@ -21,11 +24,14 @@
 		283F5531296C8CAA0055AF58 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2842ECA62979A83400C4B6A3 /* m6x11.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = m6x11.ttf; sourceTree = "<group>"; };
 		2842ECA82979A85A00C4B6A3 /* Crypt-Creeper-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Crypt-Creeper-Info.plist"; sourceTree = SOURCE_ROOT; };
+		2845F7382982E8F600236405 /* m5x7.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = m5x7.ttf; sourceTree = "<group>"; };
+		2845F7392982E8F600236405 /* m3x6.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = m3x6.ttf; sourceTree = "<group>"; };
 		284FBE9F296C61ED0029C958 /* Crypt Creeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Crypt Creeper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		284FBEA2296C61ED0029C958 /* Crypt_CreeperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crypt_CreeperApp.swift; sourceTree = "<group>"; };
 		284FBEA4296C61ED0029C958 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		284FBEA6296C61EE0029C958 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		28712E662976F04000E74C52 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		28AA776C29819AC400953AD3 /* SanMarinoBeach.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SanMarinoBeach.ttf; sourceTree = "<group>"; };
 		28D274DF2975C5EB00E2CA16 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		28FAF85029799F4E0006BB60 /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -53,6 +59,9 @@
 			isa = PBXGroup;
 			children = (
 				2842ECA62979A83400C4B6A3 /* m6x11.ttf */,
+				2845F7392982E8F600236405 /* m3x6.ttf */,
+				2845F7382982E8F600236405 /* m5x7.ttf */,
+				28AA776C29819AC400953AD3 /* SanMarinoBeach.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -155,7 +164,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2845F73A2982E8F600236405 /* m5x7.ttf in Resources */,
 				283F5532296C8CAA0055AF58 /* Preview Assets.xcassets in Resources */,
+				2845F73B2982E8F600236405 /* m3x6.ttf in Resources */,
+				28AA776D29819AC400953AD3 /* SanMarinoBeach.ttf in Resources */,
 				2842ECA72979A83400C4B6A3 /* m6x11.ttf in Resources */,
 				284FBEA7296C61EE0029C958 /* Assets.xcassets in Resources */,
 			);

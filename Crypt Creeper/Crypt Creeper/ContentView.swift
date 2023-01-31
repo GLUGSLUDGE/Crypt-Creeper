@@ -13,40 +13,624 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+enum EntityType: CaseIterable{
+    case Empty
+    case Player
+    case Portal
+    case Enemy
+    case Sword
+    case Shield
+    case Potion
+    case Coin
+    case Shop
+    case Temple
+    case Boss
+}
+class Tile: SKSpriteNode{
+    var type:EntityType = EntityType.Empty
+    var power:Int = 0
+}
 
 class GameScene: SKScene, ObservableObject {
-    @Published var coins:String = "19"
+    @Published var coins:String = "0"
+    @Published var health:String = "3"
+    @Published var level:Int = 18
+    @Published var score:String = "0"
+    @Published var xp:String = "0"
+    
+    let intSize = 15
+    var locations:[Array<CGFloat>] = []
     
     override func didMove(to view: SKView) {
-        physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
+        locations = gridLocations()
         
+        let portalrandomX = Int.random(in: 1...5)
+        var enemyAmount = 0
+        var potionAmount = 0
+        var shieldAmount = 0
+        var swordAmount = 0
+        var coinAmount = 0
+        var npcAmount = 0
+        
+        for i in 1...5 {
+            for j in 1...5{
+                let newTile = Tile(imageNamed: "ICON_ENTITY_EMPTY")
+                newTile.name = "EMPTY"
+                newTile.size = CGSize(width: intSize, height: intSize)
+                newTile.position = CGPoint(x: locations[0][i], y: locations[1][j])
+                if i == 3 && j == 1 { //Spawn tile
+                    newTile.texture = SKTexture(imageNamed: "ICON_ENTITY_PLAYER")
+                    newTile.name = "PLAYER"
+                } else if j == 5 && i == portalrandomX { //Portal tile
+                    if level == 20 {
+                        spawnTile(tile: newTile, type: EntityType.Boss)
+                    } else {
+                        spawnTile(tile: newTile, type: EntityType.Portal)
+                    }
+                } else { //Every other tile
+                    let chance = Int.random(in: 1...100)
+                    if chance <= 50 {
+                        if enemyAmount < maxAmountsPerLevel(type: EntityType.Enemy){
+                            spawnTile(tile: newTile, type: EntityType.Enemy)
+                            enemyAmount+=1
+                        }
+                    } else if chance <= 60 {
+                        if potionAmount < maxAmountsPerLevel(type: EntityType.Potion){
+                            spawnTile(tile: newTile, type: EntityType.Potion)
+                            potionAmount+=1
+                        }
+                    } else if chance <= 70 {
+                        if shieldAmount < maxAmountsPerLevel(type: EntityType.Shield){
+                            spawnTile(tile: newTile, type: EntityType.Shield)
+                            shieldAmount+=1
+                        }
+                    }
+                    else if chance <= 80 {
+                        if swordAmount < maxAmountsPerLevel(type: EntityType.Sword){
+                            spawnTile(tile: newTile, type: EntityType.Sword)
+                            swordAmount+=1
+                        }
+                    } else if chance <= 90 {
+                        if coinAmount < maxAmountsPerLevel(type: EntityType.Coin){
+                            spawnTile(tile: newTile, type: EntityType.Coin)
+                            coinAmount+=1
+                        }
+                    } else {
+                        randomTile(tile: newTile)
+                    }
+                }
+                if newTile.name == "EMPTY" {
+                    let npcChance = Int.random(in: 1...100)
+                    if npcChance > 90 && level != 1 {
+                        if npcAmount < 1 {
+                            let type = Int.random(in: 1...2)
+                            if type == 1{
+                                newTile.name = "SHOP"
+                                newTile.texture = SKTexture(imageNamed: "ICON_ENTITY_SHOP")
+                            } else {
+                                newTile.name = "TEMPLE"
+                                newTile.texture = SKTexture(imageNamed: "ICON_ENTITY_TEMPLE")
+                            }
+                            npcAmount = 1
+                        }
+                    } else {
+                        randomTile(tile: newTile)
+                    }
+                }
+                /*if newTile.power != 0*/
+                    
+                let powerLabel = SKLabelNode(text: newTile.name)
+                    powerLabel.name = "LABEL"
+                    powerLabel.fontSize = 6
+                    powerLabel.fontName = "m6x11"
+                    powerLabel.fontColor = UIColor(.black)
+                    powerLabel.zPosition = newTile.zPosition+12
+                    powerLabel.position = CGPoint(x:5,y:-7)
+                    newTile.addChild(powerLabel)
+                
+                addChild(newTile)
+            }
+        }
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
-        let box = SKSpriteNode(color: .red, size: CGSize(width: 10, height: 10))
-        box.position = location
-        createGrid()
+        let touchNode = atPoint(location)
         
-        addChild(box)
-    }
-    
-    func createGrid(){
-        coins = "IT IS WORKING"
-        let startX = CGFloat(17)
-        let startY = CGFloat(17)
-        var x, y: CGFloat
-        for i in 1...5{
-            x = (startX*CGFloat(i))
-            for j in 1...5{
-                y = (startY*CGFloat(j))
-                let box = SKSpriteNode(color: .red, size: CGSize(width: 10, height: 10))
-                box.position = CGPoint(x: x, y: y)
-                addChild(box)
+        if ((touchNode as? SKScene) == nil) { //<-- Node is touched
+            if touchNode.name != "PLAYER" && touchNode.name != "LABEL" {
+                (childNode(withName: "PLAYER") as! SKSpriteNode).texture = SKTexture(imageNamed: "ICON_ENTITY_EMPTY")
+                childNode(withName: "PLAYER")?.name = "EMPTY"
+                touchNode.name = "PLAYER"
+                (touchNode as! SKSpriteNode).texture = SKTexture(imageNamed: "ICON_ENTITY_PLAYER")
             }
         }
     }
+    
+    
+    //MARK: - Max and min amounts of entities and powers
+    //This function returns the max amount of entities per level
+    func maxAmountsPerLevel(type: EntityType) -> Int {
+        var max = 0
+        switch(type){
+        case EntityType.Empty:
+            max = 0
+        case EntityType.Player:
+            max = 0
+        case EntityType.Portal:
+            max = 0
+        case EntityType.Enemy:
+            switch(level){
+            case 1: max = 12
+            case 2: max = 12
+            case 3: max = 12
+            case 4: max = 12
+            case 5: max = 14
+            case 6: max = 14
+            case 7: max = 14
+            case 8: max = 14
+            case 9: max = 14
+            case 10: max = 16
+            case 11: max = 16
+            case 12: max = 16
+            case 13: max = 16
+            case 14: max = 16
+            case 15: max = 16
+            case 16: max = 17
+            case 17: max = 17
+            case 18: max = 17
+            case 19: max = 17
+            case 20: max = 17
+            default: max = 12
+            }
+        case EntityType.Sword:
+            switch(level){
+            case 1: max = 4
+            case 2: max = 5
+            case 3: max = 5
+            case 4: max = 5
+            case 5: max = 5
+            case 6: max = 5
+            case 7: max = 5
+            case 8: max = 5
+            case 9: max = 5
+            case 10: max = 5
+            case 11: max = 4
+            case 12: max = 4
+            case 13: max = 4
+            case 14: max = 3
+            case 15: max = 3
+            case 16: max = 3
+            case 17: max = 6
+            case 18: max = 6
+            case 19: max = 6
+            case 20: max = 3
+            default: max = 4
+            }
+        case EntityType.Shield:
+            switch(level){
+            case 1: max = 4
+            case 2: max = 4
+            case 3: max = 4
+            case 4: max = 4
+            case 5: max = 4
+            case 6: max = 4
+            case 7: max = 4
+            case 8: max = 4
+            case 9: max = 4
+            case 10: max = 5
+            case 11: max = 3
+            case 12: max = 3
+            case 13: max = 1
+            case 14: max = 3
+            case 15: max = 3
+            case 16: max = 3
+            case 17: max = 2
+            case 18: max = 4
+            case 19: max = 5
+            case 20: max = 3
+            default: max = 4
+            }
+        case EntityType.Potion:
+            switch(level){
+            case 1: max = 4
+            case 2: max = 4
+            case 3: max = 3
+            case 4: max = 2
+            case 5: max = 1
+            case 6: max = 2
+            case 7: max = 2
+            case 8: max = 1
+            case 9: max = 2
+            case 10: max = 3
+            case 11: max = 2
+            case 12: max = 2
+            case 13: max = 2
+            case 14: max = 1
+            case 15: max = 4
+            case 16: max = 2
+            case 17: max = 3
+            case 18: max = 3
+            case 19: max = 1
+            case 20: max = 2
+            default: max = 4
+            }
+        case EntityType.Coin:
+            switch(level){
+            case 1: max = 2
+            case 2: max = 2
+            case 3: max = 3
+            case 4: max = 3
+            case 5: max = 3
+            case 6: max = 2
+            case 7: max = 2
+            case 8: max = 1
+            case 9: max = 2
+            case 10: max = 3
+            case 11: max = 2
+            case 12: max = 2
+            case 13: max = 4
+            case 14: max = 3
+            case 15: max = 2
+            case 16: max = 1
+            case 17: max = 2
+            case 18: max = 4
+            case 19: max = 2
+            case 20: max = 1
+            default: max = 4
+            }
+        case EntityType.Shop:
+            if level != 1{
+                max = 1
+            } else {
+                max = 0
+            }
+        case EntityType.Temple:
+            if level != 1{
+                max = 1
+            } else {
+                max = 0
+            }
+        case EntityType.Boss:
+            max = 0
+        }
+        return max
+    }
+    //This function returns the max amount of POWER per entity
+    func maxAmounts(type: EntityType) -> Int{
+        var max = 0
+        switch(type){
+        case EntityType.Empty:
+            max = 0
+        case EntityType.Player:
+            max = 0
+        case EntityType.Portal:
+            max = 0
+        case EntityType.Enemy:
+            switch(level){
+            case 1: max = 2
+            case 2: max = 2
+            case 3: max = 3
+            case 4: max = 3
+            case 5: max = 3
+            case 6: max = 3
+            case 7: max = 4
+            case 8: max = 4
+            case 9: max = 4
+            case 10: max = 4
+            case 11: max = 5
+            case 12: max = 6
+            case 13: max = 6
+            case 14: max = 6
+            case 15: max = 6
+            case 16: max = 6
+            case 17: max = 6
+            case 18: max = 7
+            case 19: max = 7
+            case 20: max = 7
+            default: max = 7
+            }
+        case EntityType.Sword:
+            switch(level){
+            case 1: max = 2
+            case 2: max = 2
+            case 3: max = 3
+            case 4: max = 3
+            case 5: max = 3
+            case 6: max = 3
+            case 7: max = 3
+            case 8: max = 3
+            case 9: max = 3
+            case 10: max = 4
+            case 11: max = 4
+            case 12: max = 4
+            case 13: max = 4
+            case 14: max = 3
+            case 15: max = 3
+            case 16: max = 3
+            case 17: max = 4
+            case 18: max = 5
+            case 19: max = 5
+            case 20: max = 5
+            default: max = 4
+            }
+        case EntityType.Shield:
+            switch(level){
+            case 1: max = 2
+            case 2: max = 2
+            case 3: max = 3
+            case 4: max = 3
+            case 5: max = 3
+            case 6: max = 3
+            case 7: max = 3
+            case 8: max = 3
+            case 9: max = 3
+            case 10: max = 4
+            case 11: max = 4
+            case 12: max = 4
+            case 13: max = 4
+            case 14: max = 3
+            case 15: max = 3
+            case 16: max = 3
+            case 17: max = 4
+            case 18: max = 5
+            case 19: max = 5
+            case 20: max = 5
+            default: max = 4
+            }
+        case EntityType.Potion:
+            switch(level){
+            case 1: max = 2
+            case 2: max = 2
+            case 3: max = 2
+            case 4: max = 2
+            case 5: max = 2
+            case 6: max = 2
+            case 7: max = 2
+            case 8: max = 2
+            case 9: max = 2
+            case 10: max = 3
+            case 11: max = 3
+            case 12: max = 3
+            case 13: max = 2
+            case 14: max = 4
+            case 15: max = 4
+            case 16: max = 2
+            case 17: max = 2
+            case 18: max = 2
+            case 19: max = 4
+            case 20: max = 3
+            default: max = 4
+            }
+        case EntityType.Coin:
+            switch(level){
+            case 1: max = 2
+            case 2: max = 2
+            case 3: max = 2
+            case 4: max = 2
+            case 5: max = 2
+            case 6: max = 2
+            case 7: max = 2
+            case 8: max = 2
+            case 9: max = 2
+            case 10: max = 2
+            case 11: max = 3
+            case 12: max = 3
+            case 13: max = 3
+            case 14: max = 3
+            case 15: max = 3
+            case 16: max = 3
+            case 17: max = 3
+            case 18: max = 3
+            case 19: max = 3
+            case 20: max = 3
+            default: max = 3
+            }
+        case EntityType.Shop:
+            max = 0
+        case EntityType.Temple:
+            max = 0
+        case EntityType.Boss:
+            max = 8
+        }
+        return max
+    }
+    //This function return the min amount of POWER per entity
+    func minAmounts(type: EntityType) -> Int{
+        var min = 0
+        switch(type){
+        case EntityType.Empty:
+            min = 0
+        case EntityType.Player:
+            min = 0
+        case EntityType.Portal:
+            min = 0
+        case EntityType.Enemy:
+            switch(level){
+            case 1: min = 1
+            case 2: min = 1
+            case 3: min = 1
+            case 4: min = 1
+            case 5: min = 1
+            case 6: min = 1
+            case 7: min = 2
+            case 8: min = 2
+            case 9: min = 2
+            case 10: min = 2
+            case 11: min = 2
+            case 12: min = 2
+            case 13: min = 2
+            case 14: min = 3
+            case 15: min = 3
+            case 16: min = 3
+            case 17: min = 4
+            case 18: min = 4
+            case 19: min = 5
+            case 20: min = 5
+            default: min = 1
+            }
+        case EntityType.Sword:
+            switch(level){
+            case 1: min = 1
+            case 2: min = 1
+            case 3: min = 1
+            case 4: min = 1
+            case 5: min = 1
+            case 6: min = 1
+            case 7: min = 2
+            case 8: min = 2
+            case 9: min = 2
+            case 10: min = 2
+            case 11: min = 2
+            case 12: min = 2
+            case 13: min = 2
+            case 14: min = 3
+            case 15: min = 3
+            case 16: min = 3
+            case 17: min = 3
+            case 18: min = 3
+            case 19: min = 4
+            case 20: min = 3
+            default: min = 1
+            }
+        case EntityType.Shield:
+            switch(level){
+            case 1: min = 1
+            case 2: min = 1
+            case 3: min = 1
+            case 4: min = 1
+            case 5: min = 1
+            case 6: min = 1
+            case 7: min = 2
+            case 8: min = 2
+            case 9: min = 2
+            case 10: min = 2
+            case 11: min = 2
+            case 12: min = 2
+            case 13: min = 2
+            case 14: min = 3
+            case 15: min = 3
+            case 16: min = 3
+            case 17: min = 3
+            case 18: min = 3
+            case 19: min = 4
+            case 20: min = 3
+            default: min = 1
+            }
+        case EntityType.Potion:
+            switch(level){
+            case 1: min = 1
+            case 2: min = 1
+            case 3: min = 1
+            case 4: min = 1
+            case 5: min = 1
+            case 6: min = 1
+            case 7: min = 1
+            case 8: min = 1
+            case 9: min = 1
+            case 10: min = 1
+            case 11: min = 1
+            case 12: min = 2
+            case 13: min = 2
+            case 14: min = 2
+            case 15: min = 3
+            case 16: min = 3
+            case 17: min = 1
+            case 18: min = 1
+            case 19: min = 2
+            case 20: min = 1
+            default: min = 1
+            }
+        case EntityType.Coin:
+            switch(level){
+            case 1: min = 1
+            default: min = 1
+            }
+        case EntityType.Shop:
+            min = 0
+        case EntityType.Temple:
+            min = 0
+        case EntityType.Boss:
+            min = 8
+        }
+        return min
+    }
+    //MARK: - Tile spawn
+    func randomTile(tile: Tile){
+        let randomSel = Int.random(in: 1...5)
+        var randomElement = EntityType.Coin
+        switch(randomSel){
+        case 1: randomElement = EntityType.Coin
+        case 2: randomElement = EntityType.Enemy
+        case 3: randomElement = EntityType.Potion
+        case 4: randomElement = EntityType.Shield
+        default: randomElement = EntityType.Sword
+        }
+        tile.type = randomElement
+        spawnTile(tile: tile, type: tile.type)
+    }
+    func spawnTile(tile: Tile, type: EntityType){
+        tile.type = type
+        tile.power = Int.random(in: minAmounts(type: type)...maxAmounts(type: type))
+        switch(type){
+        case .Empty:
+            tile.name = "EMPTY"
+            tile.power = 0
+            tile.texture = SKTexture(imageNamed: "ICON_ENTITY_EMPTY")
+        case .Player:
+            tile.name = "PLAYER"
+            tile.power = 0
+            tile.texture = SKTexture(imageNamed: "ICON_ENTITY_PLAYER")
+        case .Portal:
+            tile.name = "PORTAL"
+            tile.power = 0
+            tile.texture = SKTexture(imageNamed: "ICON_ENTITY_PORTAL")
+        case .Enemy:
+            tile.name = "ENEMY"
+            tile.texture = SKTexture(imageNamed: "ICON_ENEMY_"+String(tile.power))
+        case .Sword:
+            tile.name = "SWORD"
+            tile.texture = SKTexture(imageNamed: "ICON_SWORD_"+String(tile.power))
+        case .Shield:
+            tile.name = "SHIELD"
+            tile.texture = SKTexture(imageNamed: "ICON_SHIELD_"+String(tile.power))
+        case .Potion:
+            tile.name = "POTION"
+            tile.texture = SKTexture(imageNamed: "ICON_POTION_"+String(tile.power))
+        case .Coin:
+            tile.name = "COIN"
+            tile.texture = SKTexture(imageNamed: "ICON_COIN_"+String(tile.power))
+        case .Shop:
+            tile.name = "SHOP"
+            tile.texture = SKTexture(imageNamed: "ICON_ENTITY_SHOP")
+        case .Temple:
+            tile.name = "TEMPLE"
+            tile.texture = SKTexture(imageNamed: "ICON_ENTITY_TEMPLE")
+        case .Boss:
+            tile.name = "BOSS"
+            tile.texture = SKTexture(imageNamed: "ICON_ENEMY_8")
+        }
+    }
+    //MARK: - Tile / other
+    func adjacentTilesTo(x:Int, y:Int){
+        //TODO: - Returns a list with the nodes adjacent to the tile input
+    }
+    //This function defines the locations of every tile in the scene.
+    func gridLocations() -> [Array<CGFloat>]{
+        var posX = [CGFloat](repeating: CGFloat(17), count: 6)
+        var posY = [CGFloat](repeating: CGFloat(17), count: 6)
+        
+        for i in 1...5{
+            posX[i] = CGFloat(posX[0]*CGFloat(i))
+            for j in 1...5{
+                posY[j] = CGFloat(posY[0]*CGFloat(j))
+            }
+        }
+        
+        return [posX, posY]
+    }
+  
 }
 
 struct ContentView: View {
@@ -88,10 +672,12 @@ struct ContentView: View {
                         }
                         HStack{
                             Rectangle()
-                                .frame(width:100, height: 100)
+                                .frame(width:80, height: 80)
                             Rectangle()
-                                .frame(width:100, height: 100)
+                                .frame(width:80, height: 80)
                             Spacer()
+                            Rectangle()
+                                .frame(width:80, height: 80)
                         }
                         HStack{
                             Text(scene.coins)
@@ -99,9 +685,6 @@ struct ContentView: View {
                             Spacer()
                         }
                         Spacer()
-                        Button("Create Grid") {
-                            scene.createGrid()
-                        }.padding(20)
                     }
                 }
                 .ignoresSafeArea()
