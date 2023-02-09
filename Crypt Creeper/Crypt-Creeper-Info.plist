@@ -5,6 +5,9 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>m6x11.ttf</string>
+		<string>SanMarinoBeach.ttf</string>
+		<string>m3x6.ttf</string>
+		<string>m5x7.ttf</string>
 	</array>
 </dict>
 </plist>
