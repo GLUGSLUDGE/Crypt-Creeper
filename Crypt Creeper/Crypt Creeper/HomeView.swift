@@ -52,29 +52,29 @@ struct HomeView: View {
                         Spacer()
                         Spacer()
                         NavigationLink(destination: ContentView()) {
-                            buttonLabel(title: "PLAY")
+                            MenuButtonLabel(title: "PLAY")
                         }
                         
                         Button {
                             //How to Play
                         } label: {
-                            buttonLabel(title: "HOW TO PLAY")
+                            MenuButtonLabel(title: "HOW TO PLAY")
                         }
                         HStack{
                             Button {
                                 //Profile
                             } label: {
-                                buttonImageLabel(SFSymbolName: "person.fill")
+                                MainMenuButtonImageLabel(SFSymbolName: "person.fill")
                             }
                             Button {
                                 //Leaderboards
                             } label: {
-                                buttonImageLabel(SFSymbolName: "trophy.fill")
+                                MainMenuButtonImageLabel(SFSymbolName: "trophy.fill")
                             }
                             Button {
                                 //Settings
                             } label: {
-                                buttonImageLabel(SFSymbolName: "gearshape.fill")
+                                MainMenuButtonImageLabel(SFSymbolName: "gearshape.fill")
                             }
                             
                         }
