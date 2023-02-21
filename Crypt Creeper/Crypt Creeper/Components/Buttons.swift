@@ -17,27 +17,35 @@ struct Buttons: View {
                 Button {
                     //
                 } label: {
-                    buttonLabel(title: "CORRECTO")
+                    MenuButtonLabel(title: "CORRECTO")
                 }
                 HStack{
                     Button {
                         //
                     } label: {
-                        buttonImageLabel(SFSymbolName: "person.fill")
+                        MenuButtonImageLabel(SFSymbolName: "person.fill")
                     }
                     Button {
                         //
                     } label: {
-                        buttonImageLabel(SFSymbolName: "trophy.fill")
+                        MenuButtonImageLabel(SFSymbolName: "trophy.fill")
                     }
                     Button {
                         //
                     } label: {
-                        buttonImageLabel(SFSymbolName: "gearshape.fill")
+                        MenuButtonImageLabel(SFSymbolName: "gearshape.fill")
                     }
-
                 }
-
+                Button {
+                    //
+                } label: {
+                    ButtonLabel(title: "Hola")
+                }
+                Button {
+                    //
+                } label: {
+                    MiniButtonLabel(title: "Sign Up")
+                }
                 Rectangle()
                     .foregroundColor(Color.red)
                 
@@ -49,7 +57,7 @@ struct Buttons: View {
     }
 }
 
-struct buttonLabel: View {
+struct MenuButtonLabel: View {
     @State var title:String
     var body: some View {
         ZStack{
@@ -68,7 +76,7 @@ struct buttonLabel: View {
     }
 }
 
-struct buttonImageLabel: View {
+struct MenuButtonImageLabel: View {
     @State var SFSymbolName:String
     var body: some View {
         ZStack{
@@ -82,6 +90,32 @@ struct buttonImageLabel: View {
             Image(systemName: SFSymbolName)
                 .foregroundColor(Color.ui.textYellow)
                 .font(Font.system(.largeTitle).bold())
+        }
+    }
+}
+
+struct MiniButtonLabel: View {
+    @State var title: String
+    var body: some View {
+        ZStack {
+            Rectangle()
+                .frame(width: UIScreen.main.bounds.size.width/3.45, height: UIScreen.main.bounds.height/12)
+                .foregroundColor(Color.white)
+            BoldText(title: title)
+                .foregroundColor(.accentColor)
+            
+        }
+    }
+}
+
+struct ButtonLabel: View {
+    @State var title: String
+    var body: some View {
+        ZStack {
+            Rectangle()
+                .frame(width: UIScreen.main.bounds.size.width/1.1, height: UIScreen.main.bounds.height/11.1)
+                .foregroundColor(Color.white)
+            BoldText(title: title)
         }
     }
 }
