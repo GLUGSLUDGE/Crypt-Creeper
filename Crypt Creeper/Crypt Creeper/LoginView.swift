@@ -8,8 +8,13 @@
 import SwiftUI
 
 struct LoginView: View {
+    enum Field: Hashable {
+        case userField
+        case passwordField
+    }
     @State var username: String = ""
     @State var password: String = ""
+    @FocusState private var focusedField: Field?
     var body: some View {
         ZStack {
             Color.accentColor
@@ -21,7 +26,8 @@ struct LoginView: View {
                             Image("Ghost")
                                 .resizable()
                                 .scaledToFit()
-                            BoldText(title: "Sin cuenta?\nRegistrate")
+                                .padding(.bottom, 5)
+                            BoldText(title: "Sin cuenta?Registrate")
                                 .foregroundColor(Color.ui.text)
                         }
                     }, title: "Sign Up", show: true)
@@ -31,23 +37,33 @@ struct LoginView: View {
                 Spacer()
                 PopUpsView(bodyContent: {
                     VStack {
-                        ThinText(title: "Usuario")
-                            .foregroundColor(Color.ui.text)
-                            .padding(.trailing, 230)
-                        TextFieldLabel(field: username)
-                        ThinText(title: "Contraseña")
+                        ThinText(title: "Usuario:")
                             .foregroundColor(Color.ui.text)
                             .padding(.trailing, 200)
+                        TextFieldLabel(field: username)
+                            .focused($focusedField, equals: .userField)
+                        ThinText(title: "Contraseña:")
+                            .foregroundColor(Color.ui.text)
+                            .padding(.trailing, 150)
                             .padding(.top)
-                        SecureFieldLabel(field: username)
-                            .padding(.bottom, 30)
+                        PasswordField(field: password)
+                            .focused($focusedField, equals: .passwordField)
+                            .padding(.bottom)
+//                        SecureFieldLabel(field: password)
+//                            .focused($focusedField, equals: .passwordField)
+//                            .padding(.bottom, 30)
                     }
                     .padding(.top)
                 }, title: "LOGIN", show: true)
-                .padding(.bottom)
                 Spacer()
                 Button {
-                    //
+                    if username.isEmpty {
+                        focusedField = .userField
+                    } else if password.isEmpty {
+                        focusedField = .passwordField
+                    } else {
+                        print("log")
+                    }
                 } label: {
                     MiniButtonLabel(title: "Login")
                 }

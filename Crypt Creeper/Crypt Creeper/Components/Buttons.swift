@@ -23,20 +23,18 @@ struct Buttons: View {
                     Button {
                         //
                     } label: {
-                        MainMenuButtonImageLabel(SFSymbolName: "person.fill")
+                        MenuButtonImageLabel(SFSymbolName: "person.fill")
                     }
                     Button {
                         //
                     } label: {
-                        MainMenuButtonImageLabel(SFSymbolName: "trophy.fill")
+                        MenuButtonImageLabel(SFSymbolName: "trophy.fill")
                     }
                     Button {
                         //
                     } label: {
-                        MainMenuButtonImageLabel(SFSymbolName: "gearshape.fill")
+                        MenuButtonImageLabel(SFSymbolName: "gearshape.fill")
                     }
-                    
-
                 }
                 Button {
                     //
@@ -78,7 +76,7 @@ struct MenuButtonLabel: View {
     }
 }
 
-struct MainMenuButtonImageLabel: View {
+struct MenuButtonImageLabel: View {
     @State var SFSymbolName:String
     var body: some View {
         ZStack{

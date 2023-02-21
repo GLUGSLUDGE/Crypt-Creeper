@@ -42,26 +42,16 @@ struct PopUpsView<BodyContent: View>: View {
                         .scaledToFit()
                         .frame(width: 30, height: 30)
                 }
-                
                 .background(.white)
                 bodyContent()
             }
-            .border(.white)
+            .border(.white, width: 1)
             .background(Color.accentColor)
             .padding()
         }
         
     }
-    
 }
-//            Rectangle()
-//                .frame(width: UIScreen.main.bounds.size.width/1.1, height: UIScreen.main.bounds.size.height/11.1)
-//                .foregroundColor(Color.ui.textYellow)
-
-//            Text(title)
-//                .foregroundColor(Color.ui.textYellow)
-//                .font(.system(size: 30))
-//                .fontWeight(.black)
 
 struct PopUps_Preview: PreviewProvider {
     static var previews: some View {

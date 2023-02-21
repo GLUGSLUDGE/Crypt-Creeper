@@ -64,17 +64,17 @@ struct HomeView: View {
                             Button {
                                 //Profile
                             } label: {
-                                MainMenuButtonImageLabel(SFSymbolName: "person.fill")
+                                MenuButtonImageLabel(SFSymbolName: "person.fill")
                             }
                             Button {
                                 //Leaderboards
                             } label: {
-                                MainMenuButtonImageLabel(SFSymbolName: "trophy.fill")
+                                MenuButtonImageLabel(SFSymbolName: "trophy.fill")
                             }
                             Button {
                                 //Settings
                             } label: {
-                                MainMenuButtonImageLabel(SFSymbolName: "gearshape.fill")
+                                MenuButtonImageLabel(SFSymbolName: "gearshape.fill")
                             }
                             
                         }
