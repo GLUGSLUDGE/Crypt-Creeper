@@ -35,7 +35,8 @@ class Tile: SKSpriteNode{
 
 class GameScene: SKScene, ObservableObject {
     @Published var coins:String = "0"
-    @Published var health:String = "3"
+    @Published var health:Int = 3
+    @Published var maxHealth:Int = 3
     @Published var level:Int = 1
     @Published var score:String = "0"
     @Published var xp:String = "0"
@@ -122,15 +123,15 @@ class GameScene: SKScene, ObservableObject {
                     }
                 }
                 /*if newTile.power != 0*/
-                    
-                let powerLabel = SKLabelNode(text: "\(newTile.x),\(newTile.y)")
+                if newTile.power != 0{
+                    let powerLabel = SKSpriteNode(texture: SKTexture(imageNamed: "num_\(newTile.power)"))
+                    powerLabel.size = CGSize(width: 5, height: 5)
                     powerLabel.name = "LABEL"
-                    powerLabel.fontSize = 6
-                    powerLabel.fontName = "m6x11"
-                    powerLabel.fontColor = UIColor(.black)
                     powerLabel.zPosition = newTile.zPosition+12
-                    powerLabel.position = CGPoint(x:5,y:-7)
+                    powerLabel.position = CGPoint(x:5,y:-3)
                     newTile.addChild(powerLabel)
+                }
+                
                 
                 addChild(newTile)
             }
@@ -162,7 +163,7 @@ class GameScene: SKScene, ObservableObject {
                 //If position isnt empty and player is adjacent, move here
                 
                 //Interact with the item that was previously here.
-                
+                destination.removeAllChildren()
                 (childNode(withName: "PLAYER") as! SKSpriteNode).texture = SKTexture(imageNamed: "ICON_ENTITY_EMPTY")
                 childNode(withName: "PLAYER")?.name = "EMPTY"
                 touchNode.name = "PLAYER"
@@ -713,11 +714,19 @@ struct ContentView: View {
                             .frame(width: geo.size.width, height: geo.size.width)
                             .border(Color.ui.gameBackground)
                         HStack{
-                            Text("HEALTH")
+                            Image("ICON_UI_HEALTH")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .padding(.leading, 6)
+                            Text(": \(scene.health) / \(scene.maxHealth)")
                                 .foregroundColor(Color.ui.text)
+                            Rectangle()
+                                .foregroundColor(.red)
+                                .frame(width: 90, height: 20)
                             Spacer()
-                            Text("LEVEL")
+                            Text("LVL: \(scene.level)")
                                 .foregroundColor(Color.ui.text)
+                                .padding(.trailing, 6)
                         }
                         HStack{
                             Rectangle()
@@ -729,9 +738,20 @@ struct ContentView: View {
                                 .frame(width:80, height: 80)
                         }
                         HStack{
-                            Text(scene.coins)
-                                .foregroundColor(Color.ui.text)
+                            Image("ICON_UI_COIN")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .padding(.leading, 6)
+                            Text(": \(scene.coins)")
+                                .foregroundColor(Color.ui.textYellow)
                             Spacer()
+                            Image("ICON_UI_XP")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                            Text(": \(scene.xp)")
+                                .foregroundColor(Color.ui.textGreen)
+                                .padding(.trailing, 6)
+                            
                         }
                         Spacer()
                     }
