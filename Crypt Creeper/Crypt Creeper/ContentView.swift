@@ -29,12 +29,14 @@ enum EntityType: CaseIterable{
 class Tile: SKSpriteNode{
     var type:EntityType = EntityType.Empty
     var power:Int = 0
+    var x:Int = 0
+    var y:Int = 0
 }
 
 class GameScene: SKScene, ObservableObject {
     @Published var coins:String = "0"
     @Published var health:String = "3"
-    @Published var level:Int = 18
+    @Published var level:Int = 1
     @Published var score:String = "0"
     @Published var xp:String = "0"
     
@@ -58,6 +60,8 @@ class GameScene: SKScene, ObservableObject {
                 newTile.name = "EMPTY"
                 newTile.size = CGSize(width: intSize, height: intSize)
                 newTile.position = CGPoint(x: locations[0][i], y: locations[1][j])
+                newTile.x = i
+                newTile.y = j
                 if i == 3 && j == 1 { //Spawn tile
                     newTile.texture = SKTexture(imageNamed: "ICON_ENTITY_PLAYER")
                     newTile.name = "PLAYER"
@@ -119,7 +123,7 @@ class GameScene: SKScene, ObservableObject {
                 }
                 /*if newTile.power != 0*/
                     
-                let powerLabel = SKLabelNode(text: newTile.name)
+                let powerLabel = SKLabelNode(text: "\(newTile.x),\(newTile.y)")
                     powerLabel.name = "LABEL"
                     powerLabel.fontSize = 6
                     powerLabel.fontName = "m6x11"
@@ -140,10 +144,30 @@ class GameScene: SKScene, ObservableObject {
         
         if ((touchNode as? SKScene) == nil) { //<-- Node is touched
             if touchNode.name != "PLAYER" && touchNode.name != "LABEL" {
+                //Check the adjacent nodes
+                let destination = touchNode as! Tile
+                if destination.name == "EMPTY"{
+                    return
+                }
+                var canMove = false;
+                for tile in adjacentTilesTo(x: destination.x, y: destination.y){
+                    if tile!.name ==  "PLAYER"{
+                        canMove = true
+                    }
+                }
+                if !canMove {
+                    return
+                }
+
+                //If position isnt empty and player is adjacent, move here
+                
+                //Interact with the item that was previously here.
+                
                 (childNode(withName: "PLAYER") as! SKSpriteNode).texture = SKTexture(imageNamed: "ICON_ENTITY_EMPTY")
                 childNode(withName: "PLAYER")?.name = "EMPTY"
                 touchNode.name = "PLAYER"
                 (touchNode as! SKSpriteNode).texture = SKTexture(imageNamed: "ICON_ENTITY_PLAYER")
+                
             }
         }
     }
@@ -613,8 +637,33 @@ class GameScene: SKScene, ObservableObject {
         }
     }
     //MARK: - Tile / other
-    func adjacentTilesTo(x:Int, y:Int){
-        //TODO: - Returns a list with the nodes adjacent to the tile input
+    func adjacentTilesTo(x:Int, y:Int) -> [Tile?]{
+        var tileR:Tile = Tile()
+        tileR.name = "EMPTY"
+        var tileL:Tile = Tile()
+        tileL.name = "EMPTY"
+        var tileU:Tile = Tile()
+        tileU.name = "EMPTY"
+        var tileD:Tile = Tile()
+        tileD.name = "EMPTY"
+        //check right tile
+        if x != 5{
+            let right = nodes(at: CGPoint(x: locations[0][x+1], y: locations[1][y]))
+            tileR = right[0] as! Tile
+        }
+        if x != 1{
+            let left = nodes(at: CGPoint(x: locations[0][x-1], y: locations[1][y]))
+            tileL = left[0] as! Tile
+        }
+        if y != 5{
+            let up = nodes(at: CGPoint(x: locations[0][x], y: locations[1][y+1]))
+            tileU = up[0] as! Tile
+        }
+        if y != 1{
+            let down = nodes(at: CGPoint(x: locations[0][x], y: locations[1][y-1]))
+            tileD = down[0] as! Tile
+        }
+        return [tileR, tileL, tileU, tileD]
     }
     //This function defines the locations of every tile in the scene.
     func gridLocations() -> [Array<CGFloat>]{
