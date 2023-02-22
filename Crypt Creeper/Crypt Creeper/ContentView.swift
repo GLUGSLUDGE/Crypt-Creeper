@@ -49,6 +49,12 @@ class GameScene: SKScene, ObservableObject {
     override func didMove(to view: SKView) {
         locations = gridLocations()
         
+        createBoard()
+        
+        
+        
+    }
+    func createBoard(){
         let portalrandomX = Int.random(in: 1...5)
         var enemyAmount = 0
         var potionAmount = 0
@@ -56,7 +62,6 @@ class GameScene: SKScene, ObservableObject {
         var swordAmount = 0
         var coinAmount = 0
         var npcAmount = 0
-        
         for i in 1...5 {
             for j in 1...5{
                 let newTile = Tile(imageNamed: "ICON_ENTITY_EMPTY")
@@ -139,7 +144,11 @@ class GameScene: SKScene, ObservableObject {
             }
         }
     }
-
+    func nextLevel(){
+        level+=1
+        removeAllChildren()
+        createBoard()
+    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
@@ -152,7 +161,10 @@ class GameScene: SKScene, ObservableObject {
                 if destination.name == "EMPTY"{
                     return
                 }
-                var canMove = false;
+                
+                var canMove = false
+                var finishedLevel = false
+                
                 for tile in adjacentTilesTo(x: destination.x, y: destination.y){
                     if tile!.name ==  "PLAYER"{
                         canMove = true
@@ -164,10 +176,10 @@ class GameScene: SKScene, ObservableObject {
                 }
                 switch(destination.name){
                 case "PORTAL":
-                    //TODO: NEXT LEVEL
+                    score += level*100
+                    finishedLevel = true
                     break
                 case "ENEMY":
-                    //TODO: CALC
                     var damage = destination.power
                     while damage != 0 && swordPower != 0 {
                         swordPower-=1
@@ -183,7 +195,11 @@ class GameScene: SKScene, ObservableObject {
                     }
                     if health == 0 {
                         //TODO: GAMEOVER RIP BOZO
+                        level = 0
+                        health = 3
+                        finishedLevel = true
                     }
+                    score+=destination.power*10
                     switch(destination.power){
                     case 1: xp+=1
                     case 2: xp+=4
@@ -195,7 +211,6 @@ class GameScene: SKScene, ObservableObject {
                     case 8: xp+=200
                     default: break
                     }
-                    //TODO: ADD XP
                 case "COIN":
                     coins += destination.power
                 case "POTION":
@@ -219,6 +234,11 @@ class GameScene: SKScene, ObservableObject {
                 childNode(withName: "PLAYER")?.name = "EMPTY"
                 touchNode.name = "PLAYER"
                 (touchNode as! SKSpriteNode).texture = SKTexture(imageNamed: "ICON_ENTITY_PLAYER")
+                
+                //Advance level
+                if finishedLevel {
+                    nextLevel()
+                }
                 
             }
         }
@@ -766,7 +786,7 @@ struct ContentView: View {
                         Spacer()
                         HStack{
                             Spacer()
-                            Text("SCORE")
+                            Text("\(scene.score)")
                                 .foregroundColor(Color.ui.text)
                         }
                         SpriteView(scene: scene)
