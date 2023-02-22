@@ -26,35 +26,52 @@ struct LoginView: View {
                             Image("Ghost")
                                 .resizable()
                                 .scaledToFit()
+                                .frame(width: 100, height: 100)
                                 .padding(.bottom, 5)
-                            BoldText(title: "Sin cuenta?Registrate")
+                            BoldText(title: "Not an user?\nWhat a loser!\nClick here!!")
                                 .foregroundColor(Color.ui.text)
                         }
                     }, title: "Sign Up", show: true)
                     .frame(width: 300)
+                    .padding(.leading, -10)
                     Spacer()
+                    
                 }
                 Spacer()
                 PopUpsView(bodyContent: {
                     VStack {
-                        ThinText(title: "Usuario:")
-                            .foregroundColor(Color.ui.text)
-                            .padding(.trailing, 200)
-                        TextFieldLabel(field: username)
-                            .focused($focusedField, equals: .userField)
-                        ThinText(title: "Contraseña:")
-                            .foregroundColor(Color.ui.text)
-                            .padding(.trailing, 150)
-                            .padding(.top)
-                        PasswordField(field: password)
-                            .focused($focusedField, equals: .passwordField)
-                            .padding(.bottom)
-//                        SecureFieldLabel(field: password)
-//                            .focused($focusedField, equals: .passwordField)
-//                            .padding(.bottom, 30)
+                        HStack {
+                            ThinText(title: "Username:")
+                                .foregroundColor(Color.ui.text)
+                                .padding(.bottom, -10)
+                                .padding(.leading, 20)
+                            Spacer()
+                        }
+                        HStack {
+                            TextFieldLabel(field: username)
+                                .focused($focusedField, equals: .userField)
+                                .padding(.horizontal, 20)
+                            Spacer()
+                        }
+                        HStack {
+                            ThinText(title: "Password:")
+                                .foregroundColor(Color.ui.text)
+                                .padding(.bottom, -10)
+                                .padding(.leading, 20)
+                            Spacer()
+                        }
+                        HStack {
+                            PasswordField(field: password)
+                                .focused($focusedField, equals: .passwordField)
+                                .padding(.horizontal, 20)
+                                .padding(.bottom)
+                            Spacer()
+                        }
+                        
                     }
                     .padding(.top)
                 }, title: "LOGIN", show: true)
+                .padding(.bottom, 50)
                 Spacer()
                 Button {
                     if username.isEmpty {

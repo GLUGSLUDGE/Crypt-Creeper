@@ -19,8 +19,8 @@ struct TextFields: View {
                 TextFieldLabel(field: field)
                     .background(Color.white)
                 PasswordField(field: field)
-//                SecureFieldLabel(field: field)
-//                    .background(Color.white)
+                SecureFieldLabel(field: field)
+                    .background(Color.white)
             }
         }
     }
@@ -31,29 +31,38 @@ struct TextFieldLabel: View {
     var body: some View {
         TextField("", text: $field)
             .background(Color.white)
+            .foregroundColor(.black)
             .font(.custom("m5x7", fixedSize: 30))
             .autocorrectionDisabled(true)
+            .frame(width: 250)
             .textInputAutocapitalization(.never)
-            .padding(.horizontal)
     }
 }
 
 struct PasswordField : View {
     @State var field: String = ""
+    let textLimit = 8
     var body: some View {
         SecureField("", text: $field)
             .background(Color.white)
             .font(.system(size: 23))
             .autocorrectionDisabled(true)
             .textInputAutocapitalization(.never)
-            .padding(.horizontal)
+            .frame(width: 140)
+            .onReceive(Just(field)) { _ in limitText(textLimit) }
+    }
+    
+    func limitText(_ upper: Int) {
+        if field.count > upper {
+            field = String(field.prefix(upper))
+        }
     }
 }
 
 struct SecureFieldLabel: View {
     @State var field: String = ""
     @State var secureText: String = ""
-    
+    let textLimit = 8
     var body: some View {
         ZStack {
             TextField("", text: $field)
@@ -62,15 +71,18 @@ struct SecureFieldLabel: View {
                 .font(.custom("m5x7", fixedSize: 30))
                 .autocorrectionDisabled(true)
                 .textInputAutocapitalization(.never)
-                .padding(.horizontal)
                 .onReceive(Just(field)) { value in
                     secureText = value
                     secureText = String(value.map { _ in "*"})
                 }
+                .onReceive(Just(field)) { _ in limitText(textLimit)  }
+            
             HStack {
                 Text(secureText)
-                    .padding(.leading)
                     .frame(height: 30)
+                    .tracking(3.5)
+                    .font(.custom("m5x7", size: 30))
+                
                 Spacer()
             }
         }
@@ -79,7 +91,15 @@ struct SecureFieldLabel: View {
             Text(secureText)
         }
     }
+    
+    func limitText(_ upper: Int) {
+            if field.count > upper {
+                field = String(field.prefix(upper))
+            }
+        }
 }
+
+
 // TODO: Cambiar tamaño
 // TODO: Que se adapten los asteriscos al texto escrito
 struct TextFields_Previews: PreviewProvider {
