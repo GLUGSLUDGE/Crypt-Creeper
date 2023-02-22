@@ -34,12 +34,14 @@ class Tile: SKSpriteNode{
 }
 
 class GameScene: SKScene, ObservableObject {
-    @Published var coins:String = "0"
+    @Published var coins:Int = 0
     @Published var health:Int = 3
     @Published var maxHealth:Int = 3
     @Published var level:Int = 1
-    @Published var score:String = "0"
-    @Published var xp:String = "0"
+    @Published var score:Int = 0
+    @Published var xp:Int = 0
+    @Published var swordPower:Int = 0
+    @Published var shieldPower:Int = 0
     
     let intSize = 15
     var locations:[Array<CGFloat>] = []
@@ -157,12 +159,61 @@ class GameScene: SKScene, ObservableObject {
                     }
                 }
                 if !canMove {
+                    //TODO: GAMEOVER RIP BOZO
                     return
                 }
-
-                //If position isnt empty and player is adjacent, move here
+                switch(destination.name){
+                case "PORTAL":
+                    //TODO: NEXT LEVEL
+                    break
+                case "ENEMY":
+                    //TODO: CALC
+                    var damage = destination.power
+                    while damage != 0 && swordPower != 0 {
+                        swordPower-=1
+                        damage-=1
+                    }
+                    while damage != 0 && shieldPower != 0 {
+                        shieldPower-=1
+                        damage-=1
+                    }
+                    while damage != 0 && health != 0 {
+                        health-=1
+                        damage-=1
+                    }
+                    if health == 0 {
+                        //TODO: GAMEOVER RIP BOZO
+                    }
+                    switch(destination.power){
+                    case 1: xp+=1
+                    case 2: xp+=4
+                    case 3: xp+=9
+                    case 4: xp+=16
+                    case 5: xp+=30
+                    case 6: xp+=50
+                    case 7: xp+=90
+                    case 8: xp+=200
+                    default: break
+                    }
+                    //TODO: ADD XP
+                case "COIN":
+                    coins += destination.power
+                case "POTION":
+                    health += destination.power
+                    if health > maxHealth {
+                        health = maxHealth
+                    }
+                case "SHIELD":
+                    shieldPower = destination.power
+                    break
+                case "SWORD":
+                    swordPower = destination.power
+                    break
+                default: break
+                    
+                }
                 
-                //Interact with the item that was previously here.
+                //MOVE
                 destination.removeAllChildren()
                 (childNode(withName: "PLAYER") as! SKSpriteNode).texture = SKTexture(imageNamed: "ICON_ENTITY_EMPTY")
                 childNode(withName: "PLAYER")?.name = "EMPTY"
@@ -692,6 +743,14 @@ struct ContentView: View {
         scene.backgroundColor = UIColor(named: "ColorGameBackground")!
         return scene
     }()
+    
+    var shieldImage:String {
+        return "ICON_SHIELD_\(scene.shieldPower)"
+    }
+    var swordImage: String {
+        return "ICON_SWORD_\(scene.swordPower)"
+    }
+    
 
 
     var body: some View {
@@ -729,10 +788,52 @@ struct ContentView: View {
                                 .padding(.trailing, 6)
                         }
                         HStack{
-                            Rectangle()
-                                .frame(width:80, height: 80)
-                            Rectangle()
-                                .frame(width:80, height: 80)
+                            ZStack{
+                                Image("ICON_ENTITY_EMPTY")
+                                    .resizable()
+                                    .frame(width:80, height: 80)
+                                Image("\(swordImage)")
+                                    .resizable()
+                                    .frame(width:80, height: 80)
+                                HStack{
+                                    Spacer()
+                                    VStack{
+                                        Spacer()
+                                        if scene.swordPower != 0{
+                                            Image("num_\(scene.swordPower)")
+                                                .resizable()
+                                                .frame(width: 20, height: 20)
+                                                .padding(6)
+                                        }
+                                    }
+                                    
+                                }
+                                
+                            }
+                            .frame(width: 80, height: 80)
+                            ZStack{
+                                Image("ICON_ENTITY_EMPTY")
+                                    .resizable()
+                                    .frame(width:80, height: 80)
+                                Image("\(shieldImage)")
+                                    .resizable()
+                                    .frame(width:80, height: 80)
+                                HStack{
+                                    Spacer()
+                                    VStack{
+                                        Spacer()
+                                        if scene.shieldPower != 0{
+                                            Image("num_\(scene.shieldPower)")
+                                                .resizable()
+                                                .frame(width: 20, height: 20)
+                                                .padding(6)
+                                        }
+                                    }
+                                    
+                                }
+                                
+                            }
+                            .frame(width: 80, height: 80)
                             Spacer()
                             Rectangle()
                                 .frame(width:80, height: 80)
