@@ -50,9 +50,6 @@ class GameScene: SKScene, ObservableObject {
         locations = gridLocations()
         
         createBoard()
-        
-        
-        
     }
     func createBoard(){
         let portalrandomX = Int.random(in: 1...5)
@@ -129,7 +126,6 @@ class GameScene: SKScene, ObservableObject {
                         randomTile(tile: newTile)
                     }
                 }
-                /*if newTile.power != 0*/
                 if newTile.power != 0{
                     let powerLabel = SKSpriteNode(texture: SKTexture(imageNamed: "num_\(newTile.power)"))
                     powerLabel.size = CGSize(width: 5, height: 5)
@@ -153,6 +149,9 @@ class GameScene: SKScene, ObservableObject {
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
         let touchNode = atPoint(location)
+        
+        
+        
         
         if ((touchNode as? SKScene) == nil) { //<-- Node is touched
             if touchNode.name != "PLAYER" && touchNode.name != "LABEL" {
@@ -178,7 +177,6 @@ class GameScene: SKScene, ObservableObject {
                 case "PORTAL":
                     score += level*100
                     finishedLevel = true
-                    break
                 case "ENEMY":
                     var damage = destination.power
                     while damage != 0 && swordPower != 0 {
@@ -195,9 +193,6 @@ class GameScene: SKScene, ObservableObject {
                     }
                     if health == 0 {
                         //TODO: GAMEOVER RIP BOZO
-                        level = 0
-                        health = 3
-                        finishedLevel = true
                     }
                     score+=destination.power*10
                     switch(destination.power){
@@ -229,17 +224,35 @@ class GameScene: SKScene, ObservableObject {
                 }
                 
                 //MOVE
-                destination.removeAllChildren()
-                (childNode(withName: "PLAYER") as! SKSpriteNode).texture = SKTexture(imageNamed: "ICON_ENTITY_EMPTY")
-                childNode(withName: "PLAYER")?.name = "EMPTY"
-                touchNode.name = "PLAYER"
-                (touchNode as! SKSpriteNode).texture = SKTexture(imageNamed: "ICON_ENTITY_PLAYER")
+                let player = childNode(withName: "PLAYER") as! Tile
+                //Spawn an empty space on your previous position
+                let oldTile = Tile()
+                spawnTile(tile: oldTile, type: EntityType.Empty)
+                oldTile.size = CGSize(width: intSize, height: intSize)
+                oldTile.y = player.y
+                oldTile.zPosition = player.zPosition-1
+                oldTile.x = player.x
+                oldTile.position = CGPoint(x: locations[0][oldTile.x], y: locations[1][oldTile.y])
+                addChild(oldTile)
+                //Carry out the actions
+                let ac = SKAction.move(to: destination.position, duration: 0.1)
                 
-                //Advance level
-                if finishedLevel {
-                    nextLevel()
+                player.run(ac) {
+                    player.x = destination.x
+                    player.y = destination.y
+                    destination.removeAllChildren()
+                    destination.removeFromParent()
                 }
-                
+                if finishedLevel {
+                    let nextLevelAction = SKAction.rotate(toAngle: 6, duration: 0.3)
+                    player.run(nextLevelAction){
+                        self.nextLevel()
+                    }
+                }
+                    //(self.childNode(withName: "PLAYER") as! SKSpriteNode).texture = SKTexture(imageNamed: "ICON_ENTITY_EMPTY")
+                    //self.childNode(withName: "PLAYER")?.name = "EMPTY"
+                    //touchNode.name = "PLAYER"
+                    //(touchNode as! SKSpriteNode).texture = SKTexture(imageNamed: "ICON_ENTITY_PLAYER")
             }
         }
     }
@@ -297,7 +310,7 @@ class GameScene: SKScene, ObservableObject {
             case 13: max = 4
             case 14: max = 3
             case 15: max = 3
-            case 16: max = 3
+            case 16: max = 6
             case 17: max = 6
             case 18: max = 6
             case 19: max = 6
@@ -321,7 +334,7 @@ class GameScene: SKScene, ObservableObject {
             case 13: max = 1
             case 14: max = 3
             case 15: max = 3
-            case 16: max = 3
+            case 16: max = 2
             case 17: max = 2
             case 18: max = 4
             case 19: max = 5
@@ -345,7 +358,7 @@ class GameScene: SKScene, ObservableObject {
             case 13: max = 2
             case 14: max = 1
             case 15: max = 4
-            case 16: max = 2
+            case 16: max = 3
             case 17: max = 3
             case 18: max = 3
             case 19: max = 1
@@ -369,7 +382,7 @@ class GameScene: SKScene, ObservableObject {
             case 13: max = 4
             case 14: max = 3
             case 15: max = 2
-            case 16: max = 1
+            case 16: max = 2
             case 17: max = 2
             case 18: max = 4
             case 19: max = 2
@@ -631,7 +644,7 @@ class GameScene: SKScene, ObservableObject {
             case 13: min = 2
             case 14: min = 2
             case 15: min = 3
-            case 16: min = 3
+            case 16: min = 2
             case 17: min = 1
             case 18: min = 1
             case 19: min = 2
