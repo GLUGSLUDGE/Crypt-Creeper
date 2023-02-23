@@ -60,9 +60,10 @@ struct LoginView: View {
                             Spacer()
                         }
                         HStack {
-                            PasswordField(field: password)
+                            SecureFieldLabel(field: password)
                                 .focused($focusedField, equals: .passwordField)
                                 .padding(.horizontal, 20)
+                                .padding(.trailing, 180)
                                 .padding(.bottom)
                             Spacer()
                         }

@@ -37,6 +37,9 @@ struct SignUpView: View {
                         }
                     }, title: "Login", show: true)
                     .frame(width: 300, height: 170)
+                    .onTapGesture {
+                        // Navigate to login
+                    }
                 }
                 VStack {
                     ZStack(alignment: .bottomTrailing) {
@@ -72,10 +75,10 @@ struct SignUpView: View {
                                             Spacer()
                                         }
                                         HStack {
-                                            PasswordField(field: password)
+                                            SecureFieldLabel(field: password)
                                                 .focused($focusedField, equals: .passwordField)
-                                                .frame(width: 140)
-                                                .padding(.horizontal, 20)
+                                                .padding(.leading, 20)
+                                                .padding(.trailing, 140)
                                             Spacer()
                                         }
                                         HStack {
@@ -86,10 +89,10 @@ struct SignUpView: View {
                                             Spacer()
                                         }
                                         HStack {
-                                            PasswordField(field: repeatPassword)
+                                            SecureFieldLabel(field: repeatPassword)
                                                 .focused($focusedField, equals: .repeatPasswordField)
-                                                .frame(width: 140)
-                                                .padding(.horizontal, 20)
+                                                .padding(.leading, 20)
+                                                .padding(.trailing, 140)
                                                 .padding(.bottom, 30)
                                             Spacer()
                                         }
@@ -110,8 +113,12 @@ struct SignUpView: View {
                                             .scaledToFit()
                                             .foregroundColor(Color.white)
                                             .rotationEffect(.degrees(-25))
+//                                            .frame(width: UIScreen.main.bounds.width/6, height: UIScreen.main.bounds.width/6)
                                             .padding(.horizontal, 10)
-                                        ThinText(title: "Galería")
+                                            .onTapGesture {
+                                                // Abrir galería
+                                            }
+                                        ThinText(title: "Gallery")
                                             .foregroundColor(Color.white)
                                     }
                                     VStack {
@@ -120,35 +127,43 @@ struct SignUpView: View {
                                             .scaledToFit()
                                             .foregroundColor(Color.white)
                                             .rotationEffect(.degrees(25))
+//                                            .frame(width: UIScreen.main.bounds.width/6, height: UIScreen.main.bounds.width/6)
                                             .padding(.horizontal, 10)
-                                        ThinText(title: "Cámara")
+                                            .onTapGesture {
+                                                // Abrir cámara
+                                            }
+                                        ThinText(title: "Camera")
                                             .foregroundColor(Color.white)
                                     }
                                 }
                             }, title: "Profile Pic", show: true)
-                            .frame(width: 300)
+                            .frame(width: 250)
+                            .padding(.bottom, 30)
                         }
                     }
                 }
-                Spacer()
-                Button {
-                    if username.isEmpty {
-                        focusedField = .userField
-                    } else if email.isEmpty {
-                        focusedField = .emailField
-                    } else if password.isEmpty {
-                        focusedField = .passwordField
-                    } else if repeatPassword.isEmpty {
-                        focusedField = .repeatPasswordField
-                    } else if password != repeatPassword {
-                        print("pringao xDD")
-                    } else {
-                        print("Login")
+                HStack {
+                    Spacer()
+                    Button {
+                        if username.isEmpty {
+                            focusedField = .userField
+                        } else if email.isEmpty {
+                            focusedField = .emailField
+                        } else if password.isEmpty {
+                            focusedField = .passwordField
+                        } else if repeatPassword.isEmpty {
+                            focusedField = .repeatPasswordField
+                        } else if password != repeatPassword {
+                            print("pringao xDD")
+                        } else {
+                            print("Login")
+                        }
+                    } label: {
+                        MiniButtonLabel(title: "Sign Up")
                     }
-                } label: {
-                    MiniButtonLabel(title: "Sign Up")
+                    .padding(.bottom, 5)
+                    .padding(.trailing, 35)
                 }
-                .padding(.leading, 200)
             }
         }
     }

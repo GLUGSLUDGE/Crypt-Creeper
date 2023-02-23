@@ -18,6 +18,7 @@
 		28AA776D29819AC400953AD3 /* SanMarinoBeach.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28AA776C29819AC400953AD3 /* SanMarinoBeach.ttf */; };
 		28D274E02975C5EB00E2CA16 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D274DF2975C5EB00E2CA16 /* ColorExtension.swift */; };
 		28FAF85129799F4E0006BB60 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FAF85029799F4E0006BB60 /* Buttons.swift */; };
+		2F7AF49429A7B8C5009322FB /* censor.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F7AF49329A7B8C5009322FB /* censor.ttf */; };
 		2F8F3DF0299E78F8004E6700 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8F3DEF299E78F8004E6700 /* LoginView.swift */; };
 		2F8F3DF2299E7E5F004E6700 /* PopUps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8F3DF1299E7E5F004E6700 /* PopUps.swift */; };
 		2F8F3DF4299E93EC004E6700 /* TextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8F3DF3299E93EC004E6700 /* TextFields.swift */; };
@@ -39,6 +40,7 @@
 		28AA776C29819AC400953AD3 /* SanMarinoBeach.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SanMarinoBeach.ttf; sourceTree = "<group>"; };
 		28D274DF2975C5EB00E2CA16 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		28FAF85029799F4E0006BB60 /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
+		2F7AF49329A7B8C5009322FB /* censor.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = censor.ttf; sourceTree = "<group>"; };
 		2F8F3DEF299E78F8004E6700 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		2F8F3DF1299E7E5F004E6700 /* PopUps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUps.swift; sourceTree = "<group>"; };
 		2F8F3DF3299E93EC004E6700 /* TextFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFields.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 			children = (
 				2842ECA62979A83400C4B6A3 /* m6x11.ttf */,
 				2845F7392982E8F600236405 /* m3x6.ttf */,
+				2F7AF49329A7B8C5009322FB /* censor.ttf */,
 				2845F7382982E8F600236405 /* m5x7.ttf */,
 				28AA776C29819AC400953AD3 /* SanMarinoBeach.ttf */,
 			);
@@ -189,6 +192,7 @@
 			files = (
 				2845F73A2982E8F600236405 /* m5x7.ttf in Resources */,
 				283F5532296C8CAA0055AF58 /* Preview Assets.xcassets in Resources */,
+				2F7AF49429A7B8C5009322FB /* censor.ttf in Resources */,
 				2845F73B2982E8F600236405 /* m3x6.ttf in Resources */,
 				28AA776D29819AC400953AD3 /* SanMarinoBeach.ttf in Resources */,
 				2842ECA72979A83400C4B6A3 /* m6x11.ttf in Resources */,
@@ -342,7 +346,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Crypt Creeper/Preview Content\"";
-				DEVELOPMENT_TEAM = HK6R3F5RZP;
+				DEVELOPMENT_TEAM = 5N8T9595RH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Crypt-Creeper-Info.plist";
@@ -381,7 +385,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Crypt Creeper/Preview Content\"";
-				DEVELOPMENT_TEAM = HK6R3F5RZP;
+				DEVELOPMENT_TEAM = 5N8T9595RH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Crypt-Creeper-Info.plist";
