@@ -16,6 +16,7 @@
 		284FBEA5296C61ED0029C958 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284FBEA4296C61ED0029C958 /* ContentView.swift */; };
 		284FBEA7296C61EE0029C958 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 284FBEA6296C61EE0029C958 /* Assets.xcassets */; };
 		28712E672976F04000E74C52 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28712E662976F04000E74C52 /* HomeView.swift */; };
+		287B0B8C29A7784600CF750C /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287B0B8B29A7784600CF750C /* GameOverView.swift */; };
 		28AA776D29819AC400953AD3 /* SanMarinoBeach.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28AA776C29819AC400953AD3 /* SanMarinoBeach.ttf */; };
 		28D274E02975C5EB00E2CA16 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D274DF2975C5EB00E2CA16 /* ColorExtension.swift */; };
 		28FAF85129799F4E0006BB60 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FAF85029799F4E0006BB60 /* Buttons.swift */; };
@@ -37,6 +38,7 @@
 		284FBEA4296C61ED0029C958 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		284FBEA6296C61EE0029C958 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		28712E662976F04000E74C52 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		287B0B8B29A7784600CF750C /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
 		28AA776C29819AC400953AD3 /* SanMarinoBeach.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SanMarinoBeach.ttf; sourceTree = "<group>"; };
 		28D274DF2975C5EB00E2CA16 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		28FAF85029799F4E0006BB60 /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				284FBEA2296C61ED0029C958 /* Crypt_CreeperApp.swift */,
 				284FBEA4296C61ED0029C958 /* ContentView.swift */,
 				280E911229A7620500CBE5C2 /* WinView.swift */,
+				287B0B8B29A7784600CF750C /* GameOverView.swift */,
 				284FBEA6296C61EE0029C958 /* Assets.xcassets */,
 				28712E662976F04000E74C52 /* HomeView.swift */,
 				283F5533296C8CBF0055AF58 /* Preview Content */,
@@ -204,6 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F8F3DF0299E78F8004E6700 /* LoginView.swift in Sources */,
+				287B0B8C29A7784600CF750C /* GameOverView.swift in Sources */,
 				2F8F3DF2299E7E5F004E6700 /* PopUps.swift in Sources */,
 				28FAF85129799F4E0006BB60 /* Buttons.swift in Sources */,
 				2F8F3DF6299E9733004E6700 /* Texts.swift in Sources */,
