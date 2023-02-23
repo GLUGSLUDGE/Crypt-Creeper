@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		280E911329A7620500CBE5C2 /* WinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280E911229A7620500CBE5C2 /* WinView.swift */; };
 		283F5532296C8CAA0055AF58 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 283F5531296C8CAA0055AF58 /* Preview Assets.xcassets */; };
 		2842ECA72979A83400C4B6A3 /* m6x11.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2842ECA62979A83400C4B6A3 /* m6x11.ttf */; };
 		2845F73A2982E8F600236405 /* m5x7.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2845F7382982E8F600236405 /* m5x7.ttf */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		280E911229A7620500CBE5C2 /* WinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinView.swift; sourceTree = "<group>"; };
 		283F5531296C8CAA0055AF58 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2842ECA62979A83400C4B6A3 /* m6x11.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = m6x11.ttf; sourceTree = "<group>"; };
 		2842ECA82979A85A00C4B6A3 /* Crypt-Creeper-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Crypt-Creeper-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -99,6 +101,7 @@
 				28D274DE2975C5D100E2CA16 /* Extensions */,
 				284FBEA2296C61ED0029C958 /* Crypt_CreeperApp.swift */,
 				284FBEA4296C61ED0029C958 /* ContentView.swift */,
+				280E911229A7620500CBE5C2 /* WinView.swift */,
 				284FBEA6296C61EE0029C958 /* Assets.xcassets */,
 				28712E662976F04000E74C52 /* HomeView.swift */,
 				283F5533296C8CBF0055AF58 /* Preview Content */,
@@ -205,6 +208,7 @@
 				28FAF85129799F4E0006BB60 /* Buttons.swift in Sources */,
 				2F8F3DF6299E9733004E6700 /* Texts.swift in Sources */,
 				28D274E02975C5EB00E2CA16 /* ColorExtension.swift in Sources */,
+				280E911329A7620500CBE5C2 /* WinView.swift in Sources */,
 				28712E672976F04000E74C52 /* HomeView.swift in Sources */,
 				284FBEA5296C61ED0029C958 /* ContentView.swift in Sources */,
 				284FBEA3296C61ED0029C958 /* Crypt_CreeperApp.swift in Sources */,

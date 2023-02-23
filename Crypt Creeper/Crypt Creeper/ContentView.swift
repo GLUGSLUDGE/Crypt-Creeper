@@ -43,6 +43,8 @@ class GameScene: SKScene, ObservableObject {
     @Published var swordPower:Int = 0
     @Published var shieldPower:Int = 0
     
+    @State var win:Bool = false
+    
     let intSize = 15
     var locations:[Array<CGFloat>] = []
     
@@ -247,6 +249,7 @@ class GameScene: SKScene, ObservableObject {
                     let nextLevelAction = SKAction.rotate(toAngle: 6, duration: 0.3)
                     player.run(nextLevelAction){
                         self.nextLevel()
+                        self.win = true
                     }
                 }
                     //(self.childNode(withName: "PLAYER") as! SKSpriteNode).texture = SKTexture(imageNamed: "ICON_ENTITY_EMPTY")
