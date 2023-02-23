@@ -34,7 +34,6 @@ struct TextFieldLabel: View {
             .foregroundColor(.black)
             .font(.custom("m5x7", fixedSize: 30))
             .autocorrectionDisabled(true)
-            .frame(width: 250)
             .textInputAutocapitalization(.never)
     }
 }
@@ -48,7 +47,6 @@ struct PasswordField : View {
             .font(.system(size: 23))
             .autocorrectionDisabled(true)
             .textInputAutocapitalization(.never)
-            .frame(width: 140)
             .onReceive(Just(field)) { _ in limitText(textLimit) }
     }
     

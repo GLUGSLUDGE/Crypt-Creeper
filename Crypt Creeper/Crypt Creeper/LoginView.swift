@@ -35,7 +35,6 @@ struct LoginView: View {
                     .frame(width: 300)
                     .padding(.leading, -10)
                     Spacer()
-                    
                 }
                 Spacer()
                 PopUpsView(bodyContent: {
