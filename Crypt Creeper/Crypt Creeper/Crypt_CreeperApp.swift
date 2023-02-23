@@ -11,7 +11,7 @@ import SwiftUI
 struct Crypt_CreeperApp: App {
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            SettingsView()
         }
     }
 }

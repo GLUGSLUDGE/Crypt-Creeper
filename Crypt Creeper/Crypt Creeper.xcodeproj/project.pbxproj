@@ -18,6 +18,10 @@
 		28AA776D29819AC400953AD3 /* SanMarinoBeach.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28AA776C29819AC400953AD3 /* SanMarinoBeach.ttf */; };
 		28D274E02975C5EB00E2CA16 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D274DF2975C5EB00E2CA16 /* ColorExtension.swift */; };
 		28FAF85129799F4E0006BB60 /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FAF85029799F4E0006BB60 /* Buttons.swift */; };
+		48255965299A8F1D00882744 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48255964299A8F1D00882744 /* NetworkHelper.swift */; };
+		48255968299A91C800882744 /* SettigsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48255967299A91C800882744 /* SettigsViewModel.swift */; };
+		4825596C29A0272800882744 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4825596B29A0272800882744 /* SettingsView.swift */; };
+		4825597229A401AB00882744 /* userDefault .swift in Sources */ = {isa = PBXBuildFile; fileRef = 4825597129A401AA00882744 /* userDefault .swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +38,10 @@
 		28AA776C29819AC400953AD3 /* SanMarinoBeach.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SanMarinoBeach.ttf; sourceTree = "<group>"; };
 		28D274DF2975C5EB00E2CA16 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		28FAF85029799F4E0006BB60 /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
+		48255964299A8F1D00882744 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
+		48255967299A91C800882744 /* SettigsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettigsViewModel.swift; sourceTree = "<group>"; };
+		4825596B29A0272800882744 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		4825597129A401AA00882744 /* userDefault .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "userDefault .swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,7 +101,9 @@
 				284FBEA6296C61EE0029C958 /* Assets.xcassets */,
 				28712E662976F04000E74C52 /* HomeView.swift */,
 				28FAF85029799F4E0006BB60 /* Buttons.swift */,
+				48255966299A90FF00882744 /* UserSettings */,
 				283F5533296C8CBF0055AF58 /* Preview Content */,
+				48255963299A8ED300882744 /* Data */,
 			);
 			path = "Crypt Creeper";
 			sourceTree = "<group>";
@@ -104,6 +114,24 @@
 				28D274DF2975C5EB00E2CA16 /* ColorExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		48255963299A8ED300882744 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				48255964299A8F1D00882744 /* NetworkHelper.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		48255966299A90FF00882744 /* UserSettings */ = {
+			isa = PBXGroup;
+			children = (
+				48255967299A91C800882744 /* SettigsViewModel.swift */,
+				4825596B29A0272800882744 /* SettingsView.swift */,
+				4825597129A401AA00882744 /* userDefault .swift */,
+			);
+			path = UserSettings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,11 +208,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4825597229A401AB00882744 /* userDefault .swift in Sources */,
 				28FAF85129799F4E0006BB60 /* Buttons.swift in Sources */,
+				4825596C29A0272800882744 /* SettingsView.swift in Sources */,
 				28D274E02975C5EB00E2CA16 /* ColorExtension.swift in Sources */,
 				28712E672976F04000E74C52 /* HomeView.swift in Sources */,
 				284FBEA5296C61ED0029C958 /* ContentView.swift in Sources */,
+				48255965299A8F1D00882744 /* NetworkHelper.swift in Sources */,
 				284FBEA3296C61ED0029C958 /* Crypt_CreeperApp.swift in Sources */,
+				48255968299A91C800882744 /* SettigsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,7 +346,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Crypt Creeper/Preview Content\"";
-				DEVELOPMENT_TEAM = HK6R3F5RZP;
+				DEVELOPMENT_TEAM = V895SM7VF4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Crypt-Creeper-Info.plist";
@@ -353,7 +385,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Crypt Creeper/Preview Content\"";
-				DEVELOPMENT_TEAM = HK6R3F5RZP;
+				DEVELOPMENT_TEAM = V895SM7VF4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Crypt-Creeper-Info.plist";
