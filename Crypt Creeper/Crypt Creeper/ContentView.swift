@@ -43,15 +43,33 @@ class GameScene: SKScene, ObservableObject {
     @Published var swordPower:Int = 0
     @Published var shieldPower:Int = 0
     
-    @State var win:Bool = false
+    @Published var showShop:Bool = false
+    @Published var showTemple:Bool = false
+    @Published var showWin:Bool = false
+    @Published var showGameOver:Bool = false
     
     let intSize = 15
     var locations:[Array<CGFloat>] = []
+    
+    func reset(){
+        print("game was reset!!!")
+        maxHealth = 3
+        health = 3
+        coins = 0
+        level = 1
+        score = 0
+        xp = 0
+        swordPower = 0
+        shieldPower = 0
+        removeAllChildren()
+        createBoard()
+    }
     
     override func didMove(to view: SKView) {
         locations = gridLocations()
         
         createBoard()
+
     }
     func createBoard(){
         let portalrandomX = Int.random(in: 1...5)
@@ -172,7 +190,7 @@ class GameScene: SKScene, ObservableObject {
                     }
                 }
                 if !canMove {
-                    //TODO: GAMEOVER RIP BOZO
+                    //showGameOver = true
                     return
                 }
                 switch(destination.name){
@@ -194,7 +212,7 @@ class GameScene: SKScene, ObservableObject {
                         damage-=1
                     }
                     if health == 0 {
-                        //TODO: GAMEOVER RIP BOZO
+                       showGameOver = true
                     }
                     score+=destination.power*10
                     switch(destination.power){
@@ -217,10 +235,31 @@ class GameScene: SKScene, ObservableObject {
                     }
                 case "SHIELD":
                     shieldPower = destination.power
-                    break
                 case "SWORD":
                     swordPower = destination.power
-                    break
+                case "SHOP":
+                    showShop = true
+                case "TEMPLE":
+                    showTemple = true
+                case "BOSS":
+                    var damage = destination.power
+                    while damage != 0 && swordPower != 0 {
+                        swordPower-=1
+                        damage-=1
+                    }
+                    while damage != 0 && shieldPower != 0 {
+                        shieldPower-=1
+                        damage-=1
+                    }
+                    while damage != 0 && health != 0 {
+                        health-=1
+                        damage-=1
+                    }
+                    if health == 0 {
+                       showGameOver = true
+                    } else {
+                        showWin = true
+                    }
                 default: break
                     
                 }
@@ -249,13 +288,8 @@ class GameScene: SKScene, ObservableObject {
                     let nextLevelAction = SKAction.rotate(toAngle: 6, duration: 0.3)
                     player.run(nextLevelAction){
                         self.nextLevel()
-                        self.win = true
                     }
                 }
-                    //(self.childNode(withName: "PLAYER") as! SKSpriteNode).texture = SKTexture(imageNamed: "ICON_ENTITY_EMPTY")
-                    //self.childNode(withName: "PLAYER")?.name = "EMPTY"
-                    //touchNode.name = "PLAYER"
-                    //(touchNode as! SKSpriteNode).texture = SKTexture(imageNamed: "ICON_ENTITY_PLAYER")
             }
         }
     }
@@ -780,6 +814,10 @@ struct ContentView: View {
         return scene
     }()
     
+    @State var showTemple:Bool = false
+    @State var showGameOver:Bool = false
+    @State var showWin:Bool = false
+    
     var shieldImage:String {
         return "ICON_SHIELD_\(scene.shieldPower)"
     }
@@ -790,14 +828,14 @@ struct ContentView: View {
 
 
     var body: some View {
-        ZStack(){
+        ZStack{
             GeometryReader { geo in
                 ZStack{
                     VStack{
                         Color.ui.gameBackground
                         Color.ui.UIBackground
                     }
-                        
+                    
                     VStack{
                         Spacer()
                         HStack{
@@ -893,9 +931,30 @@ struct ContentView: View {
                         Spacer()
                     }
                 }
-                .ignoresSafeArea()
+                .ignoresSafeArea() //Navigation
+                .sheet(isPresented: $scene.showShop) {
+                    ShopView()
+                }
+                .sheet(isPresented: $scene.showTemple) {
+                    TempleView()
+                }
+                ZStack{
+                    NavigationLink(isActive: $scene.showWin) {
+                        WinView(score: scene.score, scene: scene)
+                    } label: {
+                        EmptyView()
+                    }
+                    NavigationLink(isActive: $scene.showGameOver) {
+                        GameOverView(score: scene.score, scene: scene)
+                    } label: {
+                        EmptyView()
+                    }
+
+                }
+                .hidden()
                 
             }
+            
         }
         .navigationBarBackButtonHidden(true)
     }

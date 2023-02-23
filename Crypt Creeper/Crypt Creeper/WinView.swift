@@ -9,6 +9,8 @@ import SwiftUI
 
 struct WinView: View {
     @Environment(\.dismiss) private var dismiss
+    @State var score:Int
+    @ObservedObject var scene:GameScene
     var body: some View {
         ZStack{
             Color.ui.colorBGBlack
@@ -20,7 +22,7 @@ struct WinView: View {
                         Text("NEW HIGHSCORE!")
                             .font(.system(size: 24, weight: .heavy, design: .rounded))
                             .foregroundColor(Color.ui.textYellow)
-                        Text("SCORE: 003249")
+                        Text("SCORE: \(score)")
                             .font(.system(size: 36, weight: .heavy, design: .rounded))
                             .foregroundColor(Color.ui.text)
                     }
@@ -58,7 +60,8 @@ struct WinView: View {
                     VStack{
                         Spacer()
                         Button {
-                            
+                            scene.reset()
+                            dismiss()
                         } label: {
                             MenuButtonLabel(title: "PLAY AGAIN")
                         }
@@ -77,6 +80,6 @@ struct WinView: View {
 
 struct WinView_Previews: PreviewProvider {
     static var previews: some View {
-        WinView()
+        WinView(score: 32249, scene: GameScene())
     }
 }

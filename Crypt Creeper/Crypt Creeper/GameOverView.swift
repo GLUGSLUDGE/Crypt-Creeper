@@ -9,6 +9,8 @@ import SwiftUI
 
 struct GameOverView: View {
     @Environment(\.dismiss) private var dismiss
+    @State var score:Int
+    @ObservedObject var scene:GameScene
     var body: some View {
         ZStack{
             Color.ui.colorBGBlack
@@ -20,7 +22,7 @@ struct GameOverView: View {
                         Text("NEW HIGHSCORE!")
                             .font(.system(size: 24, weight: .heavy, design: .rounded))
                             .foregroundColor(Color.ui.textYellow)
-                        Text("SCORE: 003249")
+                        Text("SCORE: \(score)")
                             .font(.system(size: 36, weight: .heavy, design: .rounded))
                             .foregroundColor(Color.ui.text)
                     }
@@ -56,7 +58,8 @@ struct GameOverView: View {
                     VStack{
                         Spacer()
                         Button {
-                            
+                            scene.reset()
+                            dismiss()
                         } label: {
                             MenuButtonLabel(title: "PLAY AGAIN")
                         }
@@ -75,6 +78,6 @@ struct GameOverView: View {
 
 struct GameOverView_Previews: PreviewProvider {
     static var previews: some View {
-        GameOverView()
+        GameOverView(score: 99999, scene: GameScene())
     }
 }
