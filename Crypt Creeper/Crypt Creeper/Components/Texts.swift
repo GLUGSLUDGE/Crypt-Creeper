@@ -25,7 +25,7 @@ struct ThinText: View {
     var body: some View {
         VStack {
             Text(title)
-                .font(.custom("m5x7", fixedSize: 40))
+                .font(.custom("m5x7", fixedSize: 36))
                 .multilineTextAlignment(.leading)
             
         }
