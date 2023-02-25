@@ -43,16 +43,33 @@ class GameScene: SKScene, ObservableObject {
     @Published var swordPower:Int = 0
     @Published var shieldPower:Int = 0
     
+    @Published var showShop:Bool = false
+    @Published var showTemple:Bool = false
+    @Published var showWin:Bool = false
+    @Published var showGameOver:Bool = false
+    
     let intSize = 15
     var locations:[Array<CGFloat>] = []
+    
+    func reset(){
+        print("game was reset!!!")
+        maxHealth = 3
+        health = 3
+        coins = 0
+        level = 1
+        score = 0
+        xp = 0
+        swordPower = 0
+        shieldPower = 0
+        removeAllChildren()
+        createBoard()
+    }
     
     override func didMove(to view: SKView) {
         locations = gridLocations()
         
         createBoard()
-        
-        
-        
+
     }
     func createBoard(){
         let portalrandomX = Int.random(in: 1...5)
@@ -129,7 +146,6 @@ class GameScene: SKScene, ObservableObject {
                         randomTile(tile: newTile)
                     }
                 }
-                /*if newTile.power != 0*/
                 if newTile.power != 0{
                     let powerLabel = SKSpriteNode(texture: SKTexture(imageNamed: "num_\(newTile.power)"))
                     powerLabel.size = CGSize(width: 5, height: 5)
@@ -154,6 +170,9 @@ class GameScene: SKScene, ObservableObject {
         let location = touch.location(in: self)
         let touchNode = atPoint(location)
         
+        
+        
+        
         if ((touchNode as? SKScene) == nil) { //<-- Node is touched
             if touchNode.name != "PLAYER" && touchNode.name != "LABEL" {
                 //Check the adjacent nodes
@@ -171,14 +190,13 @@ class GameScene: SKScene, ObservableObject {
                     }
                 }
                 if !canMove {
-                    //TODO: GAMEOVER RIP BOZO
+                    //showGameOver = true
                     return
                 }
                 switch(destination.name){
                 case "PORTAL":
                     score += level*100
                     finishedLevel = true
-                    break
                 case "ENEMY":
                     var damage = destination.power
                     while damage != 0 && swordPower != 0 {
@@ -194,10 +212,7 @@ class GameScene: SKScene, ObservableObject {
                         damage-=1
                     }
                     if health == 0 {
-                        //TODO: GAMEOVER RIP BOZO
-                        level = 0
-                        health = 3
-                        finishedLevel = true
+                       showGameOver = true
                     }
                     score+=destination.power*10
                     switch(destination.power){
@@ -220,26 +235,61 @@ class GameScene: SKScene, ObservableObject {
                     }
                 case "SHIELD":
                     shieldPower = destination.power
-                    break
                 case "SWORD":
                     swordPower = destination.power
-                    break
+                case "SHOP":
+                    showShop = true
+                case "TEMPLE":
+                    showTemple = true
+                case "BOSS":
+                    var damage = destination.power
+                    while damage != 0 && swordPower != 0 {
+                        swordPower-=1
+                        damage-=1
+                    }
+                    while damage != 0 && shieldPower != 0 {
+                        shieldPower-=1
+                        damage-=1
+                    }
+                    while damage != 0 && health != 0 {
+                        health-=1
+                        damage-=1
+                    }
+                    if health == 0 {
+                       showGameOver = true
+                    } else {
+                        showWin = true
+                    }
                 default: break
                     
                 }
                 
                 //MOVE
-                destination.removeAllChildren()
-                (childNode(withName: "PLAYER") as! SKSpriteNode).texture = SKTexture(imageNamed: "ICON_ENTITY_EMPTY")
-                childNode(withName: "PLAYER")?.name = "EMPTY"
-                touchNode.name = "PLAYER"
-                (touchNode as! SKSpriteNode).texture = SKTexture(imageNamed: "ICON_ENTITY_PLAYER")
+                let player = childNode(withName: "PLAYER") as! Tile
+                //Spawn an empty space on your previous position
+                let oldTile = Tile()
+                spawnTile(tile: oldTile, type: EntityType.Empty)
+                oldTile.size = CGSize(width: intSize, height: intSize)
+                oldTile.y = player.y
+                oldTile.zPosition = player.zPosition-1
+                oldTile.x = player.x
+                oldTile.position = CGPoint(x: locations[0][oldTile.x], y: locations[1][oldTile.y])
+                addChild(oldTile)
+                //Carry out the actions
+                let ac = SKAction.move(to: destination.position, duration: 0.1)
                 
-                //Advance level
-                if finishedLevel {
-                    nextLevel()
+                player.run(ac) {
+                    player.x = destination.x
+                    player.y = destination.y
+                    destination.removeAllChildren()
+                    destination.removeFromParent()
                 }
-                
+                if finishedLevel {
+                    let nextLevelAction = SKAction.rotate(toAngle: 6, duration: 0.3)
+                    player.run(nextLevelAction){
+                        self.nextLevel()
+                    }
+                }
             }
         }
     }
@@ -297,7 +347,7 @@ class GameScene: SKScene, ObservableObject {
             case 13: max = 4
             case 14: max = 3
             case 15: max = 3
-            case 16: max = 3
+            case 16: max = 6
             case 17: max = 6
             case 18: max = 6
             case 19: max = 6
@@ -321,7 +371,7 @@ class GameScene: SKScene, ObservableObject {
             case 13: max = 1
             case 14: max = 3
             case 15: max = 3
-            case 16: max = 3
+            case 16: max = 2
             case 17: max = 2
             case 18: max = 4
             case 19: max = 5
@@ -345,7 +395,7 @@ class GameScene: SKScene, ObservableObject {
             case 13: max = 2
             case 14: max = 1
             case 15: max = 4
-            case 16: max = 2
+            case 16: max = 3
             case 17: max = 3
             case 18: max = 3
             case 19: max = 1
@@ -369,7 +419,7 @@ class GameScene: SKScene, ObservableObject {
             case 13: max = 4
             case 14: max = 3
             case 15: max = 2
-            case 16: max = 1
+            case 16: max = 2
             case 17: max = 2
             case 18: max = 4
             case 19: max = 2
@@ -631,7 +681,7 @@ class GameScene: SKScene, ObservableObject {
             case 13: min = 2
             case 14: min = 2
             case 15: min = 3
-            case 16: min = 3
+            case 16: min = 2
             case 17: min = 1
             case 18: min = 1
             case 19: min = 2
@@ -764,6 +814,10 @@ struct ContentView: View {
         return scene
     }()
     
+    @State var showTemple:Bool = false
+    @State var showGameOver:Bool = false
+    @State var showWin:Bool = false
+    
     var shieldImage:String {
         return "ICON_SHIELD_\(scene.shieldPower)"
     }
@@ -774,14 +828,14 @@ struct ContentView: View {
 
 
     var body: some View {
-        ZStack(){
+        ZStack{
             GeometryReader { geo in
                 ZStack{
                     VStack{
                         Color.ui.gameBackground
                         Color.ui.UIBackground
                     }
-                        
+                    
                     VStack{
                         Spacer()
                         HStack{
@@ -877,9 +931,30 @@ struct ContentView: View {
                         Spacer()
                     }
                 }
-                .ignoresSafeArea()
+                .ignoresSafeArea() //Navigation
+                .sheet(isPresented: $scene.showShop) {
+                    ShopView()
+                }
+                .sheet(isPresented: $scene.showTemple) {
+                    TempleView()
+                }
+                ZStack{
+                    NavigationLink(isActive: $scene.showWin) {
+                        WinView(score: scene.score, scene: scene)
+                    } label: {
+                        EmptyView()
+                    }
+                    NavigationLink(isActive: $scene.showGameOver) {
+                        GameOverView(score: scene.score, scene: scene)
+                    } label: {
+                        EmptyView()
+                    }
+
+                }
+                .hidden()
                 
             }
+            
         }
         .navigationBarBackButtonHidden(true)
     }
