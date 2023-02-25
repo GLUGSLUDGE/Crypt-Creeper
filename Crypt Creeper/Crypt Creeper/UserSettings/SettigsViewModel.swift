@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct user : Codable {
     let name : String
@@ -55,20 +56,20 @@ class SettingsViewModel : ObservableObject {
     
     @Published var userName = ""
     @Published var pass = ""
+    @Published var newPass = ""
+    @Published var repitNewPass = ""
     @Published var email = ""
-    @Published var profile_pic = ""
+    @Published var profile_pic : UIImage?
     @Published var message = ""
     //b @Published var data : [user] = []
     
     
     
-    
-    
     func ChangeName(completion: @escaping (Result<String, Error>) -> Void) {
         let url =  "http://127.0.0.1:8000/api/user/change-name"
-        NetworkHelper.shared.setToken(tokens:"Z04g9C6HdeNL57WZqLSUOoajAzmENDncVeNGooNf")
+        NetworkHelper.shared.setToken(tokens:"Np5s3iPAR3Jlwc4KQ4m1AkUs6e00MvCN7wstBXZs")
         
-        let parametros : [String:Any] = ["name": userName ]
+        let parametros : [String:Any] = ["name": userName]
         
         NetworkHelper.shared.requestProvider(url: url, type:.POST, params: parametros) { data, response, error in
             
@@ -78,7 +79,90 @@ class SettingsViewModel : ObservableObject {
                 return
             }
             // Verificar si se recibió una respuesta válida
-            guard let data = data, let httpResponse = response as? HTTPURLResponse, (200..<300).contains(httpResponse.statusCode) else {
+            guard let data = data, let httpResponse = response as? HTTPURLResponse, (200..<599).contains(httpResponse.statusCode) else {
+                completion(.failure(NetworkError.invalidResponse))
+                return
+            }
+            
+            // Procesar la respuesta
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                if let responseJson = json as? [String: Any], let message = responseJson["message"] as? String {
+                    completion(.success(message))
+                } else {
+                    completion(.failure(NetworkError.invalidData))
+                }
+            } catch {
+                completion(.failure(NetworkError.invalidData))
+            }
+        }
+        
+        //            if let data = data {
+        //                do {
+        //                    let decoder = JSONDecoder()
+        //                    let objects = try decoder.decode([user].self, from: data)
+        //                    self.data = objects
+        //                } catch {
+        //                    self.message = ("Error decoding JSON: \(error.localizedDescription)")
+        //                }
+        //            } else if let error = error {
+        //                self.message = ("Error fetching data: \(error.localizedDescription)")
+    }
+    func changePassword(completion: @escaping (Result<String, Error>) -> Void)  {
+        
+        NetworkHelper.shared.setToken(tokens:"6OKw2tknzvup47oAdiTEytNy6DuVCklQMUa4Ad9v"
+        )
+        
+        let  url =  "http://127.0.0.1:8000/api/user/change-password"
+        
+        let parametros : [String:Any] = [
+            "password": pass,
+            "new_password" : newPass ,
+            "repit_new_password" : repitNewPass]
+        
+        NetworkHelper.shared.requestProvider(url: url, type:.POST , params: parametros) { data, response, error in
+            // Verificar si hay un error
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            // Verificar si se recibió una respuesta válida
+            guard let data = data, let httpResponse = response as? HTTPURLResponse, (200..<599).contains(httpResponse.statusCode) else {
+                completion(.failure(NetworkError.invalidResponse))
+                return
+            }
+            
+            // Procesar la respuesta
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                if let responseJson = json as? [String: Any], let message = responseJson["message"] as? String {
+                    completion(.success(message))
+                } else {
+                    completion(.failure(NetworkError.invalidData))
+                }
+            } catch {
+                completion(.failure(NetworkError.invalidData))
+            }
+        }
+    }
+    
+    func changePhoto(completion: @escaping (Result<String, Error>) -> Void){
+        
+        NetworkHelper.shared.setToken(tokens: "9wSE0eQTlyXyy1SSCyUAIAxtUqLC7wdQJ45Insxj")
+        
+        let  url =  "http://127.0.0.1:8000/api/user/change-photo"
+       
+        let parametros : [String: Any] = [
+            "profile_pic": Base64.shared.convertImageToBase64(image: profile_pic ?? UIImage())]
+        
+        NetworkHelper.shared.requestProvider(url: url, type:.POST , params: parametros) { data, response, error in
+            
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            // Verificar si se recibió una respuesta válida
+            guard let data = data, let httpResponse = response as? HTTPURLResponse, (200..<599).contains(httpResponse.statusCode) else {
                 completion(.failure(NetworkError.invalidResponse))
                 return
             }
@@ -99,72 +183,7 @@ class SettingsViewModel : ObservableObject {
     
     
     
-    
-    
-    
-    
-    
-    //            if let data = data {
-    //                do {
-    //                    let decoder = JSONDecoder()
-    //                    let objects = try decoder.decode([user].self, from: data)
-    //                    self.data = objects
-    //                } catch {
-    //                    self.message = ("Error decoding JSON: \(error.localizedDescription)")
-    //                }
-    //            } else if let error = error {
-    //                self.message = ("Error fetching data: \(error.localizedDescription)")
-    //            }
-    
-    
-   
-
-    
-    
-    func changePassword(newPass : String , repitNewPass : String) {
-        
-        let  url =  "http://127.0.0.1:8000/api/user/change-password"
-        
-        let parametros : [String:Any] = [
-            "password": pass,
-            "new_password" : newPass ,
-            "repit_new_password" : repitNewPass]
-        
-        NetworkHelper.shared.requestProvider(url: url, type:.POST , params: parametros) { data, response, error in
-            if let error = error {
-                self.onError(error: error.localizedDescription)
-                return
-                
-            }
-            if let response = response as? HTTPURLResponse {
-                self.message = "\(response.statusCode)"
-                
-            }
-            if let data = data {
-                let json = try? JSONSerialization.jsonObject(with: data, options: [])
-                return self.message = "\(json ?? "")"
-                
-            }
-        }
-    }
-    
-    
-    
-    
-    
-    func onSuccess() {
-        
-    }
-    func onError(error: String) {
-        //  shouldShowErrorAlert = true
-        print ("mal")
-    }
-    
-    
 }
 
 
-extension UserDefaults{
-    
-}
 

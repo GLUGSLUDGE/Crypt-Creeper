@@ -14,7 +14,7 @@ class NetworkHelper {
         case GET
     }
     
-    var token : String = ""
+  private var token : String = ""
     func setToken(tokens:String){
      token = tokens
     }
@@ -64,7 +64,7 @@ class NetworkHelper {
         //añadimos los headers
         
         
-        request.addValue("Beare " + token , forHTTPHeaderField: "Authorization")
+        request.addValue("Bearer " + token , forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         
