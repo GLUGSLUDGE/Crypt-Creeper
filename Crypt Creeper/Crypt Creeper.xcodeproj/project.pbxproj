@@ -21,7 +21,7 @@
 		48255965299A8F1D00882744 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48255964299A8F1D00882744 /* NetworkHelper.swift */; };
 		48255968299A91C800882744 /* SettigsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48255967299A91C800882744 /* SettigsViewModel.swift */; };
 		4825596C29A0272800882744 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4825596B29A0272800882744 /* SettingsView.swift */; };
-		4825597229A401AB00882744 /* userDefault .swift in Sources */ = {isa = PBXBuildFile; fileRef = 4825597129A401AA00882744 /* userDefault .swift */; };
+		48F3F40229AA67B700FD0F58 /* Base64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F3F40129AA67B700FD0F58 /* Base64.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,7 +41,7 @@
 		48255964299A8F1D00882744 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		48255967299A91C800882744 /* SettigsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettigsViewModel.swift; sourceTree = "<group>"; };
 		4825596B29A0272800882744 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		4825597129A401AA00882744 /* userDefault .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "userDefault .swift"; sourceTree = "<group>"; };
+		48F3F40129AA67B700FD0F58 /* Base64.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base64.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +119,7 @@
 		48255963299A8ED300882744 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				48F3F40129AA67B700FD0F58 /* Base64.swift */,
 				48255964299A8F1D00882744 /* NetworkHelper.swift */,
 			);
 			path = Data;
@@ -129,7 +130,6 @@
 			children = (
 				48255967299A91C800882744 /* SettigsViewModel.swift */,
 				4825596B29A0272800882744 /* SettingsView.swift */,
-				4825597129A401AA00882744 /* userDefault .swift */,
 			);
 			path = UserSettings;
 			sourceTree = "<group>";
@@ -208,7 +208,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4825597229A401AB00882744 /* userDefault .swift in Sources */,
 				28FAF85129799F4E0006BB60 /* Buttons.swift in Sources */,
 				4825596C29A0272800882744 /* SettingsView.swift in Sources */,
 				28D274E02975C5EB00E2CA16 /* ColorExtension.swift in Sources */,
@@ -216,6 +215,7 @@
 				284FBEA5296C61ED0029C958 /* ContentView.swift in Sources */,
 				48255965299A8F1D00882744 /* NetworkHelper.swift in Sources */,
 				284FBEA3296C61ED0029C958 /* Crypt_CreeperApp.swift in Sources */,
+				48F3F40229AA67B700FD0F58 /* Base64.swift in Sources */,
 				48255968299A91C800882744 /* SettigsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
