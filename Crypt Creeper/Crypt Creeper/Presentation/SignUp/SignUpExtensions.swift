@@ -57,10 +57,10 @@ extension SignUpView {
                     Spacer()
                 }
                 HStack {
-                    SecureFieldLabel(field: password)
+                    PasswordField(field: password)
                         .focused($focusedField, equals: .passwordField)
                         .padding(.leading, 20)
-                        .padding(.trailing, 140)
+                        .padding(.trailing, 120)
                     Spacer()
                 }
                 HStack {
@@ -71,10 +71,10 @@ extension SignUpView {
                     Spacer()
                 }
                 HStack {
-                    SecureFieldLabel(field: repeatPassword)
+                    PasswordField(field: repeatPassword)
                         .focused($focusedField, equals: .repeatPasswordField)
                         .padding(.leading, 20)
-                        .padding(.trailing, 140)
+                        .padding(.trailing, 120)
                         .padding(.bottom, 30)
                     Spacer()
                 }
