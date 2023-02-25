@@ -11,6 +11,7 @@ struct LoginView: View {
     
 
     // MARK: - Properties
+    
     enum Field: Hashable {
         case userField
         case passwordField
@@ -20,6 +21,8 @@ struct LoginView: View {
     @State var password: String = ""
     
     @FocusState var focusedField: Field?
+    
+    @ObservedObject var viewModel: ViewModel = ViewModel()
     
     
     // MARK: - Body
@@ -43,6 +46,7 @@ struct LoginView: View {
             }
             .padding()
         }
+        .alertCustom(title: viewModel.title, message: viewModel.message, show: $viewModel.showAlert)
     }
 }
 

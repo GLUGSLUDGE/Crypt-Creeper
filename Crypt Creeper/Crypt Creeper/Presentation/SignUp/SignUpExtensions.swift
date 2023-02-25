@@ -36,7 +36,7 @@ extension SignUpView {
                         .padding(.leading, 20)
                     Spacer()
                 }
-                TextFieldLabel(field: username)
+                TextFieldLabel(field: $username)
                     .focused($focusedField, equals: .userField)
                     .padding(.horizontal, 20)
                 HStack {
@@ -46,7 +46,7 @@ extension SignUpView {
                         .padding(.leading, 20)
                     Spacer()
                 }
-                TextFieldLabel(field: email)
+                TextFieldLabel(field: $email)
                     .focused($focusedField, equals: .emailField)
                     .padding(.horizontal, 20)
                 HStack {
@@ -57,7 +57,7 @@ extension SignUpView {
                     Spacer()
                 }
                 HStack {
-                    PasswordField(field: password)
+                    PasswordField(field: $password)
                         .focused($focusedField, equals: .passwordField)
                         .padding(.leading, 20)
                         .padding(.trailing, 120)
@@ -71,7 +71,7 @@ extension SignUpView {
                     Spacer()
                 }
                 HStack {
-                    PasswordField(field: repeatPassword)
+                    PasswordField(field: $repeatPassword)
                         .focused($focusedField, equals: .repeatPasswordField)
                         .padding(.leading, 20)
                         .padding(.trailing, 120)

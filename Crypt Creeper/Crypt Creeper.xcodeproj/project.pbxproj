@@ -25,6 +25,9 @@
 		2F7AF49429A7B8C5009322FB /* censor.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F7AF49329A7B8C5009322FB /* censor.ttf */; };
 		2F8B6B2729AA6E1100710391 /* LoginExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8B6B2629AA6E1100710391 /* LoginExtensions.swift */; };
 		2F8B6B2929AA73F500710391 /* SignUpExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8B6B2829AA73F500710391 /* SignUpExtensions.swift */; };
+		2F8B6B2D29AA982000710391 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8B6B2C29AA982000710391 /* NetworkHelper.swift */; };
+		2F8B6B2F29AA9A6000710391 /* LoginView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8B6B2E29AA9A6000710391 /* LoginView-ViewModel.swift */; };
+		2F8B6B3129AAB70300710391 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8B6B3029AAB70200710391 /* Alert.swift */; };
 		2F8F3DF0299E78F8004E6700 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8F3DEF299E78F8004E6700 /* LoginView.swift */; };
 		2F8F3DF2299E7E5F004E6700 /* PopUps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8F3DF1299E7E5F004E6700 /* PopUps.swift */; };
 		2F8F3DF4299E93EC004E6700 /* TextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8F3DF3299E93EC004E6700 /* TextFields.swift */; };
@@ -53,6 +56,9 @@
 		2F7AF49329A7B8C5009322FB /* censor.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = censor.ttf; sourceTree = "<group>"; };
 		2F8B6B2629AA6E1100710391 /* LoginExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginExtensions.swift; sourceTree = "<group>"; };
 		2F8B6B2829AA73F500710391 /* SignUpExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpExtensions.swift; sourceTree = "<group>"; };
+		2F8B6B2C29AA982000710391 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
+		2F8B6B2E29AA9A6000710391 /* LoginView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginView-ViewModel.swift"; sourceTree = "<group>"; };
+		2F8B6B3029AAB70200710391 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		2F8F3DEF299E78F8004E6700 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		2F8F3DF1299E7E5F004E6700 /* PopUps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUps.swift; sourceTree = "<group>"; };
 		2F8F3DF3299E93EC004E6700 /* TextFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFields.swift; sourceTree = "<group>"; };
@@ -110,6 +116,7 @@
 		284FBEA1296C61ED0029C958 /* Crypt Creeper */ = {
 			isa = PBXGroup;
 			children = (
+				2F8B6B2B29AA97B900710391 /* Data */,
 				2F8B6B2429AA6D5C00710391 /* Presentation */,
 				2F8F3DF7299EABF8004E6700 /* Components */,
 				2842ECA82979A85A00C4B6A3 /* Crypt-Creeper-Info.plist */,
@@ -140,6 +147,7 @@
 			children = (
 				2F8F3DEF299E78F8004E6700 /* LoginView.swift */,
 				2F8B6B2629AA6E1100710391 /* LoginExtensions.swift */,
+				2F8B6B2E29AA9A6000710391 /* LoginView-ViewModel.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -171,6 +179,14 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		2F8B6B2B29AA97B900710391 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				2F8B6B2C29AA982000710391 /* NetworkHelper.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		2F8F3DF7299EABF8004E6700 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +194,7 @@
 				2F8F3DF5299E9733004E6700 /* Texts.swift */,
 				2F8F3DF1299E7E5F004E6700 /* PopUps.swift */,
 				28FAF85029799F4E0006BB60 /* Buttons.swift */,
+				2F8B6B3029AAB70200710391 /* Alert.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -258,15 +275,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F8F3DF0299E78F8004E6700 /* LoginView.swift in Sources */,
+				2F8B6B2F29AA9A6000710391 /* LoginView-ViewModel.swift in Sources */,
 				287B0B8C29A7784600CF750C /* GameOverView.swift in Sources */,
 				2F8F3DF2299E7E5F004E6700 /* PopUps.swift in Sources */,
 				2F8B6B2729AA6E1100710391 /* LoginExtensions.swift in Sources */,
+				2F8B6B3129AAB70300710391 /* Alert.swift in Sources */,
 				28FAF85129799F4E0006BB60 /* Buttons.swift in Sources */,
 				2F8F3DF6299E9733004E6700 /* Texts.swift in Sources */,
 				28D274E02975C5EB00E2CA16 /* ColorExtension.swift in Sources */,
 				28DA71BE29A7BAA800C3D4B5 /* ShopView.swift in Sources */,
 				280E911329A7620500CBE5C2 /* WinView.swift in Sources */,
 				28712E672976F04000E74C52 /* HomeView.swift in Sources */,
+				2F8B6B2D29AA982000710391 /* NetworkHelper.swift in Sources */,
 				2F8B6B2929AA73F500710391 /* SignUpExtensions.swift in Sources */,
 				2F8F3DFD29A6888C004E6700 /* SignUpView.swift in Sources */,
 				284FBEA5296C61ED0029C958 /* ContentView.swift in Sources */,
