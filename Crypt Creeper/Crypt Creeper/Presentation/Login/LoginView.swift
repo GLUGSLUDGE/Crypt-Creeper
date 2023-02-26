@@ -25,23 +25,25 @@ struct LoginView: View {
     // MARK: - Body
     
     var body: some View {
-        ZStack {
-            Color.accentColor
-                .ignoresSafeArea()
-            VStack {
-                HStack {
-                    goToSignUp()
+        NavigationView {
+            ZStack {
+                Color.ui.popUpColor
+                    .ignoresSafeArea()
+                VStack {
+                    HStack {
+                        goToSignUp()
+                        Spacer()
+                    }
                     Spacer()
-                }
-                Spacer()
-                loginPopUp()
-                Spacer()
-                HStack {
+                    loginPopUp()
                     Spacer()
-                    loginButton()
+                    HStack {
+                        Spacer()
+                        loginButton()
+                    }
                 }
+                .padding()
             }
-            .padding()
         }
         .alertCustom(title: viewModel.alertTitle, message: viewModel.alertMessage, show: $viewModel.showAlert)
     }

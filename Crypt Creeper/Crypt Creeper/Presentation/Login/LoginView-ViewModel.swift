@@ -18,6 +18,7 @@ extension LoginView {
         @Published var alertMessage: String = ""
         @Published var message: String = ""
         @Published var showAlert: Bool = false
+        @Published var isLoged: Bool = false
         
         private var token: String = ""
         
@@ -91,30 +92,20 @@ extension LoginView {
                } catch {
                    completion(.failure(NetworkError.invalidData))
                }
-                //                else if let data = data, let response = response as? HTTPURLResponse {
-                //                    print(data.debugDescription)
-                //                    if response.statusCode == 200 {
-                //                        print(response.statusCode)
-                //                        self.onSuccess()
-                //                    } else {
-                //                        print(response.statusCode)
-                //                        self.onError(error: error?.localizedDescription ?? "")
-                //                    }
-                //                }
             }
         }
         
         func onSuccess(message: String) {
-//          isLoged = true
-            print(message)
+            isLoged = true
             self.token = message
+            print(token)
             NetworkHelper.shared.setToken(tokens: token)
         }
         
         func onError(error: String) {
             print(error)
-            alertTitle = "El usuario no existe"
-            alertMessage = "Asegúrate de haberlo escrito todo correctamente"
+            alertTitle = "User or password incorrect"
+            alertMessage = "Make sure you write it all correctly"
             showAlert = true
         }
     }

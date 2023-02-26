@@ -11,11 +11,12 @@ struct PopUps : View {
     var body: some View {
         //@State var username: String
         ZStack {
-            Color.accentColor
+            Color.ui.popUpColor
                 .ignoresSafeArea()
             VStack {
                 PopUpsView(bodyContent: {
                     VStack {
+                        
                     }
                 }, title: "LOGIN", show: true)
             }
@@ -33,7 +34,7 @@ struct PopUpsView<BodyContent: View>: View {
             VStack {
                 HStack{
                     Text(title)
-                        .foregroundColor(.accentColor)
+                        .foregroundColor(Color.ui.popUpColor)
                         .font(.custom("m6x11", fixedSize: 30))
                         .padding(7)
                     Spacer()
@@ -46,10 +47,9 @@ struct PopUpsView<BodyContent: View>: View {
                 bodyContent()
             }
             .border(.white, width: 1)
-            .background(Color.accentColor)
+            .background(Color.ui.popUpColor)
             .padding()
         }
-        
     }
 }
 

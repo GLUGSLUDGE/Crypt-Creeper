@@ -31,7 +31,7 @@ struct SignUpView: View {
     
     var body: some View {
         ZStack {
-            Color.accentColor
+            Color.ui.popUpColor
                 .ignoresSafeArea()
             VStack {
                 HStack {

@@ -10,17 +10,21 @@ import SwiftUI
 extension LoginView {
     
     func goToSignUp() -> some View {
-        PopUpsView(bodyContent: {
-            HStack {
-                Image("Ghost")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 100, height: 100)
-                    .padding(.bottom, 5)
-                BoldText(title: "Not an user?\nWhat a loser!\nClick here!!")
-                    .foregroundColor(Color.ui.text)
-            }
-        }, title: "Sign Up", show: true)
+        NavigationLink {
+            SignUpView()
+        } label: {
+            PopUpsView(bodyContent: {
+                HStack {
+                    Image("Ghost")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 100, height: 100)
+                        .padding(.bottom, 5)
+                    BoldText(title: "Not an user?\nWhat a loser!\nClick here!!")
+                        .foregroundColor(Color.ui.text)
+                }
+            }, title: "Sign Up", show: true)
+        }
         .frame(width: 300)
         .padding(.leading, -10)
     }
@@ -66,9 +70,12 @@ extension LoginView {
         Button {
             if viewModel.name.isEmpty {
                 print("no name")
+                viewModel.alertTitle = "Name field incomplete"
+                viewModel.showAlert = true
                 focusedField = .userField
             } else if viewModel.password.isEmpty {
-                print("no pass")
+                viewModel.alertTitle = "Password field incomplete"
+                viewModel.showAlert = true
                 focusedField = .passwordField
             } else {
                 viewModel.login { result in
@@ -82,10 +89,12 @@ extension LoginView {
                     }
                 }
             }
-            
         } label: {
             MiniButtonLabel(title: "Login")
         }
         .padding(.trailing, 20)
+        .background(
+            NavigationLink("", destination: HomeView(), isActive: $viewModel.isLoged)
+        )
     }
 }
