@@ -17,9 +17,6 @@ struct LoginView: View {
         case passwordField
     }
     
-    @State var username: String = ""
-    @State var password: String = ""
-    
     @FocusState var focusedField: Field?
     
     @ObservedObject var viewModel: ViewModel = ViewModel()
@@ -46,7 +43,7 @@ struct LoginView: View {
             }
             .padding()
         }
-        .alertCustom(title: viewModel.title, message: viewModel.message, show: $viewModel.showAlert)
+        .alertCustom(title: viewModel.alertTitle, message: viewModel.alertMessage, show: $viewModel.showAlert)
     }
 }
 

@@ -36,7 +36,7 @@ extension LoginView {
                     Spacer()
                 }
                 HStack {
-                    TextFieldLabel(field: $username)
+                    TextFieldLabel(field: $viewModel.name)
                         .focused($focusedField, equals: .userField)
                         .padding(.horizontal, 20)
                     Spacer()
@@ -49,7 +49,7 @@ extension LoginView {
                     Spacer()
                 }
                 HStack {
-                    PasswordField(field: $password)
+                    PasswordField(field: $viewModel.password)
                         .focused($focusedField, equals: .passwordField)
                         .padding(.horizontal, 20)
                         .padding(.trailing, 160)
@@ -64,15 +64,25 @@ extension LoginView {
     
     func loginButton() -> some View {
         Button {
-            if username.isEmpty {
+            if viewModel.name.isEmpty {
                 print("no name")
                 focusedField = .userField
-            } else if password.isEmpty {
+            } else if viewModel.password.isEmpty {
                 print("no pass")
                 focusedField = .passwordField
             } else {
-                viewModel.login(name: username, password: password)
+                viewModel.login { result in
+                    switch result {
+                    case .success(let message):
+                        self.viewModel.message = message
+                        viewModel.onSuccess(message: message)
+                    case .failure(let error):
+                        self.viewModel.message = error.localizedDescription
+                        viewModel.onError(error: error.localizedDescription)
+                    }
+                }
             }
+            
         } label: {
             MiniButtonLabel(title: "Login")
         }
