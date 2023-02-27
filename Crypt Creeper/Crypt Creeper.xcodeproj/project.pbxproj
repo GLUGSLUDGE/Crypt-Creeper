@@ -28,6 +28,7 @@
 		2F8B6B2D29AA982000710391 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8B6B2C29AA982000710391 /* NetworkHelper.swift */; };
 		2F8B6B2F29AA9A6000710391 /* LoginView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8B6B2E29AA9A6000710391 /* LoginView-ViewModel.swift */; };
 		2F8B6B3129AAB70300710391 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8B6B3029AAB70200710391 /* Alert.swift */; };
+		2F8B6B3329ACFFEA00710391 /* SignUpView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8B6B3229ACFFEA00710391 /* SignUpView-ViewModel.swift */; };
 		2F8F3DF0299E78F8004E6700 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8F3DEF299E78F8004E6700 /* LoginView.swift */; };
 		2F8F3DF2299E7E5F004E6700 /* PopUps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8F3DF1299E7E5F004E6700 /* PopUps.swift */; };
 		2F8F3DF4299E93EC004E6700 /* TextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8F3DF3299E93EC004E6700 /* TextFields.swift */; };
@@ -59,6 +60,7 @@
 		2F8B6B2C29AA982000710391 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		2F8B6B2E29AA9A6000710391 /* LoginView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginView-ViewModel.swift"; sourceTree = "<group>"; };
 		2F8B6B3029AAB70200710391 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		2F8B6B3229ACFFEA00710391 /* SignUpView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignUpView-ViewModel.swift"; sourceTree = "<group>"; };
 		2F8F3DEF299E78F8004E6700 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		2F8F3DF1299E7E5F004E6700 /* PopUps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUps.swift; sourceTree = "<group>"; };
 		2F8F3DF3299E93EC004E6700 /* TextFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFields.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 			children = (
 				2F8F3DFC29A6888C004E6700 /* SignUpView.swift */,
 				2F8B6B2829AA73F500710391 /* SignUpExtensions.swift */,
+				2F8B6B3229ACFFEA00710391 /* SignUpView-ViewModel.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				2F8F3DF0299E78F8004E6700 /* LoginView.swift in Sources */,
 				2F8B6B2F29AA9A6000710391 /* LoginView-ViewModel.swift in Sources */,
 				287B0B8C29A7784600CF750C /* GameOverView.swift in Sources */,
+				2F8B6B3329ACFFEA00710391 /* SignUpView-ViewModel.swift in Sources */,
 				2F8F3DF2299E7E5F004E6700 /* PopUps.swift in Sources */,
 				2F8B6B2729AA6E1100710391 /* LoginExtensions.swift in Sources */,
 				2F8B6B3129AAB70300710391 /* Alert.swift in Sources */,

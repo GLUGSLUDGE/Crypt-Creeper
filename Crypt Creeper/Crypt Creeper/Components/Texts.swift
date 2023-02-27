@@ -10,7 +10,7 @@ import SwiftUI
 struct Texts: View {
     var body: some View {
         ZStack {
-            Color.accentColor
+            Color.ui.popUpColor
                 .ignoresSafeArea()
             VStack {
                 ThinText(title: "Prueba")
@@ -36,7 +36,6 @@ struct BoldText: View {
         VStack {
             Text(title)
                 .font(.custom("m6x11", fixedSize: 30))
-                .fontWeight(.black)
         }
     }
 }

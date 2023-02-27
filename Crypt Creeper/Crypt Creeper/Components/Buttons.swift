@@ -106,8 +106,9 @@ struct MiniButtonLabel: View {
         ZStack {
             Rectangle()
                 .frame(width: UIScreen.main.bounds.size.width/3.45, height: UIScreen.main.bounds.height/12)
-                .foregroundColor(Color.white)
+                .foregroundColor(Color.accentColor)
             BoldText(title: title)
+                .foregroundColor(Color.ui.popUpColor)
             
         }
     }
@@ -121,6 +122,7 @@ struct ButtonLabel: View {
                 .frame(width: UIScreen.main.bounds.size.width/1.1, height: UIScreen.main.bounds.height/12)
                 .foregroundColor(Color.white)
             BoldText(title: title)
+                .foregroundColor(Color.ui.popUpColor)
         }
     }
 }
@@ -130,9 +132,10 @@ struct TrueButton: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .foregroundColor(Color.white)
+                .foregroundColor(Color.accentColor)
                 .frame(height: UIScreen.main.bounds.height/12)
             BoldText(title: title)
+                .foregroundColor(Color.ui.popUpColor)
         }
     }
 }

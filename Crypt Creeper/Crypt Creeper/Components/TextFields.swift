@@ -13,7 +13,7 @@ struct TextFields: View {
     @State var censored: String = ""
     var body: some View {
         ZStack {
-            Color.accentColor
+            Color.ui.popUpColor
                 .ignoresSafeArea()
             VStack {
                 TextFieldLabel(field: $field)
@@ -29,7 +29,7 @@ struct TextFieldLabel: View {
     let textLimit = 15
     var body: some View {
         TextField("", text: $field)
-            .background(Color.white)
+            .background(Color.accentColor)
             .foregroundColor(.black)
             .font(.custom("m5x7", fixedSize: 30))
             .autocorrectionDisabled(true)

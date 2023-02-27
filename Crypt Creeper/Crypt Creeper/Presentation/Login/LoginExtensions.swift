@@ -22,6 +22,7 @@ extension LoginView {
                         .padding(.bottom, 5)
                     BoldText(title: "Not an user?\nWhat a loser!\nClick here!!")
                         .foregroundColor(Color.ui.text)
+                        .multilineTextAlignment(.leading)
                 }
             }, title: "Sign Up", show: true)
         }

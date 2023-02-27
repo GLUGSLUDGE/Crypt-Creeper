@@ -115,7 +115,6 @@ extension SignUpView {
             }
         }, title: "Profile Pic", show: true)
         .frame(width: 250)
-        .padding(.bottom, 30)
     }
     
     func signUpButton() -> some View {
