@@ -141,23 +141,28 @@ class GameScene: SKScene, ObservableObject {
                                 newTile.texture = SKTexture(imageNamed: "ICON_ENTITY_TEMPLE")
                             }
                             npcAmount = 1
+                        } else {
+                            randomTile(tile: newTile)
                         }
                     } else {
                         randomTile(tile: newTile)
                     }
                 }
-                if newTile.power != 0{
-                    let powerLabel = SKSpriteNode(texture: SKTexture(imageNamed: "num_\(newTile.power)"))
-                    powerLabel.size = CGSize(width: 5, height: 5)
-                    powerLabel.name = "LABEL"
-                    powerLabel.zPosition = newTile.zPosition+12
-                    powerLabel.position = CGPoint(x:5,y:-3)
-                    newTile.addChild(powerLabel)
-                }
                 
+                addPowerLabel(tile: newTile)
                 
                 addChild(newTile)
             }
+        }
+    }
+    func addPowerLabel(tile: Tile){
+        if tile.power != 0{
+            let powerLabel = SKSpriteNode(texture: SKTexture(imageNamed: "num_\(tile.power)"))
+            powerLabel.size = CGSize(width: 5, height: 5)
+            powerLabel.name = "LABEL"
+            powerLabel.zPosition = tile.zPosition+12
+            powerLabel.position = CGPoint(x:5,y:-3)
+            tile.addChild(powerLabel)
         }
     }
     func nextLevel(){
@@ -169,9 +174,6 @@ class GameScene: SKScene, ObservableObject {
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
         let touchNode = atPoint(location)
-        
-        
-        
         
         if ((touchNode as? SKScene) == nil) { //<-- Node is touched
             if touchNode.name != "PLAYER" && touchNode.name != "LABEL" {
@@ -933,10 +935,10 @@ struct ContentView: View {
                 }
                 .ignoresSafeArea() //Navigation
                 .sheet(isPresented: $scene.showShop) {
-                    ShopView()
+                    ShopView(scene: scene)
                 }
                 .sheet(isPresented: $scene.showTemple) {
-                    TempleView()
+                    TempleView(scene: scene)
                 }
                 ZStack{
                     NavigationLink(isActive: $scene.showWin) {

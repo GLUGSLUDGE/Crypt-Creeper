@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TempleView: View {
+    @ObservedObject var scene:GameScene
     var body: some View {
         ZStack{
             Color.ui.colorBGBlack
@@ -22,6 +23,7 @@ struct TempleView: View {
             }
             .background(Color.ui.colorBGRed)
             VStack{
+                UIPill(scene: scene, style: ShopStyle.Temple)
                 Spacer()
                 Spacer()
                 HStack{
@@ -43,6 +45,6 @@ struct TempleView: View {
 
 struct TempleView_Previews: PreviewProvider {
     static var previews: some View {
-        TempleView()
+        TempleView(scene: GameScene())
     }
 }
