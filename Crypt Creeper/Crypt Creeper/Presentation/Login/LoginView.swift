@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LoginView: View {
     
-
+    
     // MARK: - Properties
     
     enum Field: Hashable {
@@ -25,25 +25,23 @@ struct LoginView: View {
     // MARK: - Body
     
     var body: some View {
-        NavigationView {
-            ZStack {
-                Color.ui.popUpColor
-                    .ignoresSafeArea()
-                VStack {
-                    HStack {
-                        goToSignUp()
-                        Spacer()
-                    }
+        ZStack {
+            Color.ui.popUpColor
+                .ignoresSafeArea()
+            VStack {
+                HStack {
+                    goToSignUp()
                     Spacer()
-                    loginPopUp()
-                    Spacer()
-                    HStack {
-                        Spacer()
-                        loginButton()
-                    }
                 }
-                .padding()
+                Spacer()
+                loginPopUp()
+                Spacer()
+                HStack {
+                    Spacer()
+                    loginButton()
+                }
             }
+            .padding()
         }
         .alertCustom(title: viewModel.alertTitle, message: viewModel.alertMessage, show: $viewModel.showAlert)
     }
