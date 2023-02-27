@@ -74,6 +74,18 @@ struct SettingsView: View {
                     } label: {
                         Text("canbiar contraseña")
                     }
+                    Button {
+                        self.viewModel.logOut{result in
+                                switch result {
+                                case .success(let message):
+                                    self.viewModel.message = message
+                                case .failure(let error):
+                                    self.viewModel.message = error.localizedDescription
+                                }
+                        }
+                    } label: {
+                        Text("cerrar sesion")
+                    }
 
                 }
                 
@@ -112,8 +124,6 @@ struct SettingsView: View {
                 } label: {
                     Text("cambiar contraseña")
                 }
-                
-                
             }
             .navigationViewStyle(StackNavigationViewStyle())
             .fullScreenCover(isPresented: $shouldShowImagePicker, onDismiss: nil) {

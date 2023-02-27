@@ -67,7 +67,7 @@ class SettingsViewModel : ObservableObject {
     
     func ChangeName(completion: @escaping (Result<String, Error>) -> Void) {
         let url =  "http://127.0.0.1:8000/api/user/change-name"
-        NetworkHelper.shared.setToken(tokens:"Np5s3iPAR3Jlwc4KQ4m1AkUs6e00MvCN7wstBXZs")
+      
         
         let parametros : [String:Any] = ["name": userName]
         
@@ -110,8 +110,6 @@ class SettingsViewModel : ObservableObject {
     }
     func changePassword(completion: @escaping (Result<String, Error>) -> Void)  {
         
-        NetworkHelper.shared.setToken(tokens:"6OKw2tknzvup47oAdiTEytNy6DuVCklQMUa4Ad9v"
-        )
         
         let  url =  "http://127.0.0.1:8000/api/user/change-password"
         
@@ -148,7 +146,7 @@ class SettingsViewModel : ObservableObject {
     
     func changePhoto(completion: @escaping (Result<String, Error>) -> Void){
         
-        NetworkHelper.shared.setToken(tokens: "9wSE0eQTlyXyy1SSCyUAIAxtUqLC7wdQJ45Insxj")
+        
         
         let  url =  "http://127.0.0.1:8000/api/user/change-photo"
        
@@ -166,7 +164,6 @@ class SettingsViewModel : ObservableObject {
                 completion(.failure(NetworkError.invalidResponse))
                 return
             }
-            
             // Procesar la respuesta
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: [])
@@ -179,6 +176,34 @@ class SettingsViewModel : ObservableObject {
                 completion(.failure(NetworkError.invalidData))
             }
         }
+    }
+    
+    
+    func logOut(completion:@escaping (Result<String, Error>) -> Void){
+        
+        
+        
+        let  url =  "http://127.0.0.1:8000/api/user/logout"
+        // Verificar si se recibió una respuesta válida
+        NetworkHelper.shared.requestProvider(url: url) { data, response, error in
+            guard let data = data, let httpResponse = response as? HTTPURLResponse, (200..<599).contains(httpResponse.statusCode) else {
+                completion(.failure(NetworkError.invalidResponse))
+                return
+            }
+    
+            // Procesar la respuesta
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                if let responseJson = json as? [String: Any], let message = responseJson["message"] as? String {
+                    completion(.success(message))
+                } else {
+                    completion(.failure(NetworkError.invalidData))
+                }
+            } catch {
+                completion(.failure(NetworkError.invalidData))
+            }
+        }
+        
     }
     
 }
