@@ -20,6 +20,11 @@ class NetworkHelper {
         token = tokens
     }
     
+    func getToken() -> String {
+        setToken(tokens: token)
+        return token
+    }
+    
     // MARK: - Constants
     
     // Singleton

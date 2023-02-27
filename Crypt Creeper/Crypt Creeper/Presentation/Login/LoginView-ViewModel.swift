@@ -20,6 +20,7 @@ extension LoginView {
         @Published var showAlert: Bool = false
         @Published var isLoged: Bool = false
         
+        let userDefaults = UserDefaults.standard
         private var token: String = ""
         
         struct User: Codable {
@@ -99,6 +100,7 @@ extension LoginView {
             isLoged = true
             self.token = message
             print(token)
+            userDefaults.set(token, forKey: "savedToken")
             NetworkHelper.shared.setToken(tokens: token)
         }
         

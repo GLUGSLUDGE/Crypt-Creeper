@@ -28,7 +28,7 @@
 		2F8B6B2D29AA982000710391 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8B6B2C29AA982000710391 /* NetworkHelper.swift */; };
 		2F8B6B2F29AA9A6000710391 /* LoginView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8B6B2E29AA9A6000710391 /* LoginView-ViewModel.swift */; };
 		2F8B6B3129AAB70300710391 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8B6B3029AAB70200710391 /* Alert.swift */; };
-		2F8B6B3329ACFFEA00710391 /* SignUpView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8B6B3229ACFFEA00710391 /* SignUpView-ViewModel.swift */; };
+		2F8B6B3629AD052100710391 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8B6B3529AD052100710391 /* SplashView.swift */; };
 		2F8F3DF0299E78F8004E6700 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8F3DEF299E78F8004E6700 /* LoginView.swift */; };
 		2F8F3DF2299E7E5F004E6700 /* PopUps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8F3DF1299E7E5F004E6700 /* PopUps.swift */; };
 		2F8F3DF4299E93EC004E6700 /* TextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8F3DF3299E93EC004E6700 /* TextFields.swift */; };
@@ -60,7 +60,7 @@
 		2F8B6B2C29AA982000710391 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		2F8B6B2E29AA9A6000710391 /* LoginView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginView-ViewModel.swift"; sourceTree = "<group>"; };
 		2F8B6B3029AAB70200710391 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
-		2F8B6B3229ACFFEA00710391 /* SignUpView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignUpView-ViewModel.swift"; sourceTree = "<group>"; };
+		2F8B6B3529AD052100710391 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		2F8F3DEF299E78F8004E6700 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		2F8F3DF1299E7E5F004E6700 /* PopUps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUps.swift; sourceTree = "<group>"; };
 		2F8F3DF3299E93EC004E6700 /* TextFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFields.swift; sourceTree = "<group>"; };
@@ -118,13 +118,13 @@
 		284FBEA1296C61ED0029C958 /* Crypt Creeper */ = {
 			isa = PBXGroup;
 			children = (
+				284FBEA2296C61ED0029C958 /* Crypt_CreeperApp.swift */,
 				2F8B6B2B29AA97B900710391 /* Data */,
 				2F8B6B2429AA6D5C00710391 /* Presentation */,
 				2F8F3DF7299EABF8004E6700 /* Components */,
 				2842ECA82979A85A00C4B6A3 /* Crypt-Creeper-Info.plist */,
 				2842ECA52979A81F00C4B6A3 /* Fonts */,
 				28D274DE2975C5D100E2CA16 /* Extensions */,
-				284FBEA2296C61ED0029C958 /* Crypt_CreeperApp.swift */,
 				284FBEA4296C61ED0029C958 /* ContentView.swift */,
 				280E911229A7620500CBE5C2 /* WinView.swift */,
 				287B0B8B29A7784600CF750C /* GameOverView.swift */,
@@ -157,6 +157,7 @@
 		2F8B6B2429AA6D5C00710391 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				2F8B6B3429AD04DB00710391 /* Splash */,
 				2F8B6B2A29AA773700710391 /* Home */,
 				2F8B6B2529AA6D6D00710391 /* SignUp */,
 				2F8B6B2329AA6CA600710391 /* Login */,
@@ -169,7 +170,6 @@
 			children = (
 				2F8F3DFC29A6888C004E6700 /* SignUpView.swift */,
 				2F8B6B2829AA73F500710391 /* SignUpExtensions.swift */,
-				2F8B6B3229ACFFEA00710391 /* SignUpView-ViewModel.swift */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -188,6 +188,14 @@
 				2F8B6B2C29AA982000710391 /* NetworkHelper.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		2F8B6B3429AD04DB00710391 /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				2F8B6B3529AD052100710391 /* SplashView.swift */,
+			);
+			path = Splash;
 			sourceTree = "<group>";
 		};
 		2F8F3DF7299EABF8004E6700 /* Components */ = {
@@ -280,7 +288,6 @@
 				2F8F3DF0299E78F8004E6700 /* LoginView.swift in Sources */,
 				2F8B6B2F29AA9A6000710391 /* LoginView-ViewModel.swift in Sources */,
 				287B0B8C29A7784600CF750C /* GameOverView.swift in Sources */,
-				2F8B6B3329ACFFEA00710391 /* SignUpView-ViewModel.swift in Sources */,
 				2F8F3DF2299E7E5F004E6700 /* PopUps.swift in Sources */,
 				2F8B6B2729AA6E1100710391 /* LoginExtensions.swift in Sources */,
 				2F8B6B3129AAB70300710391 /* Alert.swift in Sources */,
@@ -295,6 +302,7 @@
 				2F8F3DFD29A6888C004E6700 /* SignUpView.swift in Sources */,
 				284FBEA5296C61ED0029C958 /* ContentView.swift in Sources */,
 				284FBEA3296C61ED0029C958 /* Crypt_CreeperApp.swift in Sources */,
+				2F8B6B3629AD052100710391 /* SplashView.swift in Sources */,
 				2F8F3DF4299E93EC004E6700 /* TextFields.swift in Sources */,
 				28DA71C029A7BE2A00C3D4B5 /* TempleView.swift in Sources */,
 			);
