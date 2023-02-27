@@ -11,38 +11,41 @@ struct LoginView: View {
     
 
     // MARK: - Properties
+    
     enum Field: Hashable {
         case userField
         case passwordField
     }
     
-    @State var username: String = ""
-    @State var password: String = ""
-    
     @FocusState var focusedField: Field?
+    
+    @ObservedObject var viewModel: ViewModel = ViewModel()
     
     
     // MARK: - Body
     
     var body: some View {
-        ZStack {
-            Color.accentColor
-                .ignoresSafeArea()
-            VStack {
-                HStack {
-                    goToSignUp()
+        NavigationView {
+            ZStack {
+                Color.ui.popUpColor
+                    .ignoresSafeArea()
+                VStack {
+                    HStack {
+                        goToSignUp()
+                        Spacer()
+                    }
                     Spacer()
-                }
-                Spacer()
-                loginPopUp()
-                Spacer()
-                HStack {
+                    loginPopUp()
                     Spacer()
-                    loginButton()
+                    HStack {
+                        Spacer()
+                        loginButton()
+                    }
                 }
+                .padding()
             }
-            .padding()
         }
+        .alertCustom(title: viewModel.alertTitle, message: viewModel.alertMessage, show: $viewModel.showAlert)
     }
 }
 

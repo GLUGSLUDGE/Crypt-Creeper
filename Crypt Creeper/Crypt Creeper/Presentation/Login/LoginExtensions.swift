@@ -10,17 +10,22 @@ import SwiftUI
 extension LoginView {
     
     func goToSignUp() -> some View {
-        PopUpsView(bodyContent: {
-            HStack {
-                Image("Ghost")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 100, height: 100)
-                    .padding(.bottom, 5)
-                BoldText(title: "Not an user?\nWhat a loser!\nClick here!!")
-                    .foregroundColor(Color.ui.text)
-            }
-        }, title: "Sign Up", show: true)
+        NavigationLink {
+            SignUpView()
+        } label: {
+            PopUpsView(bodyContent: {
+                HStack {
+                    Image("Ghost")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 100, height: 100)
+                        .padding(.bottom, 5)
+                    BoldText(title: "Not an user?\nWhat a loser!\nClick here!!")
+                        .foregroundColor(Color.ui.text)
+                        .multilineTextAlignment(.leading)
+                }
+            }, title: "Sign Up", show: true)
+        }
         .frame(width: 300)
         .padding(.leading, -10)
     }
@@ -36,7 +41,7 @@ extension LoginView {
                     Spacer()
                 }
                 HStack {
-                    TextFieldLabel(field: username)
+                    TextFieldLabel(field: $viewModel.name)
                         .focused($focusedField, equals: .userField)
                         .padding(.horizontal, 20)
                     Spacer()
@@ -49,7 +54,7 @@ extension LoginView {
                     Spacer()
                 }
                 HStack {
-                    PasswordField(field: password)
+                    PasswordField(field: $viewModel.password)
                         .focused($focusedField, equals: .passwordField)
                         .padding(.horizontal, 20)
                         .padding(.trailing, 160)
@@ -64,16 +69,33 @@ extension LoginView {
     
     func loginButton() -> some View {
         Button {
-            if username.isEmpty {
+            if viewModel.name.isEmpty {
+                print("no name")
+                viewModel.alertTitle = "Name field incomplete"
+                viewModel.showAlert = true
                 focusedField = .userField
-            } else if password.isEmpty {
+            } else if viewModel.password.isEmpty {
+                viewModel.alertTitle = "Password field incomplete"
+                viewModel.showAlert = true
                 focusedField = .passwordField
             } else {
-                print("log")
+                viewModel.login { result in
+                    switch result {
+                    case .success(let message):
+                        self.viewModel.message = message
+                        viewModel.onSuccess(message: message)
+                    case .failure(let error):
+                        self.viewModel.message = error.localizedDescription
+                        viewModel.onError(error: error.localizedDescription)
+                    }
+                }
             }
         } label: {
             MiniButtonLabel(title: "Login")
         }
         .padding(.trailing, 20)
+        .background(
+            NavigationLink("", destination: HomeView(), isActive: $viewModel.isLoged)
+        )
     }
 }

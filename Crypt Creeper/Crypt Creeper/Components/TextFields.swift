@@ -13,11 +13,11 @@ struct TextFields: View {
     @State var censored: String = ""
     var body: some View {
         ZStack {
-            Color.accentColor
+            Color.ui.popUpColor
                 .ignoresSafeArea()
             VStack {
-                TextFieldLabel(field: field)
-                PasswordField(field: field)
+                TextFieldLabel(field: $field)
+                PasswordField(field: $field)
                 SecureFieldLabel(field: field)
             }
         }
@@ -25,11 +25,11 @@ struct TextFields: View {
 }
 
 struct TextFieldLabel: View {
-    @State var field : String = ""
+    @Binding var field : String
     let textLimit = 15
     var body: some View {
         TextField("", text: $field)
-            .background(Color.white)
+            .background(Color.accentColor)
             .foregroundColor(.black)
             .font(.custom("m5x7", fixedSize: 30))
             .autocorrectionDisabled(true)
@@ -44,7 +44,7 @@ struct TextFieldLabel: View {
 }
 
 struct PasswordField : View {
-    @State var field: String = ""
+    @Binding var field: String
     let textLimit = 8
     var body: some View {
         SecureField("", text: $field)
