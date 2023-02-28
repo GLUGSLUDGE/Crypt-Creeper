@@ -33,6 +33,8 @@
 		2F8F3DF2299E7E5F004E6700 /* PopUps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8F3DF1299E7E5F004E6700 /* PopUps.swift */; };
 		2F8F3DF4299E93EC004E6700 /* TextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8F3DF3299E93EC004E6700 /* TextFields.swift */; };
 		2F8F3DF6299E9733004E6700 /* Texts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8F3DF5299E9733004E6700 /* Texts.swift */; };
+		48F3F40029AA35F100FD0F58 /* HowToPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F3F3FF29AA35F100FD0F58 /* HowToPlayView.swift */; };
+		48F3F40529AA797000FD0F58 /* HowToPlayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F3F40429AA797000FD0F58 /* HowToPlayExtension.swift */; };
 		2F8F3DFD29A6888C004E6700 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8F3DFC29A6888C004E6700 /* SignUpView.swift */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +67,8 @@
 		2F8F3DF1299E7E5F004E6700 /* PopUps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUps.swift; sourceTree = "<group>"; };
 		2F8F3DF3299E93EC004E6700 /* TextFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFields.swift; sourceTree = "<group>"; };
 		2F8F3DF5299E9733004E6700 /* Texts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Texts.swift; sourceTree = "<group>"; };
+		48F3F3FF29AA35F100FD0F58 /* HowToPlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HowToPlayView.swift; sourceTree = "<group>"; };
+		48F3F40429AA797000FD0F58 /* HowToPlayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayExtension.swift; sourceTree = "<group>"; };
 		2F8F3DFC29A6888C004E6700 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,6 +125,7 @@
 				284FBEA2296C61ED0029C958 /* Crypt_CreeperApp.swift */,
 				2F8B6B2B29AA97B900710391 /* Data */,
 				2F8B6B2429AA6D5C00710391 /* Presentation */,
+				48F3F40329AA78E100FD0F58 /* HowToPlay */,
 				2F8F3DF7299EABF8004E6700 /* Components */,
 				2842ECA82979A85A00C4B6A3 /* Crypt-Creeper-Info.plist */,
 				2842ECA52979A81F00C4B6A3 /* Fonts */,
@@ -210,6 +215,15 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		48F3F40329AA78E100FD0F58 /* HowToPlay */ = {
+			isa = PBXGroup;
+			children = (
+				48F3F3FF29AA35F100FD0F58 /* HowToPlayView.swift */,
+				48F3F40429AA797000FD0F58 /* HowToPlayExtension.swift */,
+			);
+			path = HowToPlay;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -286,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F8F3DF0299E78F8004E6700 /* LoginView.swift in Sources */,
+				48F3F40529AA797000FD0F58 /* HowToPlayExtension.swift in Sources */,
 				2F8B6B2F29AA9A6000710391 /* LoginView-ViewModel.swift in Sources */,
 				287B0B8C29A7784600CF750C /* GameOverView.swift in Sources */,
 				2F8F3DF2299E7E5F004E6700 /* PopUps.swift in Sources */,
@@ -305,6 +320,7 @@
 				2F8B6B3629AD052100710391 /* SplashView.swift in Sources */,
 				2F8F3DF4299E93EC004E6700 /* TextFields.swift in Sources */,
 				28DA71C029A7BE2A00C3D4B5 /* TempleView.swift in Sources */,
+				48F3F40029AA35F100FD0F58 /* HowToPlayView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
