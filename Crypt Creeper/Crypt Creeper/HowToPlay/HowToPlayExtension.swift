@@ -295,11 +295,12 @@ extension HowToPlayView {
                     .resizable()
                     .frame(width: 80 ,height:80)
                     .scaledToFit()
-                    .padding(.horizontal,20)
+                    .padding(.leading,40)
                     .padding(.vertical,-5)
                 Text("MAX LIFE + (up to 6).")
                     .font(.system(size: 20,weight: .heavy,design: .monospaced))
                     .foregroundColor(.white)
+                    .padding(.leading,15)
                 Spacer()
             }
             HStack{
@@ -307,11 +308,12 @@ extension HowToPlayView {
                     .resizable()
                     .frame(width: 80 ,height:80)
                     .scaledToFit()
-                    .padding(.horizontal,20)
+                    .padding(.leading,40)
                     .padding(.vertical,-5)
                 Text("HOLD SLOT + (up to 3).")
                     .font(.system(size: 20,weight: .heavy,design: .monospaced))
                     .foregroundColor(.white)
+                    .padding(.leading,15)
                 Spacer()
             }
             HStack{
@@ -319,11 +321,12 @@ extension HowToPlayView {
                     .resizable()
                     .frame(width: 80 ,height:80)
                     .scaledToFit()
-                    .padding(.horizontal,20)
+                    .padding(.leading,40)
                     .padding(.vertical,-5)
                 Text("FULL HEAL.")
                     .font(.system(size: 20,weight: .heavy,design: .monospaced))
                     .foregroundColor(.white)
+                    .padding(.leading,15)
                 Spacer()
             }
             Text("HOLD SLOTS work by moving a PICK UP into the slot for later use.\n\nTap the HOLD SLOT tile while empty and select an available pick up to grab.\n\nTap the HOLD SLOT while holding to activate that PICKUP.\n\nYou may cancel a grab by clicking the empty slot again.\n")
