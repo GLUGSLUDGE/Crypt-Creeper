@@ -11,7 +11,7 @@ struct HowToPlayView: View {
     var body: some View {
         
         ZStack{
-            Color.accentColor
+            Color.ui.popUpColor
                 .ignoresSafeArea()
             PopUpsView(bodyContent: {
                 ScrollView{
