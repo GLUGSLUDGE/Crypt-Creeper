@@ -27,15 +27,61 @@ struct TempleView: View {
                 Spacer()
                 Spacer()
                 HStack{
-                    Image("ICON_ENTITY_EMPTY")
-                        .resizable()
-                        .scaledToFit()
-                    Image("ICON_ENTITY_EMPTY")
-                        .resizable()
-                        .scaledToFit()
-                    Image("ICON_ENTITY_EMPTY")
-                        .resizable()
-                        .scaledToFit()
+                    VStack{
+                        ZStack{
+                            Image("ICON_ENTITY_EMPTY")
+                                .resizable()
+                                .scaledToFit()
+                            Image("ICON_C_MAXHEALTH")
+                                .resizable()
+                                .scaledToFit()
+                        }
+                        HStack{
+                            Image("ICON_UI_XP")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                            Text("20")
+                                .foregroundColor(Color.ui.textGreen)
+                                .font(.system(size: 24, weight: .heavy, design: .rounded))
+                        }
+                    }
+                    VStack{
+                        ZStack{
+                            Image("ICON_ENTITY_EMPTY")
+                                .resizable()
+                                .scaledToFit()
+                            Image("ICON_C_FULLHEAL")
+                                .resizable()
+                                .scaledToFit()
+                        }
+                        HStack{
+                            Image("ICON_UI_XP")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                            Text("20")
+                                .foregroundColor(Color.ui.textGreen)
+                                .font(.system(size: 24, weight: .heavy, design: .rounded))
+                        }
+                    }
+                    VStack{
+                        ZStack{
+                            Image("ICON_ENTITY_EMPTY")
+                                .resizable()
+                                .scaledToFit()
+                            Image("ICON_C_SLOT")
+                                .resizable()
+                                .scaledToFit()
+                        }
+                        HStack{
+                            Image("ICON_UI_XP")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                            Text("20")
+                                .foregroundColor(Color.ui.textGreen)
+                                .font(.system(size: 24, weight: .heavy, design: .rounded))
+                        }
+                    }
+                    
                 }
                 Spacer()
             }

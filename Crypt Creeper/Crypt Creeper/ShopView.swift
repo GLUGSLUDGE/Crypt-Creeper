@@ -54,11 +54,13 @@ struct ShopView: View {
                                         Spacer()
                                         VStack{
                                             Spacer()
-                                            Image("num_\(item.power)")
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(width: 32)
-                                                .padding(20)
+                                            if item.power != 0{
+                                                Image("num_\(item.power)")
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(width: 32)
+                                                    .padding(20)
+                                            }
                                         }
                                     }
                                 }
@@ -102,12 +104,12 @@ enum ItemType: CaseIterable{
     case GREENP
     case RERROLL
     case BOMB
+    case NONE
 }
 class Item: Identifiable{
-    
     init(nType:ItemType, nPrice:Int, nPower:Int) {
         type = nType
-        power = Int.random(in: 3...5)
+        power = nPower
         price = 3*power
         switch type {
         case ItemType.SWORD:
@@ -122,6 +124,8 @@ class Item: Identifiable{
             sprite = Image("ICON_C_RERROLL")
         case ItemType.BOMB:
             sprite = Image("ICON_C_BOMB")
+        case .NONE:
+            sprite = Image("ICON_ENTITY_EMPTY")
         }
     }
     

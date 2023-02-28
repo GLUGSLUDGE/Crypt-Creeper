@@ -35,23 +35,34 @@ struct UIPill: View {
                 PillComponent(image: Image("ICON_UI_COIN"), info: "\(scene.coins)", textcolor: Color.ui.textYellow)
             }
             if style == ShopStyle.Temple {
-                PillComponent(image: Image("ICON_UI_XP"), info: "\(scene.coins)", textcolor: Color.ui.textGreen)
+                PillComponent(image: Image("ICON_UI_XP"), info: "\(scene.xp)", textcolor: Color.ui.textGreen)
             }
             Rectangle()
                 .frame(width: 9, height: 32)
                 .foregroundColor(Color.ui.colorBGPinkDark)
                 .cornerRadius(10)
-            PillComponent(image: Image("ICON_UI_HEALTH"), info: "\(scene.coins)", textcolor: Color.ui.text)
+            PillComponent(image: Image("ICON_UI_HEALTH"), info: "\(scene.health)", textcolor: Color.ui.text)
             Rectangle()
                 .frame(width: 9, height: 32)
                 .foregroundColor(Color.ui.colorBGPinkDark)
                 .cornerRadius(10)
-            PillComponent(image: Image("ICON_UI_SWORD"), info: "\(scene.coins)", textcolor: Color.ui.text)
-            Rectangle()
-                .frame(width: 9, height: 32)
-                .foregroundColor(Color.ui.colorBGPinkDark)
-                .cornerRadius(10)
-            PillComponent(image: Image("ICON_UI_SHIELD"), info: "\(scene.shieldPower)", textcolor: Color.ui.text)
+            if style == ShopStyle.Shop{
+                PillComponent(image: Image("ICON_UI_SWORD"), info: "\(scene.swordPower)", textcolor: Color.ui.text)
+                Rectangle()
+                    .frame(width: 9, height: 32)
+                    .foregroundColor(Color.ui.colorBGPinkDark)
+                    .cornerRadius(10)
+                PillComponent(image: Image("ICON_UI_SHIELD"), info: "\(scene.shieldPower)", textcolor: Color.ui.text)
+            }
+            if style == ShopStyle.Temple {
+                PillComponent(image: Image("ICON_UI_MAXHEALTH"), info: "\(scene.maxHealth)", textcolor: Color.ui.text)
+                Rectangle()
+                    .frame(width: 9, height: 32)
+                    .foregroundColor(Color.ui.colorBGPinkDark)
+                    .cornerRadius(10)
+                PillComponent(image: Image("ICON_UI_INVENTORY"), info: "\(scene.inventorySlots.count)", textcolor: Color.ui.text)
+            }
+            
         }
         .padding()
         .background(Color.ui.colorBGPurple)

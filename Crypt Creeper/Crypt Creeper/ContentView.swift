@@ -26,7 +26,7 @@ enum EntityType: CaseIterable{
     case Temple
     case Boss
 }
-class Tile: SKSpriteNode{
+class Tile: SKSpriteNode, Identifiable{
     var type:EntityType = EntityType.Empty
     var power:Int = 0
     var x:Int = 0
@@ -42,6 +42,7 @@ class GameScene: SKScene, ObservableObject {
     @Published var xp:Int = 0
     @Published var swordPower:Int = 0
     @Published var shieldPower:Int = 0
+    @Published var inventorySlots:[Item] = []
     
     @Published var showShop:Bool = false
     @Published var showTemple:Bool = false
@@ -61,15 +62,96 @@ class GameScene: SKScene, ObservableObject {
         xp = 0
         swordPower = 0
         shieldPower = 0
+        inventorySlots = [Item]()
         removeAllChildren()
         createBoard()
     }
     
     override func didMove(to view: SKView) {
         locations = gridLocations()
+        increaseInventory()
         
         createBoard()
 
+    }
+    func useItem(item: Item){
+        switch(item.type){
+        case ItemType.BOMB:
+            //deals 2 damage to every monster
+            break
+        case ItemType.RERROLL:
+            //Rerolls the floor
+            break
+        case ItemType.GREENP:
+            //Turns every monster into power 1
+            break
+        case ItemType.POTION:
+            //Cure
+            break
+        case ItemType.SWORD:
+            let tPower = swordPower
+            swordPower = item.power
+            item.power = tPower
+            if item.power == 0 {
+                item.sprite = Image("ICON_ENTITY_EMPTY")
+                item.type = ItemType.NONE
+            } else {
+                item.sprite = Image("ICON_SWORD_\(item.power)")
+            }
+            break
+        case ItemType.SHIELD:
+            let tPower = shieldPower
+            shieldPower = item.power
+            item.power = tPower
+            if item.power == 0 {
+                item.sprite = Image("ICON_ENTITY_EMPTY")
+                item.type = ItemType.NONE
+            } else {
+                item.sprite = Image("ICON_SHIELD_\(item.power)")
+            }
+            break
+        case ItemType.NONE: break
+        }
+    }
+    func increaseInventory(){
+        if inventorySlots.count < 3 {
+            inventorySlots = []
+            inventorySlots.append(Item(nType: ItemType.NONE, nPrice: 0, nPower: 0))
+        }
+    }
+    func saveSword(){
+        if inventorySlots.isEmpty {
+            return
+        }
+        var success = false
+        for item in inventorySlots {
+            if !success{
+                if item.type == ItemType.NONE {
+                    item.type = ItemType.SWORD
+                    item.power = swordPower
+                    item.sprite = Image("ICON_SWORD_\(item.power)")
+                    swordPower = 0
+                    success = true
+                }
+            }
+        }
+    }
+    func saveShield(){
+        if inventorySlots.isEmpty {
+            return
+        }
+        var success = false
+        for item in inventorySlots {
+            if !success{
+                if item.type == ItemType.NONE {
+                    item.type = ItemType.SHIELD
+                    item.power = shieldPower
+                    item.sprite = Image("ICON_SHIELD_\(item.power)")
+                    shieldPower = 0
+                    success = true
+                }
+            }
+        }
     }
     func createBoard(){
         let portalrandomX = Int.random(in: 1...5)
@@ -805,7 +887,7 @@ class GameScene: SKScene, ObservableObject {
     }
   
 }
-
+//MARK: - View
 struct ContentView: View {
     
     @ObservedObject var scene: GameScene = {
@@ -871,6 +953,9 @@ struct ContentView: View {
                                 Image("\(swordImage)")
                                     .resizable()
                                     .frame(width:80, height: 80)
+                                    .onTapGesture {
+                                        scene.saveSword()
+                                    }
                                 HStack{
                                     Spacer()
                                     VStack{
@@ -894,6 +979,9 @@ struct ContentView: View {
                                 Image("\(shieldImage)")
                                     .resizable()
                                     .frame(width:80, height: 80)
+                                    .onTapGesture {
+                                        scene.saveShield()
+                                    }
                                 HStack{
                                     Spacer()
                                     VStack{
@@ -911,8 +999,33 @@ struct ContentView: View {
                             }
                             .frame(width: 80, height: 80)
                             Spacer()
-                            Rectangle()
-                                .frame(width:80, height: 80)
+                            ForEach (scene.inventorySlots) {item in
+                                ZStack{
+                                    Image("ICON_ENTITY_EMPTY")
+                                        .resizable()
+                                        .frame(width:80, height: 80)
+                                    item.sprite
+                                        .resizable()
+                                        .frame(width:80, height: 80)
+                                        .onTapGesture {
+                                            scene.useItem(item: item)
+                                        }
+                                    HStack{
+                                        Spacer()
+                                        VStack{
+                                            Spacer()
+                                            if item.power != 0 {
+                                                Image("num_\(item.power)")
+                                                    .resizable()
+                                                    .frame(width: 20, height: 20)
+                                                    .padding(6)
+                                            }
+                                        }
+                                    }
+                                    
+                                }
+                                .frame(width: 80, height: 80)
+                            }
                         }
                         HStack{
                             Image("ICON_UI_COIN")
