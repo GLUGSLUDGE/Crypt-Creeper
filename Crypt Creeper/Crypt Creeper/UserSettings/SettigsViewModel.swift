@@ -146,7 +146,7 @@ class SettingsViewModel : ObservableObject {
     
     func changePhoto(completion: @escaping (Result<String, Error>) -> Void){
         
-        
+        NetworkHelper.shared.setToken(tokens: "oGVUKaWM2PMzx5AS3oK40PwrjO7x2DBQGEYv97jr")
         
         let  url =  "http://127.0.0.1:8000/api/user/change-photo"
        

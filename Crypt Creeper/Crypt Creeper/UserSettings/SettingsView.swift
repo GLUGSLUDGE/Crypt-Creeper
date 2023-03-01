@@ -72,7 +72,7 @@ struct SettingsView: View {
                             }
                         }
                     } label: {
-                        Text("canbiar contraseña")
+                        Text("cambiar foto")
                     }
                     Button {
                         self.viewModel.logOut{result in
