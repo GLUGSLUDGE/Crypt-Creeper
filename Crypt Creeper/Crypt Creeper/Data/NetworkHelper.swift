@@ -10,13 +10,19 @@ import Foundation
 class NetworkHelper {
     
     enum RequestType: String {
+        case PUT
         case POST
         case GET
     }
     
-  private var token : String = ""
+    private var token : String = ""
     func setToken(tokens:String){
-     token = tokens
+        token = tokens
+    }
+    
+    func getToken() -> String {
+        setToken(tokens: token)
+        return token
     }
     
     // MARK: - Constants
@@ -27,50 +33,38 @@ class NetworkHelper {
     
     // MARK: - Private Methods
     
-    // se comunica con la API
+    // Se comunica con la API
     private func requestApi(request: URLRequest, completion: @escaping (_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void) {
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             completion(data, response, error)
         }
-        //iniciamos la petición
+        //Iniciamos la petición
         task.resume()
     }
     
     
     //MARK: - Public Methods
     
-    // se comunica con la función requestApi, capa Provider
+    // Se comunica con la función requestApi, capa Provider
     func requestProvider(url: String, type: RequestType = .POST, params: [String: Any]? = nil, completion: @escaping (_ data: Data?, _ response: URLResponse?, _ error: Error?) -> Void) -> Void {
         
-        // convertimos la url de tipo String a tipo URL
+        // Convertimos la url de tipo String a tipo URL
         let url = URL(string: url)
-        
-        
         guard let urlNotNil = url else { return }
-        
-        
         var request = URLRequest(url: urlNotNil)
-        
-        
         request.httpMethod = type.rawValue
-        
         
         if let dictionary = params {
             let data = try! JSONSerialization.data(withJSONObject: dictionary, options: [])
             request.httpBody = data
         }
         
-        //añadimos los headers
-        
-        
+        // Añadimos los headers
         request.addValue("Bearer " + token , forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        
-     
-        
-        //llamamos a la función requestApi
+        // Llamamos a la función requestApi
         requestApi(request: request) { data, response, error in
             DispatchQueue.main.async {
                 completion(data, response, error)

@@ -29,21 +29,49 @@ enum EntityType: CaseIterable{
 class Tile: SKSpriteNode{
     var type:EntityType = EntityType.Empty
     var power:Int = 0
+    var x:Int = 0
+    var y:Int = 0
 }
 
 class GameScene: SKScene, ObservableObject {
-    @Published var coins:String = "0"
-    @Published var health:String = "3"
-    @Published var level:Int = 18
-    @Published var score:String = "0"
-    @Published var xp:String = "0"
+    @Published var coins:Int = 0
+    @Published var health:Int = 3
+    @Published var maxHealth:Int = 3
+    @Published var level:Int = 1
+    @Published var score:Int = 0
+    @Published var xp:Int = 0
+    @Published var swordPower:Int = 0
+    @Published var shieldPower:Int = 0
+    
+    @Published var showShop:Bool = false
+    @Published var showTemple:Bool = false
+    @Published var showWin:Bool = false
+    @Published var showGameOver:Bool = false
     
     let intSize = 15
     var locations:[Array<CGFloat>] = []
     
+    func reset(){
+        print("game was reset!!!")
+        maxHealth = 3
+        health = 3
+        coins = 0
+        level = 1
+        score = 0
+        xp = 0
+        swordPower = 0
+        shieldPower = 0
+        removeAllChildren()
+        createBoard()
+    }
+    
     override func didMove(to view: SKView) {
         locations = gridLocations()
         
+        createBoard()
+
+    }
+    func createBoard(){
         let portalrandomX = Int.random(in: 1...5)
         var enemyAmount = 0
         var potionAmount = 0
@@ -51,13 +79,14 @@ class GameScene: SKScene, ObservableObject {
         var swordAmount = 0
         var coinAmount = 0
         var npcAmount = 0
-        
         for i in 1...5 {
             for j in 1...5{
                 let newTile = Tile(imageNamed: "ICON_ENTITY_EMPTY")
                 newTile.name = "EMPTY"
                 newTile.size = CGSize(width: intSize, height: intSize)
                 newTile.position = CGPoint(x: locations[0][i], y: locations[1][j])
+                newTile.x = i
+                newTile.y = j
                 if i == 3 && j == 1 { //Spawn tile
                     newTile.texture = SKTexture(imageNamed: "ICON_ENTITY_PLAYER")
                     newTile.name = "PLAYER"
@@ -117,33 +146,150 @@ class GameScene: SKScene, ObservableObject {
                         randomTile(tile: newTile)
                     }
                 }
-                /*if newTile.power != 0*/
-                    
-                let powerLabel = SKLabelNode(text: newTile.name)
+                if newTile.power != 0{
+                    let powerLabel = SKSpriteNode(texture: SKTexture(imageNamed: "num_\(newTile.power)"))
+                    powerLabel.size = CGSize(width: 5, height: 5)
                     powerLabel.name = "LABEL"
-                    powerLabel.fontSize = 6
-                    powerLabel.fontName = "m6x11"
-                    powerLabel.fontColor = UIColor(.black)
                     powerLabel.zPosition = newTile.zPosition+12
-                    powerLabel.position = CGPoint(x:5,y:-7)
+                    powerLabel.position = CGPoint(x:5,y:-3)
                     newTile.addChild(powerLabel)
+                }
+                
                 
                 addChild(newTile)
             }
         }
     }
-
+    func nextLevel(){
+        level+=1
+        removeAllChildren()
+        createBoard()
+    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
         let touchNode = atPoint(location)
         
+        
+        
+        
         if ((touchNode as? SKScene) == nil) { //<-- Node is touched
             if touchNode.name != "PLAYER" && touchNode.name != "LABEL" {
-                (childNode(withName: "PLAYER") as! SKSpriteNode).texture = SKTexture(imageNamed: "ICON_ENTITY_EMPTY")
-                childNode(withName: "PLAYER")?.name = "EMPTY"
-                touchNode.name = "PLAYER"
-                (touchNode as! SKSpriteNode).texture = SKTexture(imageNamed: "ICON_ENTITY_PLAYER")
+                //Check the adjacent nodes
+                let destination = touchNode as! Tile
+                if destination.name == "EMPTY"{
+                    return
+                }
+                
+                var canMove = false
+                var finishedLevel = false
+                
+                for tile in adjacentTilesTo(x: destination.x, y: destination.y){
+                    if tile!.name ==  "PLAYER"{
+                        canMove = true
+                    }
+                }
+                if !canMove {
+                    //showGameOver = true
+                    return
+                }
+                switch(destination.name){
+                case "PORTAL":
+                    score += level*100
+                    finishedLevel = true
+                case "ENEMY":
+                    var damage = destination.power
+                    while damage != 0 && swordPower != 0 {
+                        swordPower-=1
+                        damage-=1
+                    }
+                    while damage != 0 && shieldPower != 0 {
+                        shieldPower-=1
+                        damage-=1
+                    }
+                    while damage != 0 && health != 0 {
+                        health-=1
+                        damage-=1
+                    }
+                    if health == 0 {
+                       showGameOver = true
+                    }
+                    score+=destination.power*10
+                    switch(destination.power){
+                    case 1: xp+=1
+                    case 2: xp+=4
+                    case 3: xp+=9
+                    case 4: xp+=16
+                    case 5: xp+=30
+                    case 6: xp+=50
+                    case 7: xp+=90
+                    case 8: xp+=200
+                    default: break
+                    }
+                case "COIN":
+                    coins += destination.power
+                case "POTION":
+                    health += destination.power
+                    if health > maxHealth {
+                        health = maxHealth
+                    }
+                case "SHIELD":
+                    shieldPower = destination.power
+                case "SWORD":
+                    swordPower = destination.power
+                case "SHOP":
+                    showShop = true
+                case "TEMPLE":
+                    showTemple = true
+                case "BOSS":
+                    var damage = destination.power
+                    while damage != 0 && swordPower != 0 {
+                        swordPower-=1
+                        damage-=1
+                    }
+                    while damage != 0 && shieldPower != 0 {
+                        shieldPower-=1
+                        damage-=1
+                    }
+                    while damage != 0 && health != 0 {
+                        health-=1
+                        damage-=1
+                    }
+                    if health == 0 {
+                       showGameOver = true
+                    } else {
+                        showWin = true
+                    }
+                default: break
+                    
+                }
+                
+                //MOVE
+                let player = childNode(withName: "PLAYER") as! Tile
+                //Spawn an empty space on your previous position
+                let oldTile = Tile()
+                spawnTile(tile: oldTile, type: EntityType.Empty)
+                oldTile.size = CGSize(width: intSize, height: intSize)
+                oldTile.y = player.y
+                oldTile.zPosition = player.zPosition-1
+                oldTile.x = player.x
+                oldTile.position = CGPoint(x: locations[0][oldTile.x], y: locations[1][oldTile.y])
+                addChild(oldTile)
+                //Carry out the actions
+                let ac = SKAction.move(to: destination.position, duration: 0.1)
+                
+                player.run(ac) {
+                    player.x = destination.x
+                    player.y = destination.y
+                    destination.removeAllChildren()
+                    destination.removeFromParent()
+                }
+                if finishedLevel {
+                    let nextLevelAction = SKAction.rotate(toAngle: 6, duration: 0.3)
+                    player.run(nextLevelAction){
+                        self.nextLevel()
+                    }
+                }
             }
         }
     }
@@ -201,7 +347,7 @@ class GameScene: SKScene, ObservableObject {
             case 13: max = 4
             case 14: max = 3
             case 15: max = 3
-            case 16: max = 3
+            case 16: max = 6
             case 17: max = 6
             case 18: max = 6
             case 19: max = 6
@@ -225,7 +371,7 @@ class GameScene: SKScene, ObservableObject {
             case 13: max = 1
             case 14: max = 3
             case 15: max = 3
-            case 16: max = 3
+            case 16: max = 2
             case 17: max = 2
             case 18: max = 4
             case 19: max = 5
@@ -249,7 +395,7 @@ class GameScene: SKScene, ObservableObject {
             case 13: max = 2
             case 14: max = 1
             case 15: max = 4
-            case 16: max = 2
+            case 16: max = 3
             case 17: max = 3
             case 18: max = 3
             case 19: max = 1
@@ -273,7 +419,7 @@ class GameScene: SKScene, ObservableObject {
             case 13: max = 4
             case 14: max = 3
             case 15: max = 2
-            case 16: max = 1
+            case 16: max = 2
             case 17: max = 2
             case 18: max = 4
             case 19: max = 2
@@ -535,7 +681,7 @@ class GameScene: SKScene, ObservableObject {
             case 13: min = 2
             case 14: min = 2
             case 15: min = 3
-            case 16: min = 3
+            case 16: min = 2
             case 17: min = 1
             case 18: min = 1
             case 19: min = 2
@@ -613,8 +759,33 @@ class GameScene: SKScene, ObservableObject {
         }
     }
     //MARK: - Tile / other
-    func adjacentTilesTo(x:Int, y:Int){
-        //TODO: - Returns a list with the nodes adjacent to the tile input
+    func adjacentTilesTo(x:Int, y:Int) -> [Tile?]{
+        var tileR:Tile = Tile()
+        tileR.name = "EMPTY"
+        var tileL:Tile = Tile()
+        tileL.name = "EMPTY"
+        var tileU:Tile = Tile()
+        tileU.name = "EMPTY"
+        var tileD:Tile = Tile()
+        tileD.name = "EMPTY"
+        //check right tile
+        if x != 5{
+            let right = nodes(at: CGPoint(x: locations[0][x+1], y: locations[1][y]))
+            tileR = right[0] as! Tile
+        }
+        if x != 1{
+            let left = nodes(at: CGPoint(x: locations[0][x-1], y: locations[1][y]))
+            tileL = left[0] as! Tile
+        }
+        if y != 5{
+            let up = nodes(at: CGPoint(x: locations[0][x], y: locations[1][y+1]))
+            tileU = up[0] as! Tile
+        }
+        if y != 1{
+            let down = nodes(at: CGPoint(x: locations[0][x], y: locations[1][y-1]))
+            tileD = down[0] as! Tile
+        }
+        return [tileR, tileL, tileU, tileD]
     }
     //This function defines the locations of every tile in the scene.
     func gridLocations() -> [Array<CGFloat>]{
@@ -642,54 +813,148 @@ struct ContentView: View {
         scene.backgroundColor = UIColor(named: "ColorGameBackground")!
         return scene
     }()
+    
+    @State var showTemple:Bool = false
+    @State var showGameOver:Bool = false
+    @State var showWin:Bool = false
+    
+    var shieldImage:String {
+        return "ICON_SHIELD_\(scene.shieldPower)"
+    }
+    var swordImage: String {
+        return "ICON_SWORD_\(scene.swordPower)"
+    }
+    
 
 
     var body: some View {
-        ZStack(){
+        ZStack{
             GeometryReader { geo in
                 ZStack{
                     VStack{
                         Color.ui.gameBackground
                         Color.ui.UIBackground
                     }
-                        
+                    
                     VStack{
                         Spacer()
                         HStack{
                             Spacer()
-                            Text("SCORE")
+                            Text("\(scene.score)")
                                 .foregroundColor(Color.ui.text)
                         }
                         SpriteView(scene: scene)
                             .frame(width: geo.size.width, height: geo.size.width)
                             .border(Color.ui.gameBackground)
                         HStack{
-                            Text("HEALTH")
+                            Image("ICON_UI_HEALTH")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .padding(.leading, 6)
+                            Text(": \(scene.health) / \(scene.maxHealth)")
                                 .foregroundColor(Color.ui.text)
+                            Rectangle()
+                                .foregroundColor(.red)
+                                .frame(width: 90, height: 20)
                             Spacer()
-                            Text("LEVEL")
+                            Text("LVL: \(scene.level)")
                                 .foregroundColor(Color.ui.text)
+                                .padding(.trailing, 6)
                         }
                         HStack{
-                            Rectangle()
-                                .frame(width:80, height: 80)
-                            Rectangle()
-                                .frame(width:80, height: 80)
+                            ZStack{
+                                Image("ICON_ENTITY_EMPTY")
+                                    .resizable()
+                                    .frame(width:80, height: 80)
+                                Image("\(swordImage)")
+                                    .resizable()
+                                    .frame(width:80, height: 80)
+                                HStack{
+                                    Spacer()
+                                    VStack{
+                                        Spacer()
+                                        if scene.swordPower != 0{
+                                            Image("num_\(scene.swordPower)")
+                                                .resizable()
+                                                .frame(width: 20, height: 20)
+                                                .padding(6)
+                                        }
+                                    }
+                                    
+                                }
+                                
+                            }
+                            .frame(width: 80, height: 80)
+                            ZStack{
+                                Image("ICON_ENTITY_EMPTY")
+                                    .resizable()
+                                    .frame(width:80, height: 80)
+                                Image("\(shieldImage)")
+                                    .resizable()
+                                    .frame(width:80, height: 80)
+                                HStack{
+                                    Spacer()
+                                    VStack{
+                                        Spacer()
+                                        if scene.shieldPower != 0{
+                                            Image("num_\(scene.shieldPower)")
+                                                .resizable()
+                                                .frame(width: 20, height: 20)
+                                                .padding(6)
+                                        }
+                                    }
+                                    
+                                }
+                                
+                            }
+                            .frame(width: 80, height: 80)
                             Spacer()
                             Rectangle()
                                 .frame(width:80, height: 80)
                         }
                         HStack{
-                            Text(scene.coins)
-                                .foregroundColor(Color.ui.text)
+                            Image("ICON_UI_COIN")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .padding(.leading, 6)
+                            Text(": \(scene.coins)")
+                                .foregroundColor(Color.ui.textYellow)
                             Spacer()
+                            Image("ICON_UI_XP")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                            Text(": \(scene.xp)")
+                                .foregroundColor(Color.ui.textGreen)
+                                .padding(.trailing, 6)
+                            
                         }
                         Spacer()
                     }
                 }
-                .ignoresSafeArea()
+                .ignoresSafeArea() //Navigation
+                .sheet(isPresented: $scene.showShop) {
+                    ShopView()
+                }
+                .sheet(isPresented: $scene.showTemple) {
+                    TempleView()
+                }
+                ZStack{
+                    NavigationLink(isActive: $scene.showWin) {
+                        WinView(score: scene.score, scene: scene)
+                    } label: {
+                        EmptyView()
+                    }
+                    NavigationLink(isActive: $scene.showGameOver) {
+                        GameOverView(score: scene.score, scene: scene)
+                    } label: {
+                        EmptyView()
+                    }
+
+                }
+                .hidden()
                 
             }
+            
         }
         .navigationBarBackButtonHidden(true)
     }
