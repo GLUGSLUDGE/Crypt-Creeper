@@ -21,5 +21,6 @@ extension Color {
         let colorBGRed = Color("ColorBGRed")
         let textYellow = Color("ColorTextYellow")
         let textGreen = Color("ColorTextGreen")
+        let popUpColor = Color("ColorPopUps")
     }
 }
