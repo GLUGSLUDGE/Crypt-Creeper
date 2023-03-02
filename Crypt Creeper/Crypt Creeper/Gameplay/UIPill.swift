@@ -27,7 +27,8 @@ enum ShopStyle{
 }
 
 struct UIPill: View {
-    @ObservedObject var scene:GameScene
+    @EnvironmentObject var scene:GameScene
+
     var style:ShopStyle
     var body: some View {
         HStack{
