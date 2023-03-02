@@ -37,44 +37,6 @@ struct TempleView: View {
             item.empty()
         }
     }
-    /*
-     func buy(_ item: Item){
-         if scene.coins < item.price {
-             return
-         }
-         var success = false
-         for invitem in scene.inventorySlots {
-             if !success {
-                 if invitem.type == ItemType.NONE {
-                     invitem.type = item.type
-                     invitem.sprite = item.sprite
-                     invitem.power = item.power
-                     scene.coins -= item.price
-                     item.empty()
-                     success = true
-                 }
-             }
-         }
-         if success {
-             return
-         }
-         switch(item.type){
-         case .SWORD:
-             scene.swordPower = item.power
-             scene.coins -= item.price
-             item.empty()
-         case .SHIELD:
-             scene.shieldPower = item.power
-             scene.coins -= item.price
-             item.empty()
-         case .POTION:
-             scene.heal(amount: item.power)
-             scene.coins -= item.price
-             item.empty()
-         default: break
-         }
-     }
-     */
     var body: some View {
         ZStack{
             Color.ui.colorBGBlack
@@ -87,7 +49,6 @@ struct TempleView: View {
                     .resizable()
                     .scaledToFit()
             }
-            .background(Color.ui.colorBGRed)
             VStack{
                 UIPill(style: ShopStyle.Temple)
                 Spacer()

@@ -72,68 +72,69 @@ struct ShopView: View {
     }
 
     var body: some View {
-        VStack{
-            UIPill(style: ShopStyle.Shop)
-            Spacer()
-            HStack{
-                ForEach(stockItems){ item in
-                    VStack{
-                        ZStack {
-                            Image("ICON_ENTITY_EMPTY")
-                                .resizable()
-                                .padding(6)
-                            item.sprite
-                                .resizable()
-                                .padding(6)
-                                .onTapGesture {
-                                    buy(item)
-                                }
-                            HStack{
-                                Spacer()
-                                VStack{
+        ZStack{
+            Color.ui.colorBGBlack
+                .ignoresSafeArea()
+            ZStack{
+                Rectangle()
+                    .foregroundColor(Color.ui.colorBGRed)
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
+                Image("ImageBGShop02")
+                    .resizable()
+                    .scaledToFit()
+                Image("ImageBGShop01")
+                    .resizable()
+                    .scaledToFit()
+                Image("ImageKeyShop")
+                    .resizable()
+                    .scaledToFit()
+            }
+            VStack{
+                UIPill(style: ShopStyle.Shop)
+                Spacer()
+                Spacer()
+                HStack{
+                    ForEach(stockItems){ item in
+                        VStack{
+                            ZStack {
+                                Image("ICON_ENTITY_EMPTY")
+                                    .resizable()
+                                    .padding(6)
+                                item.sprite
+                                    .resizable()
+                                    .padding(6)
+                                    .onTapGesture {
+                                        buy(item)
+                                    }
+                                HStack{
                                     Spacer()
-                                    if item.power != 0{
-                                        Image("num_\(item.power)")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: 32)
-                                            .padding(20)
+                                    VStack{
+                                        Spacer()
+                                        if item.power != 0{
+                                            Image("num_\(item.power)")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 32)
+                                                .padding(20)
+                                        }
                                     }
                                 }
                             }
-                        }
-                        .scaledToFit()
-                        HStack{
-                            if item.sprite != Image("ICON_ENTITY_EMPTY"){
-                                Image("ICON_UI_COIN")
-                                    .resizable()
-                                    .frame(width: 30, height: 30)
-                                Text("\(item.price)")
-                                    .foregroundColor(Color.ui.textYellow)
-                                    .font(.system(size: 24, weight: .heavy, design: .rounded))
+                            .scaledToFit()
+                            HStack{
+                                if item.sprite != Image("ICON_ENTITY_EMPTY"){
+                                    Image("ICON_UI_COIN")
+                                        .resizable()
+                                        .frame(width: 30, height: 30)
+                                    Text("\(item.price)")
+                                        .foregroundColor(Color.ui.textYellow)
+                                        .font(.system(size: 24, weight: .heavy, design: .rounded))
+                                }
                             }
                         }
                     }
                 }
-            }
-            List {
-                ForEach (stockItems){ item in
-                    HStack{
-                        item.sprite
-                          .resizable()
-                          .frame(width: 20, height: 20)
-                        if item.type != ItemType.NONE{
-                            Text("price: \(item.price)")
-                        } else {
-                            Text("NOTHING")
-                        }
-                        
-                    }
-                    .onTapGesture {
-                        item.empty()
-                    }
-                    
-                }
+                Spacer()
             }
         }
         .onAppear{

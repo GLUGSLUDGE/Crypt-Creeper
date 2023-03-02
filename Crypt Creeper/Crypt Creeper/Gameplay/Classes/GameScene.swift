@@ -46,8 +46,6 @@ import SwiftUI
     override func didMove(to view: SKView) {
         locations = gridLocations()
         createBoard()
-        increaseInventory()
-
     }
     func heal(amount:Int){
         health += amount
