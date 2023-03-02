@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "E74BB5AD-8E9C-471F-9857-71F4251BCA74"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "15A0E432-6481-4F4C-B7F3-61A93B5BD1F9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Crypt Creeper/TempleView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
+            landmarkName = "buy(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "15A0E432-6481-4F4C-B7F3-61A93B5BD1F9 - be848b24fe9e3654"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Crypt_Creeper.TempleViewModel.buy(Crypt_Creeper.Item) -&gt; ()"
+                  moduleName = "Crypt Creeper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/abby/Documents/Crypt-Creeper/Crypt%20Creeper/Crypt%20Creeper/TempleView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "133"
+                  endingLineNumber = "133"
+                  offsetFromSymbolStart = "1088">
+               </Location>
+               <Location
+                  uuid = "15A0E432-6481-4F4C-B7F3-61A93B5BD1F9 - be848b24fe9e3673"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Crypt_Creeper.TempleViewModel.buy(Crypt_Creeper.Item) -&gt; ()"
+                  moduleName = "Crypt Creeper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/abby/Documents/Crypt-Creeper/Crypt%20Creeper/Crypt%20Creeper/TempleView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "134"
+                  endingLineNumber = "134"
+                  offsetFromSymbolStart = "604">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

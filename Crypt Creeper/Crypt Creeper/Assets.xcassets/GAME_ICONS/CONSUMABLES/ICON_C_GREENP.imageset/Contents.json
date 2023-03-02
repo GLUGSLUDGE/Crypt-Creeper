@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "Monster potion.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
