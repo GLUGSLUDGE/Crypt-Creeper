@@ -16,7 +16,7 @@ extension SignUpView {
                     .resizable()
                     .scaledToFit()
                     .padding(.bottom, 5)
-                BoldText(title: "CLICK HERE IF YOU ARE NOT NEW!!!")
+                BoldText(title: "CLICK HERE IF YOU ARE NOT NEW!!!",fontSize: 20)
                     .foregroundColor(Color.ui.text)
             }
         }, title: "Login", show: true)
@@ -30,7 +30,7 @@ extension SignUpView {
         PopUpsView(bodyContent: {
             VStack {
                 HStack {
-                    ThinText(title: "Username:")
+                    ThinText(title: "Username:",fontSize: 30)
                         .foregroundColor(Color.ui.text)
                         .padding(.bottom, -10)
                         .padding(.leading, 20)
@@ -40,7 +40,7 @@ extension SignUpView {
                     .focused($focusedField, equals: .userField)
                     .padding(.horizontal, 20)
                 HStack {
-                    ThinText(title: "Email:")
+                    ThinText(title: "Email:",fontSize: 30)
                         .foregroundColor(Color.ui.text)
                         .padding(.bottom, -10)
                         .padding(.leading, 20)
@@ -50,7 +50,7 @@ extension SignUpView {
                     .focused($focusedField, equals: .emailField)
                     .padding(.horizontal, 20)
                 HStack {
-                    ThinText(title: "Password:")
+                    ThinText(title: "Password:",fontSize: 30)
                         .foregroundColor(Color.ui.text)
                         .padding(.bottom, -10)
                         .padding(.leading, 20)
@@ -64,7 +64,7 @@ extension SignUpView {
                     Spacer()
                 }
                 HStack {
-                    ThinText(title: "Repeat password:")
+                    ThinText(title: "Repeat password:",fontSize: 30)
                         .foregroundColor(Color.ui.text)
                         .padding(.bottom, -10)
                         .padding(.leading, 20)
@@ -96,7 +96,7 @@ extension SignUpView {
                         .onTapGesture {
                             // Abrir galería
                         }
-                    ThinText(title: "Gallery")
+                    ThinText(title: "Gallery",fontSize: 30)
                         .foregroundColor(Color.white)
                 }
                 VStack {
@@ -109,7 +109,7 @@ extension SignUpView {
                         .onTapGesture {
                             // Abrir cámara
                         }
-                    ThinText(title: "Camera")
+                    ThinText(title: "Camera",fontSize: 20)
                         .foregroundColor(Color.white)
                 }
             }
@@ -133,7 +133,7 @@ extension SignUpView {
                 // TODO: Navigate to home
             }
         } label: {
-            MiniButtonLabel(title: "Sign Up")
+            MiniButtonLabel(title: "Sign Up",fontSize: 30, widthSize: 4, heightSize: 20)
         }
         .padding(.bottom, 5)
         .padding(.trailing, 35)
