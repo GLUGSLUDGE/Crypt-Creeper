@@ -8,34 +8,21 @@
 import Foundation
 import SwiftUI
 
-extension FactionsSelectionView {
+extension FactionsView {
     
-    func button(image: String, title: String) -> some View {
-        
-        Button {
-            //
-        } label: {
-            PopUpsView(bodyContent: {
-                Image(image)
-                    .resizable()
-                    .scaledToFit()
-            }, title: title, show: true)
-            .frame(width: UIScreen.main.bounds.width/2, height: UIScreen.main.bounds.height/4)
-        }
-    }
-    
-    func popUp(image: String, title: String) -> some View {
-        PopUpsView(bodyContent: {
+    func popUp(image: String, title: String, id: Int) -> some View {
+        PopUpsView(title: title) {
             Button {
-                //
+                print(userModel)
             } label: {
                 Image(image)
                     .resizable()
                     .scaledToFit()
             }
-
-        }, title: title, show: true)
+        }
         .frame(width: UIScreen.main.bounds.width/2, height: UIScreen.main.bounds.height/4)
+        .background(
+            NavigationLink("", destination: HomeView(), isActive: $viewModel.isLoged)
+        )
     }
-    
 }

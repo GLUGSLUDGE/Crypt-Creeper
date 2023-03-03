@@ -7,135 +7,147 @@
 
 import SwiftUI
 
+struct GalleryImageView: View {
+    var completion: () -> ()
+    var body: some View {
+        ImageSysName(image: "photo.on.rectangle.angled") {
+            completion()
+        }
+        .foregroundColor(Color.white)
+        .rotationEffect(.degrees(-25))
+        .padding(.horizontal, 10)
+    }
+}
+
+struct CameraImageView: View {
+    var completion: () -> ()
+    var body: some View {
+        ImageSysName(image: "camera") {
+            completion()
+        }
+        .foregroundColor(Color.white)
+        .rotationEffect(.degrees(25))
+        .padding(.horizontal, 10)
+    }
+}
+
 extension SignUpView {
     
-    func goToLogin() -> some View {
-        PopUpsView(bodyContent: {
-            HStack {
-                Image("Hans")
-                    .resizable()
-                    .scaledToFit()
-                    .padding(.bottom, 5)
-                BoldText(title: "CLICK HERE IF YOU ARE NOT NEW!!!")
-                    .foregroundColor(Color.ui.text)
-            }
-        }, title: "Login", show: true)
-        .frame(width: 300, height: 170)
-        .onTapGesture {
-            // Navigate to login
-        }
-    }
-    
     func signUpPopUp() -> some View {
-        PopUpsView(bodyContent: {
-            VStack {
-                HStack {
-                    ThinText(title: "Username:")
-                        .foregroundColor(Color.ui.text)
-                        .padding(.bottom, -10)
-                        .padding(.leading, 20)
-                    Spacer()
-                }
-                TextFieldLabel(field: $username)
-                    .focused($focusedField, equals: .userField)
-                    .padding(.horizontal, 20)
-                HStack {
-                    ThinText(title: "Email:")
-                        .foregroundColor(Color.ui.text)
-                        .padding(.bottom, -10)
-                        .padding(.leading, 20)
-                    Spacer()
-                }
-                TextFieldLabel(field: $email)
-                    .focused($focusedField, equals: .emailField)
-                    .padding(.horizontal, 20)
-                HStack {
-                    ThinText(title: "Password:")
-                        .foregroundColor(Color.ui.text)
-                        .padding(.bottom, -10)
-                        .padding(.leading, 20)
-                    Spacer()
-                }
-                HStack {
-                    PasswordField(field: $password)
-                        .focused($focusedField, equals: .passwordField)
-                        .padding(.leading, 20)
-                        .padding(.trailing, 120)
-                    Spacer()
-                }
-                HStack {
-                    ThinText(title: "Repeat password:")
-                        .foregroundColor(Color.ui.text)
-                        .padding(.bottom, -10)
-                        .padding(.leading, 20)
-                    Spacer()
-                }
-                HStack {
-                    PasswordField(field: $repeatPassword)
-                        .focused($focusedField, equals: .repeatPasswordField)
-                        .padding(.leading, 20)
-                        .padding(.trailing, 120)
-                        .padding(.bottom, 30)
-                    Spacer()
-                }
-            }
-        }, title: "SIGN UP", show: true)
+        PopUpsView(title: "SIGN UP") {
+            textfieldsViews
+        }
         .frame(width: 300)
     }
     
-    func selectImage() -> some View {
-        PopUpsView(bodyContent: {
+    var textfieldsViews: some View {
+        VStack(spacing: 10) {
+            VStack(alignment: .leading, spacing: 0) {
+                ThinText(title: "Username:")
+                    .foregroundColor(Color.ui.text)
+                    .padding(.leading, 20)
+                
+                TextFieldLabel(field: $viewModel.username)
+                    .padding(.horizontal, 20)
+            }
+            VStack(alignment: .leading, spacing: 0) {
+                ThinText(title: "Email:")
+                    .foregroundColor(Color.ui.text)
+                    .padding(.leading, 20)
+                
+                TextFieldLabel(field: $viewModel.email)
+                    .padding(.horizontal, 20)
+            }
+            VStack(alignment: .leading, spacing: 0) {
+                ThinText(title: "Password:")
+                    .foregroundColor(Color.ui.text)
+                    .padding(.leading, 20)
+                
+                PasswordField(field: $viewModel.password)
+                    .padding(.leading, 20)
+                    .padding(.trailing, 120)
+            }
+            
+            VStack(alignment: .leading, spacing: 0) {
+                ThinText(title: "Repeat password:")
+                    .foregroundColor(Color.ui.text)
+                    .padding(.leading, 20)
+                
+                PasswordField(field: $viewModel.repeatPassword)
+                    .padding(.leading, 20)
+                    .padding(.trailing, 120)
+                    .padding(.bottom, 30)
+            }
+        }
+    }
+    
+    func signUpForm(titleText: String, paddingTextEdge: Edge.Set, paddingFieldEdge: Edge.Set, paddingTextSize: CGFloat, paddingFieldSize: CGFloat, feidl: Binding<String>) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            ThinText(title: titleText)
+                .foregroundColor(Color.ui.text)
+                .padding(paddingTextEdge, paddingTextSize)
+            
+            TextFieldLabel(field: feidl)
+                .padding(paddingFieldEdge, paddingFieldSize)
+        }
+    }
+    
+    var selectImage : some View {
+        PopUpsView(title: "Profile Pic") {
             HStack {
                 VStack {
-                    Image(systemName: "photo.on.rectangle.angled")
-                        .resizable()
-                        .scaledToFit()
-                        .foregroundColor(Color.white)
-                        .rotationEffect(.degrees(-25))
-                        .padding(.horizontal, 10)
-                        .onTapGesture {
-                            // Abrir galería
-                        }
+                    GalleryImageView {
+                        self.sourceType = .photoLibrary
+                        self.isImagePickerDisplay.toggle()
+                    }
                     ThinText(title: "Gallery")
                         .foregroundColor(Color.white)
                 }
                 VStack {
-                    Image(systemName: "camera")
-                        .resizable()
-                        .scaledToFit()
-                        .foregroundColor(Color.white)
-                        .rotationEffect(.degrees(25))
-                        .padding(.horizontal, 10)
-                        .onTapGesture {
-                            // Abrir cámara
-                        }
+                    CameraImageView {
+                        self.sourceType = .photoLibrary
+                        self.isImagePickerDisplay.toggle()
+                    }
                     ThinText(title: "Camera")
                         .foregroundColor(Color.white)
                 }
             }
-        }, title: "Profile Pic", show: true)
+        }
         .frame(width: 250)
     }
     
     func signUpButton() -> some View {
         Button {
-            if username.isEmpty {
-                focusedField = .userField
-            } else if email.isEmpty {
-                focusedField = .emailField
-            } else if password.isEmpty {
-                focusedField = .passwordField
-            } else if repeatPassword.isEmpty {
-                focusedField = .repeatPasswordField
-            } else if password != repeatPassword {
-                print("pringao xDD")
+            if viewModel.username.isEmpty || viewModel.email.isEmpty || viewModel.password.isEmpty || viewModel.repeatPassword.isEmpty {
+                viewModel.alertTitle = "There are empty fields"
+                viewModel.showAlert = true
+                
+                
             } else {
-                // TODO: Navigate to home
+                viewModel.userModel = .init(username: viewModel.username,
+                                            email: viewModel.email,
+                                            password: viewModel.password,
+                                            factionId: viewModel.factionId,
+                                            profilePic: viewModel.profilePic)
+                viewModel.isRegistered = true
+//                viewModel.signUp { result in
+//                    switch result {
+//                    case .success(let message):
+//                        self.viewModel.message = message
+//                        viewModel.onSuccess(message: message)
+//                    case .failure(let error):
+//                        self.viewModel.message = error.localizedDescription
+//                        viewModel.onError(error: error.localizedDescription)
+//                    }
+//                }
             }
         } label: {
             MiniButtonLabel(title: "Sign Up")
         }
         .padding(.bottom, 5)
         .padding(.trailing, 35)
+        .background {
+            NavigationLink("", destination: FactionsView(userModel: viewModel.userModel), isActive: $viewModel.isRegistered)
+        }
     }
 }
