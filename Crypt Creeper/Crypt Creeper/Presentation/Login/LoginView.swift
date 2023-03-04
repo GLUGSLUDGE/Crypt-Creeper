@@ -8,22 +8,22 @@
 import SwiftUI
 
 struct LoginView: View {
-    
-    
+
+
     // MARK: - Properties
-    
+
     enum Field: Hashable {
         case userField
         case passwordField
     }
-    
+
     @FocusState var focusedField: Field?
-    
+
     @ObservedObject var viewModel: ViewModel = ViewModel()
-    
-    
+
+
     // MARK: - Body
-    
+
     var body: some View {
         ZStack {
             Color.ui.popUpColor

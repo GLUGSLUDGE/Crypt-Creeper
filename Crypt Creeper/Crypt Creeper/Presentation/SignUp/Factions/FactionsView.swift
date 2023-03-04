@@ -94,7 +94,9 @@ struct FactionsView: View {
                                         case .success(let message):
                                             viewModel.onSuccess(message: message)
                                         case .failure(let error):
+                                            
                                             viewModel.onError(error: error.localizedDescription)
+//                                            NavigationLink("", destination: SignUpView(), isActive: $viewModel.formError)
                                         }
                                 }
                             }

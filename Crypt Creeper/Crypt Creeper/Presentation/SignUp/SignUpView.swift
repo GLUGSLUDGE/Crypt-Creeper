@@ -125,6 +125,12 @@ struct SignUpView: View {
             if viewModel.username.isEmpty || viewModel.email.isEmpty || viewModel.password.isEmpty || viewModel.repeatPassword.isEmpty {
                 viewModel.alertTitle = "There are empty fields"
                 viewModel.showAlert = true
+            } else if viewModel.password != viewModel.repeatPassword{
+                viewModel.alertTitle = "The passwords doesn't match"
+                viewModel.showAlert = true
+            } else if !viewModel.email.contains("@") && (!viewModel.email.contains(".com") || !viewModel.email.contains(".es") || !viewModel.email.contains(".net")) {
+                viewModel.alertTitle = "Select a valid email"
+                viewModel.showAlert = true
             } else if viewModel.profilePic == nil {
                 viewModel.alertTitle = "Empty pic"
                 viewModel.alertMessage = "Select an image to continue"

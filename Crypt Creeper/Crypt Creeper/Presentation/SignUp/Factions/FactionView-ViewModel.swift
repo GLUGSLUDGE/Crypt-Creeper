@@ -7,11 +7,13 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 extension FactionsView {
     class ViewModel: ObservableObject{
         
         @Published var isLoged: Bool = false
+        @Published var formError: Bool = false
         
         let userDefaults = UserDefaults.standard
         private var token: String = ""
@@ -97,6 +99,7 @@ extension FactionsView {
         
         func onError(error: String) {
             print(error)
+            formError = true
         }
         
         func convertImageToBase64(image: UIImage) -> String {

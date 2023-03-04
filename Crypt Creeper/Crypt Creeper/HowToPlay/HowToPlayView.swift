@@ -17,7 +17,7 @@ struct HowToPlayView: View {
     @Binding var show :Bool
     var body: some View {
         if show{
-            PopUpsView(bodyContent: {
+            PopUpsView(title: "How to play", bodyContent: {
                 ScrollView{
                     vPlayer()
                     
@@ -39,7 +39,7 @@ struct HowToPlayView: View {
                     
                 }
                 
-            }, title: "How to play ", show: true).overlay(content: {
+            }).overlay(content: {
                 VStack{
                     HStack{
                         Spacer()
