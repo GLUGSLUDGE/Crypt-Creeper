@@ -121,25 +121,17 @@ extension SignUpView {
             if viewModel.username.isEmpty || viewModel.email.isEmpty || viewModel.password.isEmpty || viewModel.repeatPassword.isEmpty {
                 viewModel.alertTitle = "There are empty fields"
                 viewModel.showAlert = true
-                
-                
+            } else if viewModel.profilePic == nil {
+                viewModel.alertTitle = "Empty pic"
+                viewModel.alertMessage = "Select an image to continue"
+                viewModel.showAlert = true
             } else {
                 viewModel.userModel = .init(username: viewModel.username,
                                             email: viewModel.email,
                                             password: viewModel.password,
                                             factionId: viewModel.factionId,
-                                            profilePic: viewModel.profilePic)
+                                            profilePic: viewModel.profilePic ?? UIImage())
                 viewModel.isRegistered = true
-//                viewModel.signUp { result in
-//                    switch result {
-//                    case .success(let message):
-//                        self.viewModel.message = message
-//                        viewModel.onSuccess(message: message)
-//                    case .failure(let error):
-//                        self.viewModel.message = error.localizedDescription
-//                        viewModel.onError(error: error.localizedDescription)
-//                    }
-//                }
             }
         } label: {
             MiniButtonLabel(title: "Sign Up")

@@ -91,7 +91,6 @@ struct SignUpView: View {
     
     var profilePic: some View {
         PopUpsView(title: "Pic") {
-            
             ImageFromUi(image: viewModel.profilePic) {
             }
         }
