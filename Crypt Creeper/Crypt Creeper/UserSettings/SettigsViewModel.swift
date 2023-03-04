@@ -59,6 +59,13 @@ class SettingsViewModel : ObservableObject {
     @Published var newPass = ""
     @Published var repitNewPass = ""
     @Published var email = ""
+    @Published var showCN = false
+    @Published var showCP = false
+    @Published var showCPic = false
+    @Published var showLog = false
+    @Published var showLogOut = false
+    @Published var showDestry = false
+    
     @Published var profile_pic : UIImage?
     @Published var message = ""
     //b @Published var data : [user] = []
@@ -66,6 +73,7 @@ class SettingsViewModel : ObservableObject {
     
     
     func ChangeName(completion: @escaping (Result<String, Error>) -> Void) {
+        NetworkHelper.shared.setToken(tokens: "tx7ptTbyy7EzahdvGnbmt3c0T2PBdVXPf6pim3ay")
         let url =  "http://127.0.0.1:8000/api/user/change-name"
       
         
@@ -110,6 +118,7 @@ class SettingsViewModel : ObservableObject {
     }
     func changePassword(completion: @escaping (Result<String, Error>) -> Void)  {
         
+        NetworkHelper.shared.setToken(tokens: "nxGWRjO9GXm8JetdWjtiMswTXGOAWYHoDm1ERb1D")
         
         let  url =  "http://127.0.0.1:8000/api/user/change-password"
         
@@ -181,7 +190,7 @@ class SettingsViewModel : ObservableObject {
     
     func logOut(completion:@escaping (Result<String, Error>) -> Void){
         
-        
+        NetworkHelper.shared.setToken(tokens: "tx7ptTbyy7EzahdvGnbmt3c0T2PBdVXPf6pim3ay")
         
         let  url =  "http://127.0.0.1:8000/api/user/logout"
         // Verificar si se recibió una respuesta válida
