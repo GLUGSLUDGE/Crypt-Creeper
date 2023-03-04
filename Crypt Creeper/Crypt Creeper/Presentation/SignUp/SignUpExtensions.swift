@@ -7,30 +7,6 @@
 
 import SwiftUI
 
-struct GalleryImageView: View {
-    var completion: () -> ()
-    var body: some View {
-        ImageSysName(image: "photo.on.rectangle.angled") {
-            completion()
-        }
-        .foregroundColor(Color.white)
-        .rotationEffect(.degrees(-25))
-        .padding(.horizontal, 10)
-    }
-}
-
-struct CameraImageView: View {
-    var completion: () -> ()
-    var body: some View {
-        ImageSysName(image: "camera") {
-            completion()
-        }
-        .foregroundColor(Color.white)
-        .rotationEffect(.degrees(25))
-        .padding(.horizontal, 10)
-    }
-}
-
 extension SignUpView {
     
     func signUpPopUp() -> some View {
@@ -92,54 +68,21 @@ extension SignUpView {
         }
     }
     
-    var selectImage : some View {
-        PopUpsView(title: "Profile Pic") {
-            HStack {
-                VStack {
-                    GalleryImageView {
-                        self.sourceType = .photoLibrary
-                        self.isImagePickerDisplay.toggle()
-                    }
-                    ThinText(title: "Gallery")
-                        .foregroundColor(Color.white)
-                }
-                VStack {
-                    CameraImageView {
-                        self.sourceType = .photoLibrary
-                        self.isImagePickerDisplay.toggle()
-                    }
-                    ThinText(title: "Camera")
-                        .foregroundColor(Color.white)
-                }
-            }
+    @ViewBuilder func galleryImage(completion: @escaping () -> ()) -> some View {
+        ImageSysName(image: "photo.on.rectangle.angled") {
+            completion()
         }
-        .frame(width: 250)
+        .foregroundColor(Color.white)
+        .rotationEffect(.degrees(-25))
+        .padding(.horizontal, 10)
     }
     
-    func signUpButton() -> some View {
-        Button {
-            if viewModel.username.isEmpty || viewModel.email.isEmpty || viewModel.password.isEmpty || viewModel.repeatPassword.isEmpty {
-                viewModel.alertTitle = "There are empty fields"
-                viewModel.showAlert = true
-            } else if viewModel.profilePic == nil {
-                viewModel.alertTitle = "Empty pic"
-                viewModel.alertMessage = "Select an image to continue"
-                viewModel.showAlert = true
-            } else {
-                viewModel.userModel = .init(username: viewModel.username,
-                                            email: viewModel.email,
-                                            password: viewModel.password,
-                                            factionId: viewModel.factionId,
-                                            profilePic: viewModel.profilePic ?? UIImage())
-                viewModel.isRegistered = true
-            }
-        } label: {
-            MiniButtonLabel(title: "Sign Up")
+    @ViewBuilder func cameraImage(completion: @escaping () -> ()) -> some View {
+        ImageSysName(image: "camera") {
+            completion()
         }
-        .padding(.bottom, 5)
-        .padding(.trailing, 35)
-        .background {
-            NavigationLink("", destination: FactionsView(userModel: viewModel.userModel), isActive: $viewModel.isRegistered)
-        }
+        .foregroundColor(Color.white)
+        .rotationEffect(.degrees(25))
+        .padding(.horizontal, 10)
     }
 }

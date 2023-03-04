@@ -17,7 +17,7 @@ struct TextFields: View {
                 .ignoresSafeArea()
             VStack {
                 TextFieldLabel(field: $field)
-                PasswordField(field: $field)
+//                PasswordField(field: $field)
                 SecureFieldLabel(field: field)
             }
         }
@@ -26,7 +26,7 @@ struct TextFields: View {
 
 struct TextFieldLabel: View {
     @Binding var field : String
-    let textLimit = 15
+    let textLimit = 25
     var body: some View {
         TextField("", text: $field)
             .background(Color.accentColor)

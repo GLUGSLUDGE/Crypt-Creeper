@@ -13,12 +13,11 @@ struct SignUpView: View {
     
     // MARK: - Properties
     
-    
     @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @State var selectedImage: UIImage?
     @State var isImagePickerDisplay = false
     
-    @ObservedObject var viewModel: SignUpViewModel = SignUpViewModel()
+    @ObservedObject var viewModel: ViewModel = ViewModel()
     
     @Environment(\.dismiss) var dismiss
     
@@ -56,7 +55,7 @@ struct SignUpView: View {
                 // MARK: - Button Stack
                 HStack {
                     Spacer()
-                    signUpButton()
+                    signUpButton
                 }
             }
         }
@@ -95,8 +94,56 @@ struct SignUpView: View {
             }
         }
         .padding(.top, 50)
-        .onAppear {
-            
+    }
+    
+    var selectImage : some View {
+        PopUpsView(title: "Profile Pic") {
+            HStack {
+                VStack {
+                    galleryImage {
+                        self.sourceType = .photoLibrary
+                        self.isImagePickerDisplay.toggle()
+                    }
+                    ThinText(title: "Gallery")
+                        .foregroundColor(Color.white)
+                }
+                VStack {
+                    cameraImage {
+                        self.sourceType = .camera
+                        self.isImagePickerDisplay.toggle()
+                    }
+                    ThinText(title: "Camera")
+                        .foregroundColor(Color.white)
+                }
+            }
+        }
+        .frame(width: 250)
+    }
+    
+    var signUpButton: some View {
+        Button {
+            if viewModel.username.isEmpty || viewModel.email.isEmpty || viewModel.password.isEmpty || viewModel.repeatPassword.isEmpty {
+                viewModel.alertTitle = "There are empty fields"
+                viewModel.showAlert = true
+            } else if viewModel.profilePic == nil {
+                viewModel.alertTitle = "Empty pic"
+                viewModel.alertMessage = "Select an image to continue"
+                viewModel.showAlert = true
+            } else {
+                viewModel.userModel = .init(username: viewModel.username,
+                                            email: viewModel.email,
+                                            password: viewModel.password,
+                                            factionId: viewModel.factionId,
+                                            profilePic: viewModel.profilePic ?? UIImage())
+                viewModel.isRegistered = true
+            }
+        } label: {
+            MiniButtonLabel(title: "Sign Up")
+        }
+        .padding(.bottom, 5)
+        .padding(.trailing, 35)
+        .background {
+            NavigationLink("", destination: FactionsView(userModel: viewModel.userModel), isActive: $viewModel.isRegistered)
         }
     }
 }
@@ -106,16 +153,3 @@ struct SignUpView_Previews: PreviewProvider {
         SignUpView()
     }
 }
-
-//class Base64 {
-//    static let shared = Base64()
-//    func convertImageToBase64(image: UIImage) -> String {
-//        let compressedImage = compressImage(image: image, quality: 0.5) // Calidad deseada
-//        let base64String = compressedImage?.base64EncodedString() ?? ""
-//        return base64String
-//    }
-//
-//    private func compressImage(image: UIImage, quality: CGFloat) -> Data? {
-//        return image.jpegData(compressionQuality: quality)
-//    }
-//}

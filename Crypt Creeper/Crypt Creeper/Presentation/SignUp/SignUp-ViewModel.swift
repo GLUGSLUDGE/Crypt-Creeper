@@ -10,23 +10,24 @@
 
 import Foundation
 import UIKit
-
-class SignUpViewModel: ObservableObject {
-    
-    @Published var username: String = ""
-    @Published var email: String = ""
-    @Published var password: String = ""
-    @Published var repeatPassword: String = ""
-    @Published var profilePic: UIImage?
-    @Published var factionId: Int = 0
-    
-    @Published var alertTitle: String = ""
-    @Published var alertMessage: String = ""
-    @Published var message: String = ""
-    @Published var showAlert: Bool = false
-    @Published var isRegistered: Bool = false
-    @Published var isLoged: Bool = false
-    
-    var userModel: UserModel = .init()
-
+extension SignUpView {
+    class ViewModel: ObservableObject {
+        
+        @Published var username: String = ""
+        @Published var email: String = ""
+        @Published var password: String = ""
+        @Published var repeatPassword: String = ""
+        @Published var profilePic: UIImage?
+        @Published var factionId: Int = 0
+        
+        @Published var alertTitle: String = ""
+        @Published var alertMessage: String = ""
+        @Published var message: String = ""
+        @Published var showAlert: Bool = false
+        @Published var isRegistered: Bool = false
+        @Published var isLoged: Bool = false
+        
+        var userModel: UserModel = .init()
+        
+    }
 }
