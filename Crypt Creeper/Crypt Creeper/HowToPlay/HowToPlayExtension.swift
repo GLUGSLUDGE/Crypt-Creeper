@@ -230,7 +230,6 @@ extension HowToPlayView {
             columView(setImage: "ICON_C_FULLHEAL", setText:"FULL HEAL.")
             
             textView(text: "HOLD SLOTS work by moving a PICK UP into the slot for later use.\n\nTap the HOLD SLOT tile while empty and select an available pick up to grab.\n\nTap the HOLD SLOT while holding to activate that PICKUP.")
-            
         }
     }
     func vShop()-> some View {
@@ -247,7 +246,7 @@ extension HowToPlayView {
     }
     func vLevels()-> some View{
         VStack{
-            dividerImage(setImage: "ICON_ENTITY_PORTAL", setText: "LEVES")
+            dividerImage(setImage: "ICON_ENTITY_PORTAL", setText: "LEVELS")
             textView(text: "The player starts at the bottom and must reach the portal to warp to the next level.")
             
         }
@@ -262,8 +261,8 @@ extension HowToPlayView {
     }
     func vScore()-> some View {
         VStack{
-            divider(setText: "SCOR")
-            textView(text: "Every action results in points being added to your score, clearing out each level as much as you can without trapping yourself is the key to HIGHSCORES.")
+            divider(setText: "SCORE")
+            textView(text: "Every action results in points being added to your score, clearing out each level as much as you can without trapping yourself is the key to HIGHSCORES.\n\n")
             
         }
     }
