@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct SettingsView: View {
     
     @ObservedObject var viewModel = SettingsViewModel()
@@ -20,60 +21,62 @@ struct SettingsView: View {
             ZStack{
                 Color.ui.popUpColor
                     .ignoresSafeArea()
-                
-                PopUpsView(bodyContent: {
-                    VStack(spacing: 20){
-                        BoldText(title: "USER OPTIONS", fontSize: 30)
-                            .foregroundColor(Color.white)
-                            .padding(.trailing,190)
-                            .padding(.top,10)
-                        
-                        Button {
-                            //Cambiar NOMBRE
-                            viewModel.showCN.toggle()
+                VStack{
+                    PopUpsView(bodyContent: {
+                        VStack(spacing: 20){
+                            BoldText(title: "USER OPTIONS", fontSize: 30)
+                                .foregroundColor(Color.white)
+                                .padding(.trailing,190)
+                                .padding(.top,10)
                             
-                        } label: {
-                            ButtonLabel(title: "CHANGE NAME", fontSize: 30)
-                        }
-                        
-                        Button {
-                            viewModel.showCP.toggle()
-                        } label: {
-                            ButtonLabel(title: "CHANGE PASSWORD", fontSize: 30)
-                        }
-                        
-                        Button {
-                            viewModel.showCPic.toggle()
-                        } label: {
-                            ButtonLabel(title: "CHANGE PERFIL PICTURE", fontSize: 30)
-                        }
-                        
-                        
-                        HStack(spacing:30){
                             Button {
+                                //Cambiar NOMBRE
+                                viewModel.showCN.toggle()
                                 
                             } label: {
-                                MiniButtonLabel(title: "DESTRY\nACCOUNT?", fontSize: 30, widthSize: 3,heightSize: 9)
-                                    .multilineTextAlignment(.leading)
-                                    .padding(.bottom,20)
+                                ButtonLabel(title: "CHANGE NAME", fontSize: 30)
+                            }
+                            
+                            
+                            Button {
+                                viewModel.showCP.toggle()
+                            } label: {
+                                ButtonLabel(title: "CHANGE PASSWORD", fontSize: 30)
                             }
                             
                             Button {
-                                //  CERRAR SEION
-                                viewModel.showLogOut.toggle()
-                                logOut(bool: viewModel.showLogOut)
-                                
+                                viewModel.showCPic.toggle()
                             } label: {
-                                MiniButtonLabel(title: "LOG OUT", fontSize: 30, widthSize: 3, heightSize: 9)
-                                    .padding(.bottom,20)
+                                ButtonLabel(title: "CHANGE PERFIL PICTURE", fontSize: 30)
+                            }
+                            HStack(spacing:30){
+                                Button {
+                                    
+                                } label: {
+                                    MiniButtonLabel(title: "DESTRY\nACCOUNT?", fontSize: 30, widthSize: 3,heightSize: 11.5)
+                                        .multilineTextAlignment(.leading)
+                                        .padding(.bottom,20)
+                                }
+                                
+                                Button {
+                                    //  CERRAR SEION
+                                    viewModel.showLogOut.toggle()
+                                    logOut(bool: viewModel.showLogOut)
+                                    
+                                } label: {
+                                    MiniButtonLabel(title: "LOG OUT", fontSize: 30, widthSize: 3, heightSize: 11.5)
+                                        .padding(.bottom,20)
+                                }
                             }
                         }
-                    }
-                }, title: "User Settings ", show:true)
+                    }, title: "User Settings ", show:true)
+                    
+                   soundView()
+                   
+                }
                 changeName(show: $viewModel.showCN)
                 changePass(show: $viewModel.showCP)
-                changePic(Show: $viewModel.showCPic)
-                
+                changePic(show: $viewModel.showCPic)
             }
             
             //            .navigationViewStyle(StackNavigationViewStyle())
@@ -84,6 +87,69 @@ struct SettingsView: View {
         }
     }
 }
+func soundView()->some View {
+    ZStack{
+        Color.ui.popUpColor
+            .ignoresSafeArea()
+        VStack{
+            PopUpsView(bodyContent: {
+                VStack(alignment: .leading,spacing:5){
+                    BoldText(title: "SOUND", fontSize: 30)
+                        .foregroundColor(Color.white)
+                        .padding(.leading,20)
+                        .padding(.top,10)
+                    HStack{
+                        VStack(alignment: .leading){
+                            BoldText(title: "SFX:", fontSize: 30)
+                                .foregroundColor(Color.white)
+                            
+                                .padding(.top,10)
+                            Button {
+                                //speaker.slash.fillCambiar NOMBRE
+                                
+                            } label: {
+                                Rectangle()
+                                    .frame(width:110,height: 70)
+                                    .padding(.bottom)
+                                    .foregroundColor(Color.white)
+                                    .overlay {
+                                        Image(systemName: "speaker.wave.3")
+                                            .resizable()
+                                            .foregroundColor(Color.ui.popUpColor)
+                                            .frame(width: 70,height: 50)
+                                            .padding(.bottom,15)
+                                    }
+                            }
+                        }
+                        Spacer()
+                        VStack(alignment: .leading){
+                            BoldText(title: "MUSIC:", fontSize: 30)
+                                .foregroundColor(Color.white)
+                                .padding(.top,10)
+                            Rectangle()
+                                .frame(width:110,height: 70)
+                                .padding(.bottom)
+                                .foregroundColor(Color.white)
+                                .overlay {
+                                    Image(systemName: "speaker.slash.fill")
+                                        .resizable()
+                                        .foregroundColor(Color.ui.popUpColor)
+                                        .frame(width: 70,height: 50)
+                                        .padding(.bottom,15)
+                                }
+                        }
+                             
+                    }
+                    .padding(.horizontal,20)
+                }
+            }, title: "Sound Settings", show: true)
+        }
+    }
+}
+        
+        
+
+               
 struct changeName : View{
     @Binding  var show : Bool
     @State var settingsView = SettingsView()
@@ -122,7 +188,23 @@ struct changeName : View{
                     }
                 }
                 
-            }, title: "CHANGE NAME", show: true)
+            }, title: "CHANGE NAME", show: true).overlay(content: {
+                VStack{
+                    HStack{
+                        Spacer()
+                        Button {
+                            show.toggle()
+                        } label: {
+                            Image("")
+                                .resizable()
+                                .frame(width: 30,height:30)
+                                .padding(.trailing,15)
+                                .padding(.top,20)
+                                .foregroundColor(Color.clear)
+                        }
+                    }
+                    Spacer()
+                }})
             .frame(width: 300, height: 300)
             .padding(.bottom, 100)
             
@@ -148,17 +230,17 @@ struct changePass: View{
                         .foregroundColor(Color.white)
                         .padding(.leading,20)
                     PasswordField(field: settingsView.$viewModel.newPass)
-                        
+                    
                         .padding(.horizontal, 20)
                     
                     ThinText(title: "REPIT NEW PASSWORD:", fontSize: 20)
                         .foregroundColor(Color.white)
                         .padding(.leading,20)
                     PasswordField(field: settingsView.$viewModel.repitNewPass)
-                        
-                       
+                    
+                    
                         .padding(.horizontal, 20)
-                       
+                    
                     
                     Button {
                         show.toggle()
@@ -181,19 +263,33 @@ struct changePass: View{
                     }
                     
                 }
-            }, title: "CHANGE PASSWORD", show: true)
+            }, title: "CHANGE PASSWORD", show: true).overlay(content: {
+                VStack{
+                    HStack{
+                        Spacer()
+                        Button {
+                            show.toggle()
+                        } label: {
+                            Image("")
+                                .resizable()
+                                .frame(width: 30,height:30)
+                                .padding(.trailing,15)
+                                .padding(.top,20)
+                                .foregroundColor(Color.clear)
+                        }
+                    }
+                    Spacer()
+                }})
             .frame(width: 300, height: 300)
         }
     }
 }
 struct changePic : View{
-    @Binding var Show: Bool
+    @Binding var show: Bool
     @State var settingsView = SettingsView()
     var body: some View {
         
-        if Show{
-            //             NavigationView {
-            
+        if show{
             
             PopUpsView(bodyContent: {
                 VStack{
@@ -245,9 +341,8 @@ struct changePic : View{
                         
                     }
                     
-                    
                     Button {
-                        Show.toggle()
+                        show.toggle()
                         settingsView.viewModel.changePhoto { result in
                             switch result {
                             case .success(let message):
@@ -259,13 +354,25 @@ struct changePic : View{
                     } label: {
                         MiniButtonLabel(title: "COMFIRM", fontSize: 20, widthSize: 3, heightSize: 20)
                     }
-                    
-                    
-                    
                 }
-            }, title: "CHANGE PHOTO", show: true)
+            }, title: "CHANGE PHOTO", show: true).overlay(content: {
+                VStack{
+                    HStack{
+                        Spacer()
+                        Button {
+                            show.toggle()
+                        } label: {
+                            Image("")
+                                .resizable()
+                                .frame(width: 30,height:30)
+                                .padding(.trailing,15)
+                                .padding(.top,20)
+                                .foregroundColor(Color.clear)
+                        }
+                    }
+                    Spacer()
+                }})
             .frame(width: 300)
-            
         }
         //                .navigationViewStyle(StackNavigationViewStyle())
         //                .fullScreenCover(isPresented: settingsView.$shouldShowImagePicker, onDismiss: nil) {
@@ -276,8 +383,7 @@ struct changePic : View{
         //        }
         
         
-    }
-}
+    }}
 
 func logOut(bool: Bool) {
     @State var settingsView = SettingsView()
@@ -296,162 +402,162 @@ func logOut(bool: Bool) {
         
     }
 }
-    
-    //                TextField ("nombre" , text: $viewModel.userName)
-    //                    .multilineTextAlignment(.center)
-    //                    .frame(height: 50)
-    //                    .background(Color .gray)
-    //                    .cornerRadius(20)
-    //                    .padding(.all , 10)
-    //                Button {
-    //                    self.viewModel.ChangeName { result in
-    //                        switch result {
-    //                        case .success(let message):
-    //                            self.viewModel.message = message
-    //                        case .failure(let error):
-    //                            self.viewModel.message = error.localizedDescription
-    //                        }
-    //                    }
-    //                }label: {
-    //                    Text("cambiar nombre")
-    //                }
-    //                Spacer()
-    //
-    //                Text(viewModel.message)
-    //
-    //                VStack{
-    //
-    //                    Button {
-    //                        shouldShowImagePicker.toggle()
-    //                    } label: {
-    //                        if let image = viewModel.profile_pic {
-    //                            Image(uiImage: image)
-    //                                .resizable()
-    //                                .scaledToFill()
-    //                                .frame(width: 143, height: 143)
-    //                                .cornerRadius(80)
-    //                        } else {
-    //
-    //                            Image(systemName:"person.fill")
-    //                                .resizable()
-    //                                .clipShape(Circle())
-    //                                .frame(width: 150, height: 150)
-    //                                .overlay(Circle().stroke(Color.blue))
-    //                        }
-    //                    }
-    //                    .overlay(RoundedRectangle(cornerRadius: 80)
-    //                        .stroke(Color.black, lineWidth: 3))
-    //
-    //                    Button {
-    //                        self.viewModel.changePhoto{result in
-    //                            switch result {
-    //                            case .success(let message):
-    //                                self.viewModel.message = message
-    //                            case .failure(let error):
-    //                                self.viewModel.message = error.localizedDescription
-    //                            }
-    //                        }
-    //                    } label: {
-    //                        Text("cambiar foto")
-    //                    }
-    //                    Button {
-    //                        self.viewModel.logOut{result in
-    //                                switch result {
-    //                                case .success(let message):
-    //                                    self.viewModel.message = message
-    //                                case .failure(let error):
-    //                                    self.viewModel.message = error.localizedDescription
-    //                                }
-    //                        }
-    //                    } label: {
-    //                        Text("cerrar sesion")
-    //                    }
-    //
-    //                }
-    //
-    //                Spacer()
-    //
-    //
-    //                TextField ("Contraseña antigua " , text: $viewModel.pass)
-    //                    .multilineTextAlignment(.center)
-    //                    .frame(height: 50)
-    //                    .background(Color .gray)
-    //                    .cornerRadius(20)
-    //                    .padding(.all , 10)
-    //                TextField ("nueva contraseña" , text: $viewModel.newPass)
-    //                    .multilineTextAlignment(.center)
-    //                    .frame(height: 50)
-    //                    .background(Color .gray)
-    //                    .cornerRadius(20)
-    //                    .padding(.all , 10)
-    //
-    //                TextField ("repetir contraseña" , text: $viewModel.repitNewPass)
-    //                    .multilineTextAlignment(.center)
-    //                    .frame(height: 50)
-    //                    .background(Color .gray)
-    //                    .cornerRadius(20)
-    //                    .padding(.all , 10)
-    //
-    //                Button {
-    //                    viewModel.changePassword { result in
-    //                        switch result {
-    //                        case .success(let message):
-    //                            self.viewModel.message = message
-    //                        case .failure(let error):
-    //                            self.viewModel.message = error.localizedDescription
-    //                        }
-    //                    }
-    //                } label: {
-    //                    Text("cambiar contraseña")
-    //                }
-    //            }
-    //
-    
-    
-    
-    
-    
-    struct SettingsView_Previews: PreviewProvider {
-        static var previews: some View {
-            SettingsView()
-        }
+
+//                TextField ("nombre" , text: $viewModel.userName)
+//                    .multilineTextAlignment(.center)
+//                    .frame(height: 50)
+//                    .background(Color .gray)
+//                    .cornerRadius(20)
+//                    .padding(.all , 10)
+//                Button {
+//                    self.viewModel.ChangeName { result in
+//                        switch result {
+//                        case .success(let message):
+//                            self.viewModel.message = message
+//                        case .failure(let error):
+//                            self.viewModel.message = error.localizedDescription
+//                        }
+//                    }
+//                }label: {
+//                    Text("cambiar nombre")
+//                }
+//                Spacer()
+//
+//                Text(viewModel.message)
+//
+//                VStack{
+//
+//                    Button {
+//                        shouldShowImagePicker.toggle()
+//                    } label: {
+//                        if let image = viewModel.profile_pic {
+//                            Image(uiImage: image)
+//                                .resizable()
+//                                .scaledToFill()
+//                                .frame(width: 143, height: 143)
+//                                .cornerRadius(80)
+//                        } else {
+//
+//                            Image(systemName:"person.fill")
+//                                .resizable()
+//                                .clipShape(Circle())
+//                                .frame(width: 150, height: 150)
+//                                .overlay(Circle().stroke(Color.blue))
+//                        }
+//                    }
+//                    .overlay(RoundedRectangle(cornerRadius: 80)
+//                        .stroke(Color.black, lineWidth: 3))
+//
+//                    Button {
+//                        self.viewModel.changePhoto{result in
+//                            switch result {
+//                            case .success(let message):
+//                                self.viewModel.message = message
+//                            case .failure(let error):
+//                                self.viewModel.message = error.localizedDescription
+//                            }
+//                        }
+//                    } label: {
+//                        Text("cambiar foto")
+//                    }
+//                    Button {
+//                        self.viewModel.logOut{result in
+//                                switch result {
+//                                case .success(let message):
+//                                    self.viewModel.message = message
+//                                case .failure(let error):
+//                                    self.viewModel.message = error.localizedDescription
+//                                }
+//                        }
+//                    } label: {
+//                        Text("cerrar sesion")
+//                    }
+//
+//                }
+//
+//                Spacer()
+//
+//
+//                TextField ("Contraseña antigua " , text: $viewModel.pass)
+//                    .multilineTextAlignment(.center)
+//                    .frame(height: 50)
+//                    .background(Color .gray)
+//                    .cornerRadius(20)
+//                    .padding(.all , 10)
+//                TextField ("nueva contraseña" , text: $viewModel.newPass)
+//                    .multilineTextAlignment(.center)
+//                    .frame(height: 50)
+//                    .background(Color .gray)
+//                    .cornerRadius(20)
+//                    .padding(.all , 10)
+//
+//                TextField ("repetir contraseña" , text: $viewModel.repitNewPass)
+//                    .multilineTextAlignment(.center)
+//                    .frame(height: 50)
+//                    .background(Color .gray)
+//                    .cornerRadius(20)
+//                    .padding(.all , 10)
+//
+//                Button {
+//                    viewModel.changePassword { result in
+//                        switch result {
+//                        case .success(let message):
+//                            self.viewModel.message = message
+//                        case .failure(let error):
+//                            self.viewModel.message = error.localizedDescription
+//                        }
+//                    }
+//                } label: {
+//                    Text("cambiar contraseña")
+//                }
+//            }
+//
+
+
+
+
+
+struct SettingsView_Previews: PreviewProvider {
+    static var previews: some View {
+        SettingsView()
     }
-    struct ImagePicker: UIViewControllerRepresentable {
-        
-        @Binding var image: UIImage?
-        
-        private let controller = UIImagePickerController()
-        
-        func makeCoordinator() -> Coordinator {
-            return Coordinator(parent: self)
-        }
-        
-        class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-            
-            let parent: ImagePicker
-            
-            init(parent: ImagePicker) {
-                self.parent = parent
-            }
-            
-            func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-                parent.image = info[.originalImage] as? UIImage
-                picker.dismiss(animated: true)
-            }
-            
-            func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-                picker.dismiss(animated: true)
-            }
-            
-        }
-        
-        func makeUIViewController(context: Context) -> some UIViewController {
-            controller.delegate = context.coordinator
-            return controller
-        }
-        
-        func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-            
-        }
+}
+struct ImagePicker: UIViewControllerRepresentable {
+    
+    @Binding var image: UIImage?
+    
+    private let controller = UIImagePickerController()
+    
+    func makeCoordinator() -> Coordinator {
+        return Coordinator(parent: self)
     }
     
+    class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+        
+        let parent: ImagePicker
+        
+        init(parent: ImagePicker) {
+            self.parent = parent
+        }
+        
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            parent.image = info[.originalImage] as? UIImage
+            picker.dismiss(animated: true)
+        }
+        
+        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+            picker.dismiss(animated: true)
+        }
+        
+    }
+    
+    func makeUIViewController(context: Context) -> some UIViewController {
+        controller.delegate = context.coordinator
+        return controller
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+        
+    }
+}
+
