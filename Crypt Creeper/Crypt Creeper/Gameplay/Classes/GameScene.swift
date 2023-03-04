@@ -1,52 +1,142 @@
 //
-//  ContentView.swift
+//  GameScene.swift
 //  Crypt Creeper
 //
-//  Created by Abby Dominguez on 9/1/23.
+//  Created by Abby Dominguez on 1/3/23.
 //
 
-import SwiftUI
+import Foundation
 import SpriteKit
+import SwiftUI
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
-enum EntityType: CaseIterable{
-    case Empty
-    case Player
-    case Portal
-    case Enemy
-    case Sword
-    case Shield
-    case Potion
-    case Coin
-    case Shop
-    case Temple
-    case Boss
-}
-class Tile: SKSpriteNode{
-    var type:EntityType = EntityType.Empty
-    var power:Int = 0
-    var x:Int = 0
-    var y:Int = 0
-}
-
-class GameScene: SKScene, ObservableObject {
-    @Published var coins:String = "0"
+@MainActor class GameScene: SKScene, ObservableObject {
+    @Published var coins:Int = 0
     @Published var health:Int = 3
     @Published var maxHealth:Int = 3
     @Published var level:Int = 1
-    @Published var score:String = "0"
-    @Published var xp:String = "0"
+    @Published var score:Int = 0
+    @Published var xp:Int = 0
+    @Published var swordPower:Int = 0
+    @Published var shieldPower:Int = 0
+    @Published var inventorySlots:[Item] = []
     
-    let intSize = 15
-    var locations:[Array<CGFloat>] = []
+    @Published var showShop:Bool = false
+    @Published var showTemple:Bool = false
+    @Published var showWin:Bool = false
+    @Published var showGameOver:Bool = false
+    
+    private let intSize = 15
+    private var locations:[Array<CGFloat>] = []
+    
+    func reset(){
+        print("game was reset!!!")
+        maxHealth = 3
+        health = 3
+        coins = 0
+        level = 1
+        score = 0
+        xp = 0
+        swordPower = 0
+        shieldPower = 0
+        inventorySlots = [Item]()
+        removeAllChildren()
+        createBoard()
+    }
     
     override func didMove(to view: SKView) {
         locations = gridLocations()
-        
+        createBoard()
+        increaseInventory()
+
+    }
+    func heal(amount:Int){
+        health += amount
+        if health > maxHealth {
+            health = maxHealth
+        }
+    }
+    func useItem(item: Item){
+        switch(item.type){
+        case ItemType.BOMB:
+            //deals 2 damage to every monster
+            break
+        case ItemType.RERROLL:
+            //Rerolls the floor
+            break
+        case ItemType.GREENP:
+            //Turns every monster into power 1
+            break
+        case ItemType.POTION:
+            //Cure
+            break
+        case ItemType.SWORD:
+            let tPower = swordPower
+            swordPower = item.power
+            item.power = tPower
+            if item.power == 0 {
+                item.sprite = Image("ICON_ENTITY_EMPTY")
+                item.type = ItemType.NONE
+            } else {
+                item.sprite = Image("ICON_SWORD_\(item.power)")
+            }
+            break
+        case ItemType.SHIELD:
+            let tPower = shieldPower
+            shieldPower = item.power
+            item.power = tPower
+            if item.power == 0 {
+                item.sprite = Image("ICON_ENTITY_EMPTY")
+                item.type = ItemType.NONE
+            } else {
+                item.sprite = Image("ICON_SHIELD_\(item.power)")
+            }
+            break
+        case ItemType.NONE: break
+        case .MAXH: break
+        case .FULLH: break
+        case .SLOT: break
+        }
+    }
+    func increaseInventory(){
+        if inventorySlots.count < 3 {
+            inventorySlots.append(Item(nType: ItemType.NONE, nPrice: 0, nPower: 0))
+        }
+    }
+    func saveSword(){
+        if inventorySlots.isEmpty {
+            return
+        }
+        var success = false
+        for item in inventorySlots {
+            if !success{
+                if item.type == ItemType.NONE {
+                    item.type = ItemType.SWORD
+                    item.power = swordPower
+                    item.sprite = Image("ICON_SWORD_\(item.power)")
+                    swordPower = 0
+                    success = true
+                }
+            }
+        }
+    }
+    func saveShield(){
+        if inventorySlots.isEmpty {
+            return
+        }
+        var success = false
+        for item in inventorySlots {
+            if !success{
+                if item.type == ItemType.NONE {
+                    item.type = ItemType.SHIELD
+                    item.power = shieldPower
+                    item.sprite = Image("ICON_SHIELD_\(item.power)")
+                    shieldPower = 0
+                    success = true
+                }
+            }
+        }
+    }
+    func createBoard(){
         let portalrandomX = Int.random(in: 1...5)
         var enemyAmount = 0
         var potionAmount = 0
@@ -54,7 +144,6 @@ class GameScene: SKScene, ObservableObject {
         var swordAmount = 0
         var coinAmount = 0
         var npcAmount = 0
-        
         for i in 1...5 {
             for j in 1...5{
                 let newTile = Tile(imageNamed: "ICON_ENTITY_EMPTY")
@@ -117,27 +206,35 @@ class GameScene: SKScene, ObservableObject {
                                 newTile.texture = SKTexture(imageNamed: "ICON_ENTITY_TEMPLE")
                             }
                             npcAmount = 1
+                        } else {
+                            randomTile(tile: newTile)
                         }
                     } else {
                         randomTile(tile: newTile)
                     }
                 }
-                /*if newTile.power != 0*/
-                if newTile.power != 0{
-                    let powerLabel = SKSpriteNode(texture: SKTexture(imageNamed: "num_\(newTile.power)"))
-                    powerLabel.size = CGSize(width: 5, height: 5)
-                    powerLabel.name = "LABEL"
-                    powerLabel.zPosition = newTile.zPosition+12
-                    powerLabel.position = CGPoint(x:5,y:-3)
-                    newTile.addChild(powerLabel)
-                }
                 
+                addPowerLabel(tile: newTile)
                 
                 addChild(newTile)
             }
         }
     }
-
+    func addPowerLabel(tile: Tile){
+        if tile.power != 0{
+            let powerLabel = SKSpriteNode(texture: SKTexture(imageNamed: "num_\(tile.power)"))
+            powerLabel.size = CGSize(width: 5, height: 5)
+            powerLabel.name = "LABEL"
+            powerLabel.zPosition = tile.zPosition+12
+            powerLabel.position = CGPoint(x:5,y:-3)
+            tile.addChild(powerLabel)
+        }
+    }
+    func nextLevel(){
+        level+=1
+        removeAllChildren()
+        createBoard()
+    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
@@ -150,25 +247,113 @@ class GameScene: SKScene, ObservableObject {
                 if destination.name == "EMPTY"{
                     return
                 }
-                var canMove = false;
+                
+                var canMove = false
+                var finishedLevel = false
+                
                 for tile in adjacentTilesTo(x: destination.x, y: destination.y){
                     if tile!.name ==  "PLAYER"{
                         canMove = true
                     }
                 }
                 if !canMove {
+                    //showGameOver = true
                     return
                 }
-
-                //If position isnt empty and player is adjacent, move here
+                switch(destination.name){
+                case "PORTAL":
+                    score += level*100
+                    finishedLevel = true
+                case "ENEMY":
+                    var damage = destination.power
+                    while damage != 0 && swordPower != 0 {
+                        swordPower-=1
+                        damage-=1
+                    }
+                    while damage != 0 && shieldPower != 0 {
+                        shieldPower-=1
+                        damage-=1
+                    }
+                    while damage != 0 && health != 0 {
+                        health-=1
+                        damage-=1
+                    }
+                    if health == 0 {
+                       showGameOver = true
+                    }
+                    score+=destination.power*10
+                    switch(destination.power){
+                    case 1: xp+=1
+                    case 2: xp+=4
+                    case 3: xp+=9
+                    case 4: xp+=16
+                    case 5: xp+=30
+                    case 6: xp+=50
+                    case 7: xp+=90
+                    case 8: xp+=200
+                    default: break
+                    }
+                case "COIN":
+                    coins += destination.power
+                case "POTION":
+                    heal(amount: destination.power)
+                case "SHIELD":
+                    shieldPower = destination.power
+                case "SWORD":
+                    swordPower = destination.power
+                case "SHOP":
+                    showShop = true
+                case "TEMPLE":
+                    showTemple = true
+                case "BOSS":
+                    var damage = destination.power
+                    while damage != 0 && swordPower != 0 {
+                        swordPower-=1
+                        damage-=1
+                    }
+                    while damage != 0 && shieldPower != 0 {
+                        shieldPower-=1
+                        damage-=1
+                    }
+                    while damage != 0 && health != 0 {
+                        health-=1
+                        damage-=1
+                    }
+                    if health == 0 {
+                       showGameOver = true
+                    } else {
+                        showWin = true
+                    }
+                default: break
+                    
+                }
                 
-                //Interact with the item that was previously here.
-                destination.removeAllChildren()
-                (childNode(withName: "PLAYER") as! SKSpriteNode).texture = SKTexture(imageNamed: "ICON_ENTITY_EMPTY")
-                childNode(withName: "PLAYER")?.name = "EMPTY"
-                touchNode.name = "PLAYER"
-                (touchNode as! SKSpriteNode).texture = SKTexture(imageNamed: "ICON_ENTITY_PLAYER")
+                //MOVE
+                let player = childNode(withName: "PLAYER") as! Tile
+                //Spawn an empty space on your previous position
+                let oldTile = Tile()
+                spawnTile(tile: oldTile, type: EntityType.Empty)
+                oldTile.size = CGSize(width: intSize, height: intSize)
+                oldTile.y = player.y
+                oldTile.zPosition = player.zPosition-1
+                oldTile.x = player.x
+                oldTile.position = CGPoint(x: locations[0][oldTile.x], y: locations[1][oldTile.y])
+                addChild(oldTile)
+                //Carry out the actions
+                let ac = SKAction.move(to: destination.position, duration: 0.1)
                 
+                player.run(ac) {
+                    player.x = destination.x
+                    player.y = destination.y
+                    destination.removeAllChildren()
+                    destination.removeFromParent()
+                }
+                if finishedLevel {
+                    let nextLevelAction = SKAction.rotate(toAngle: 6, duration: 0.3)
+                    player.run(nextLevelAction){
+                        self.nextLevel()
+                    }
+                }
             }
         }
     }
@@ -226,7 +411,7 @@ class GameScene: SKScene, ObservableObject {
             case 13: max = 4
             case 14: max = 3
             case 15: max = 3
-            case 16: max = 3
+            case 16: max = 6
             case 17: max = 6
             case 18: max = 6
             case 19: max = 6
@@ -250,7 +435,7 @@ class GameScene: SKScene, ObservableObject {
             case 13: max = 1
             case 14: max = 3
             case 15: max = 3
-            case 16: max = 3
+            case 16: max = 2
             case 17: max = 2
             case 18: max = 4
             case 19: max = 5
@@ -274,7 +459,7 @@ class GameScene: SKScene, ObservableObject {
             case 13: max = 2
             case 14: max = 1
             case 15: max = 4
-            case 16: max = 2
+            case 16: max = 3
             case 17: max = 3
             case 18: max = 3
             case 19: max = 1
@@ -298,7 +483,7 @@ class GameScene: SKScene, ObservableObject {
             case 13: max = 4
             case 14: max = 3
             case 15: max = 2
-            case 16: max = 1
+            case 16: max = 2
             case 17: max = 2
             case 18: max = 4
             case 19: max = 2
@@ -560,7 +745,7 @@ class GameScene: SKScene, ObservableObject {
             case 13: min = 2
             case 14: min = 2
             case 15: min = 3
-            case 16: min = 3
+            case 16: min = 2
             case 17: min = 1
             case 18: min = 1
             case 19: min = 2
@@ -681,85 +866,4 @@ class GameScene: SKScene, ObservableObject {
         return [posX, posY]
     }
   
-}
-
-struct ContentView: View {
-    
-    @ObservedObject var scene: GameScene = {
-        let scene = GameScene()
-        scene.size = CGSize(width: 100, height: 100)
-        scene.scaleMode = .aspectFit
-        scene.backgroundColor = UIColor(named: "ColorGameBackground")!
-        return scene
-    }()
-
-
-    var body: some View {
-        ZStack(){
-            GeometryReader { geo in
-                ZStack{
-                    VStack{
-                        Color.ui.gameBackground
-                        Color.ui.UIBackground
-                    }
-                        
-                    VStack{
-                        Spacer()
-                        HStack{
-                            Spacer()
-                            Text("SCORE")
-                                .foregroundColor(Color.ui.text)
-                        }
-                        SpriteView(scene: scene)
-                            .frame(width: geo.size.width, height: geo.size.width)
-                            .border(Color.ui.gameBackground)
-                        HStack{
-                            Image("ICON_UI_HEALTH")
-                                .resizable()
-                                .frame(width: 20, height: 20)
-                                .padding(.leading, 6)
-                            Text(": \(scene.health) / \(scene.maxHealth)")
-                                .foregroundColor(Color.ui.text)
-                            Rectangle()
-                                .foregroundColor(.red)
-                                .frame(width: 90, height: 20)
-                            Spacer()
-                            Text("LVL: \(scene.level)")
-                                .foregroundColor(Color.ui.text)
-                                .padding(.trailing, 6)
-                        }
-                        HStack{
-                            Rectangle()
-                                .frame(width:80, height: 80)
-                            Rectangle()
-                                .frame(width:80, height: 80)
-                            Spacer()
-                            Rectangle()
-                                .frame(width:80, height: 80)
-                        }
-                        HStack{
-                            Image("ICON_UI_COIN")
-                                .resizable()
-                                .frame(width: 20, height: 20)
-                                .padding(.leading, 6)
-                            Text(": \(scene.coins)")
-                                .foregroundColor(Color.ui.textYellow)
-                            Spacer()
-                            Image("ICON_UI_XP")
-                                .resizable()
-                                .frame(width: 20, height: 20)
-                            Text(": \(scene.xp)")
-                                .foregroundColor(Color.ui.textGreen)
-                                .padding(.trailing, 6)
-                            
-                        }
-                        Spacer()
-                    }
-                }
-                .ignoresSafeArea()
-                
-            }
-        }
-        .navigationBarBackButtonHidden(true)
-    }
 }
