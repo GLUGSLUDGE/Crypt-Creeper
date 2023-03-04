@@ -13,7 +13,7 @@ extension LoginView {
         NavigationLink {
             SignUpView()
         } label: {
-            PopUpsView(bodyContent: {
+            PopUpsView(title: "Sign Up") {
                 HStack {
                     Image("Ghost")
                         .resizable()
@@ -24,14 +24,14 @@ extension LoginView {
                         .foregroundColor(Color.ui.text)
                         .multilineTextAlignment(.leading)
                 }
-            }, title: "Sign Up", show: true)
+            }
         }
         .frame(width: 300)
         .padding(.leading, -10)
     }
     
     func loginPopUp() -> some View {
-        PopUpsView(bodyContent: {
+        PopUpsView(title: "LOGIN") {
             VStack {
                 HStack {
                     ThinText(title: "Username:",fontSize: 30)
@@ -63,7 +63,7 @@ extension LoginView {
                 }
             }
             .padding(.top)
-        }, title: "LOGIN", show: true)
+        }
         .padding(.bottom, 100)
     }
     

@@ -6,14 +6,18 @@
 //
 
 import SwiftUI
+struct HowToPlay: View {
+    @State var ver = true
+    var body: some View {
+        HowToPlayView(show: $ver )
+    }
+}
 
 struct HowToPlayView: View {
+    @Binding var show :Bool
     var body: some View {
-        
-        ZStack{
-            Color.ui.popUpColor
-                .ignoresSafeArea()
-            PopUpsView(bodyContent: {
+        if show{
+            PopUpsView(title: "How to play", bodyContent: {
                 ScrollView{
                     vPlayer()
                     
@@ -35,15 +39,36 @@ struct HowToPlayView: View {
                     
                 }
                 
-            }, title: "How to play ", show: true)
-            
+            }).overlay(content: {
+                VStack{
+                    HStack{
+                        Spacer()
+                        Button {
+                            show.toggle()
+                        } label: {
+                            Image("")
+                                .resizable()
+                                .frame(width: 30,height:30)
+                                .padding(.trailing,15)
+                                .padding(.top,20)
+                                .foregroundColor(Color.clear)
+                        }
+                    }
+                    Spacer()
+                }})
+            .padding(.vertical,50)
         }
     }
 }
+
 struct HowToPlay_Previews: PreviewProvider {
     
     static var previews: some View {
-        HowToPlayView()
+        ZStack{
+            Color.ui.popUpColor
+                .ignoresSafeArea()
+            HowToPlay()
+        }
     }
 }
 
