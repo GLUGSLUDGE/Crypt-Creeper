@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
+    @State var showSettings = false
     var body: some View {
         GeometryReader { geo in
             ZStack{
@@ -72,6 +73,7 @@ struct HomeView: View {
                         }
                         Button {
                             //Settings
+                            showSettings.toggle()
                         } label: {
                             MenuButtonImageLabel(SFSymbolName: "gearshape.fill")
                         }
@@ -79,7 +81,7 @@ struct HomeView: View {
                     }
                 }.padding(.bottom, 30)
                 
-                
+                SettingsView(show: $showSettings)
                 
             }
             .ignoresSafeArea()
