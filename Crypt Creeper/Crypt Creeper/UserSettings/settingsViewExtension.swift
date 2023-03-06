@@ -213,15 +213,16 @@ extension SettingsView{
             case .success(let message):
                 self.viewModel.message = message
                 self.viewModel.showAlet1.toggle()
-                UserDefaults.standard.removeObject(forKey: "savedToken")
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    withAnimation {
-                        if let window = UIApplication.shared.windows.first {
-                            window.rootViewController = UIHostingController(rootView: SplashView())
-                            window.makeKeyAndVisible()
+                if message == "closed session"{
+                    UserDefaults.standard.removeObject(forKey: "savedToken")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        withAnimation {
+                            if let window = UIApplication.shared.windows.first {
+                                window.rootViewController = UIHostingController(rootView: SplashView())
+                                window.makeKeyAndVisible()
+                            }
                         }
-                    }
-                }
+                    }}
                 print(message)
             case .failure(let error):
                 viewModel.message = error.localizedDescription
@@ -252,18 +253,21 @@ extension SettingsView{
                                 switch result {
                                 case .success(let message):
                                     self.viewModel.message = message
+                                    self.viewModel.showAlet1.toggle()
                                     self.viewModel.pass = ""
-                                    UserDefaults.standard.removeObject(forKey: "savedToken")
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                        withAnimation {
-                                            if let window = UIApplication.shared.windows.first {
-                                                window.rootViewController = UIHostingController(rootView: SplashView())
-                                                window.makeKeyAndVisible()
+                                    if message == "User Delete"{
+                                        UserDefaults.standard.removeObject(forKey: "savedToken")
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                            withAnimation {
+                                                if let window = UIApplication.shared.windows.first {
+                                                    window.rootViewController = UIHostingController(rootView: SplashView())
+                                                    window.makeKeyAndVisible()
+                                                }
                                             }
-                                        }
-                                    }
+                                        }}
                                 case .failure(let error):
                                     self.viewModel.message = error.localizedDescription
+                                    self.viewModel.showAlet1.toggle()
                                 }
                             }
                         } label: {
