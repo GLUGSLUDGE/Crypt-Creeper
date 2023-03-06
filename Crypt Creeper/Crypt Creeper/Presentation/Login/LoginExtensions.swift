@@ -13,28 +13,28 @@ extension LoginView {
         NavigationLink {
             SignUpView()
         } label: {
-            PopUpsView(bodyContent: {
+            PopUpsView(title: "Sign Up") {
                 HStack {
                     Image("Ghost")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 100, height: 100)
                         .padding(.bottom, 5)
-                    BoldText(title: "Not an user?\nWhat a loser!\nClick here!!")
+                    BoldText(title: "Not an user?\nWhat a loser!\nClick here!!",fontSize: 30)
                         .foregroundColor(Color.ui.text)
                         .multilineTextAlignment(.leading)
                 }
-            }, title: "Sign Up", show: true)
+            }
         }
         .frame(width: 300)
         .padding(.leading, -10)
     }
     
     func loginPopUp() -> some View {
-        PopUpsView(bodyContent: {
+        PopUpsView(title: "LOGIN") {
             VStack {
                 HStack {
-                    ThinText(title: "Username:")
+                    ThinText(title: "Username:",fontSize: 30)
                         .foregroundColor(Color.ui.text)
                         .padding(.bottom, -10)
                         .padding(.leading, 20)
@@ -47,7 +47,7 @@ extension LoginView {
                     Spacer()
                 }
                 HStack {
-                    ThinText(title: "Password:")
+                    ThinText(title: "Password:",fontSize: 30)
                         .foregroundColor(Color.ui.text)
                         .padding(.bottom, -10)
                         .padding(.leading, 20)
@@ -63,7 +63,7 @@ extension LoginView {
                 }
             }
             .padding(.top)
-        }, title: "LOGIN", show: true)
+        }
         .padding(.bottom, 100)
     }
     
@@ -91,7 +91,7 @@ extension LoginView {
                 }
             }
         } label: {
-            MiniButtonLabel(title: "Login")
+            MiniButtonLabel(title: "Login", fontSize:30, widthSize: 2.5,heightSize:11.5)
         }
         .padding(.trailing, 20)
         .background(

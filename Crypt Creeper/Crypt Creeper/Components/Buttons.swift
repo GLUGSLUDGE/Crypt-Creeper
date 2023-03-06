@@ -39,17 +39,17 @@ struct Buttons: View {
                 Button {
                     //
                 } label: {
-                    ButtonLabel(title: "Hola")
+                    ButtonLabel(title: "Hola",fontSize: 30)
                 }
                 Button {
                     //
                 } label: {
-                    MiniButtonLabel(title: "Sign Up")
+                    MiniButtonLabel(title: "Sign Up", fontSize: 36, widthSize: 43 , heightSize:40)
                 }
                 Button {
                     //
                 } label: {
-                    TrueButton(title: "Hola")
+                    TrueButton(title: "Hola",fontSize: 30)
                 }
 
                 Rectangle()
@@ -102,12 +102,15 @@ struct MenuButtonImageLabel: View {
 
 struct MiniButtonLabel: View {
     @State var title: String
+    @State var fontSize: CGFloat
+    @State var widthSize: CGFloat
+    @State var heightSize: CGFloat
     var body: some View {
         ZStack {
             Rectangle()
-                .frame(width: UIScreen.main.bounds.size.width/3.45, height: UIScreen.main.bounds.height/12)
+                .frame(width: UIScreen.main.bounds.size.width/widthSize, height: UIScreen.main.bounds.height/heightSize)
                 .foregroundColor(Color.accentColor)
-            BoldText(title: title)
+            BoldText(title: title, fontSize:fontSize)
                 .foregroundColor(Color.ui.popUpColor)
             
         }
@@ -116,12 +119,13 @@ struct MiniButtonLabel: View {
 
 struct ButtonLabel: View {
     @State var title: String
+    @State var fontSize: CGFloat
     var body: some View {
         ZStack {
             Rectangle()
                 .frame(width: UIScreen.main.bounds.size.width/1.1, height: UIScreen.main.bounds.height/12)
                 .foregroundColor(Color.white)
-            BoldText(title: title)
+            BoldText(title: title, fontSize: fontSize)
                 .foregroundColor(Color.ui.popUpColor)
         }
     }
@@ -129,12 +133,13 @@ struct ButtonLabel: View {
 
 struct TrueButton: View {
     @State var title: String
+    @State var fontSize: CGFloat
     var body: some View {
         ZStack {
             Rectangle()
                 .foregroundColor(Color.accentColor)
                 .frame(height: UIScreen.main.bounds.height/12)
-            BoldText(title: title)
+            BoldText(title: title,fontSize: fontSize)
                 .foregroundColor(Color.ui.popUpColor)
         }
     }

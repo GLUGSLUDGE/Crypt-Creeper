@@ -21,36 +21,44 @@ struct SplashView: View {
     // MARK: - Body
     
     var body: some View {
-        if isActive {
-            if userDefaults.string(forKey: "savedToken") != nil {
-                HomeView()
+        NavigationView {
+            if isActive {
+                if userDefaults.string(forKey: "savedToken") != nil {
+                    
+                   
+                    HomeView()
+                    
+                } else {
+                    LoginView()
+                }
             } else {
-                LoginView()
-            }
-        } else {
-            ZStack {
-                Color.accentColor
-                    .ignoresSafeArea()
-                VStack {
+                ZStack {
+                    Color.accentColor
+                        .ignoresSafeArea()
                     VStack {
-                        Image("ImageGlugLogo")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: UIScreen.main.bounds.size.width/1.1, height: UIScreen.main.bounds.size.height/1.1)
-                    }
-                    .scaleEffect(size)
-                    .opacity(opacity)
-                    .onAppear {
-                        withAnimation(.easeIn(duration: 1.2)) {
-                            self.size = 1
-                            self.opacity = 1
+                        VStack {
+                            Image("ImageGlugLogo")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: UIScreen.main.bounds.size.width/1.1, height: UIScreen.main.bounds.size.height/1.1)
+                        }
+                        .scaleEffect(size)
+                        .opacity(opacity)
+                        .onAppear {
+                            
+                            withAnimation(.easeIn(duration: 1.2)) {
+                                self.size = 1
+                                self.opacity = 1
+                            }
                         }
                     }
-                }
-                .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                        withAnimation {
-                            self.isActive = true
+                    .onAppear {
+                        let tokenm = userDefaults.string(forKey: "savedToken")
+                        NetworkHelper.shared.setToken(tokens: "\(tokenm ?? "")")
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            withAnimation {
+                                self.isActive = true
+                            }
                         }
                     }
                 }

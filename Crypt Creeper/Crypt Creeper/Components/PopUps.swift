@@ -14,11 +14,9 @@ struct PopUps : View {
             Color.ui.popUpColor
                 .ignoresSafeArea()
             VStack {
-                PopUpsView(bodyContent: {
-                    VStack {
-                        
-                    }
-                }, title: "LOGIN", show: true)
+                PopUpsView(title: "", canHide: true) {
+                    Text("hola")
+                }
             }
             .padding()
         }
@@ -26,9 +24,11 @@ struct PopUps : View {
 }
 
 struct PopUpsView<BodyContent: View>: View {
-    let bodyContent : () -> BodyContent
     @State var title:String
-    @State var show:Bool
+    @State private var show:Bool = true
+    @State var canHide = false
+    let bodyContent : () -> BodyContent
+
     var body: some View {
         if show{
             VStack {
@@ -42,6 +42,11 @@ struct PopUpsView<BodyContent: View>: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 30, height: 30)
+                        .onTapGesture {
+                            if canHide{
+                                show = false
+                            }
+                        }
                 }
                 .background(.white)
                 bodyContent()

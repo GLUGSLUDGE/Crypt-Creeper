@@ -8,42 +8,40 @@
 import SwiftUI
 
 struct LoginView: View {
-    
+
 
     // MARK: - Properties
-    
+
     enum Field: Hashable {
         case userField
         case passwordField
     }
-    
+
     @FocusState var focusedField: Field?
-    
+
     @ObservedObject var viewModel: ViewModel = ViewModel()
-    
-    
+
+
     // MARK: - Body
-    
+
     var body: some View {
-        NavigationView {
-            ZStack {
-                Color.ui.popUpColor
-                    .ignoresSafeArea()
-                VStack {
-                    HStack {
-                        goToSignUp()
-                        Spacer()
-                    }
+        ZStack {
+            Color.ui.popUpColor
+                .ignoresSafeArea()
+            VStack {
+                HStack {
+                    goToSignUp()
                     Spacer()
-                    loginPopUp()
-                    Spacer()
-                    HStack {
-                        Spacer()
-                        loginButton()
-                    }
                 }
-                .padding()
+                Spacer()
+                loginPopUp()
+                Spacer()
+                HStack {
+                    Spacer()
+                    loginButton()
+                }
             }
+            .padding()
         }
         .alertCustom(title: viewModel.alertTitle, message: viewModel.alertMessage, show: $viewModel.showAlert)
     }
