@@ -53,6 +53,7 @@ struct FactionsView: View {
                                     case .success(let message):
                                         viewModel.onSuccess(message: message)
                                     case .failure(let error):
+                                        print(userModel)
                                         viewModel.onError(error: error.localizedDescription)
                                     }
                             }
@@ -94,8 +95,8 @@ struct FactionsView: View {
                                         case .success(let message):
                                             viewModel.onSuccess(message: message)
                                         case .failure(let error):
-                                            
                                             viewModel.onError(error: error.localizedDescription)
+                                            sigError()
 //                                            NavigationLink("", destination: SignUpView(), isActive: $viewModel.formError)
                                         }
                                 }
@@ -117,6 +118,7 @@ struct FactionsView: View {
                                             viewModel.onSuccess(message: message)
                                         case .failure(let error):
                                             viewModel.onError(error: error.localizedDescription)
+                                            sigError()
                                         }
                                 }
                             }

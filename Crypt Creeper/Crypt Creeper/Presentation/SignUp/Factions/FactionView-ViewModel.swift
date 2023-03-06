@@ -60,7 +60,7 @@ extension FactionsView {
                 "email" : user.email,
                 "password" : user.password,
                 "faction_id" : user.factionId,
-                "profile_pic" : convertImageToBase64(image: user.profilePic)
+                "profile_pic" : Base64.shared.convertImageToBase64(image: user.profilePic)
             ]
             
             NetworkHelper.shared.requestProvider(url: url, type: .PUT, params: dictionary) { data, response, error in
@@ -102,14 +102,5 @@ extension FactionsView {
             formError = true
         }
         
-        func convertImageToBase64(image: UIImage) -> String {
-            let compressedImage = compressImage(image: image, quality: 0.5) // Calidad deseada
-            let base64String = compressedImage?.base64EncodedString() ?? ""
-            return base64String
-        }
-        
-        private func compressImage(image: UIImage, quality: CGFloat) -> Data? {
-            return image.jpegData(compressionQuality: quality)
-        }
     }
 }

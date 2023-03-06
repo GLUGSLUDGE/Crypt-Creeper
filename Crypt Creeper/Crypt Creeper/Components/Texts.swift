@@ -13,8 +13,8 @@ struct Texts: View {
             Color.ui.popUpColor
                 .ignoresSafeArea()
             VStack {
-                ThinText(title: "Prueba")
-                BoldText(title: "Prueba 2")
+                ThinText(title: "Prueba",fontSize: 36)
+                BoldText(title: "Prueba 2",fontSize: 30)
             }
         }
     }
@@ -22,20 +22,22 @@ struct Texts: View {
 
 struct ThinText: View {
     @State var title: String
+    @State var fontSize: CGFloat
     var body: some View {
         VStack {
             Text(title)
-                .font(.custom("m5x7", fixedSize: 36))
+                .font(.custom("m5x7", fixedSize: fontSize))
         }
     }
 }
 
 struct BoldText: View {
     @State var title: String
+    @State var fontSize: CGFloat
     var body: some View {
         VStack {
             Text(title)
-                .font(.custom("m6x11", fixedSize: 30))
+                .font(.custom("m6x11", fixedSize: fontSize))
         }
     }
 }

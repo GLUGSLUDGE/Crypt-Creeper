@@ -19,7 +19,7 @@ extension SignUpView {
     var textfieldsViews: some View {
         VStack(spacing: 10) {
             VStack(alignment: .leading, spacing: 0) {
-                ThinText(title: "Username:")
+                ThinText(title: "Username:", fontSize: 30)
                     .foregroundColor(Color.ui.text)
                     .padding(.leading, 20)
                 
@@ -27,7 +27,7 @@ extension SignUpView {
                     .padding(.horizontal, 20)
             }
             VStack(alignment: .leading, spacing: 0) {
-                ThinText(title: "Email:")
+                ThinText(title: "Email:", fontSize: 30)
                     .foregroundColor(Color.ui.text)
                     .padding(.leading, 20)
                 
@@ -35,7 +35,7 @@ extension SignUpView {
                     .padding(.horizontal, 20)
             }
             VStack(alignment: .leading, spacing: 0) {
-                ThinText(title: "Password:")
+                ThinText(title: "Password:", fontSize: 30)
                     .foregroundColor(Color.ui.text)
                     .padding(.leading, 20)
                 
@@ -45,7 +45,7 @@ extension SignUpView {
             }
             
             VStack(alignment: .leading, spacing: 0) {
-                ThinText(title: "Repeat password:")
+                ThinText(title: "Repeat password:", fontSize: 30)
                     .foregroundColor(Color.ui.text)
                     .padding(.leading, 20)
                 
@@ -59,7 +59,7 @@ extension SignUpView {
     
     func signUpForm(titleText: String, paddingTextEdge: Edge.Set, paddingFieldEdge: Edge.Set, paddingTextSize: CGFloat, paddingFieldSize: CGFloat, feidl: Binding<String>) -> some View {
         VStack(alignment: .leading, spacing: 0) {
-            ThinText(title: titleText)
+            ThinText(title: titleText, fontSize: 20)
                 .foregroundColor(Color.ui.text)
                 .padding(paddingTextEdge, paddingTextSize)
             

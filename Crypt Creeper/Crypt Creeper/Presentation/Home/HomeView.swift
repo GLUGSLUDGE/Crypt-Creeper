@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @State var showHowToPlay = false
+    @State var showSettings = false
     var body: some View {
         GeometryReader { geo in
             ZStack{
@@ -17,7 +18,7 @@ struct HomeView: View {
                         .padding(-10)
                     Color.ui.colorBGBlack
                 }
-                Image("ImageBGWin03")
+                Image(uiImage: UIImage(named: "ImageBGTitle03")!)
                     .resizable()
                     .scaledToFill()
                     .frame(width: geo.size.width)
@@ -76,6 +77,7 @@ struct HomeView: View {
                         }
                         Button {
                             //Settings
+                            showSettings.toggle()
                         } label: {
                             MenuButtonImageLabel(SFSymbolName: "gearshape.fill")
                         }
@@ -83,11 +85,14 @@ struct HomeView: View {
                     }
                 }.padding(.bottom, 30)
                 
-               HowToPlayView(show: $showHowToPlay)
-                    
+            
                 
             }
             .ignoresSafeArea()
+                HowToPlayView(show: $showHowToPlay)
+                 
+                SettingsView(show: $showSettings)
+            
         }
         .navigationBarBackButtonHidden()
     }
