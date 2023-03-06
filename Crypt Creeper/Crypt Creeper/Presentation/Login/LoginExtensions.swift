@@ -20,7 +20,7 @@ extension LoginView {
                         .scaledToFit()
                         .frame(width: 100, height: 100)
                         .padding(.bottom, 5)
-                    BoldText(title: "Not an user?\nWhat a loser!\nClick here!!",fontSize: 20)
+                    BoldText(title: "Not an user?\nWhat a loser!\nClick here!!",fontSize: 30)
                         .foregroundColor(Color.ui.text)
                         .multilineTextAlignment(.leading)
                 }
@@ -91,7 +91,7 @@ extension LoginView {
                 }
             }
         } label: {
-            MiniButtonLabel(title: "Login", fontSize: 30, widthSize: 20,heightSize: 2)
+            MiniButtonLabel(title: "Login", fontSize:30, widthSize: 2.5,heightSize:11.5)
         }
         .padding(.trailing, 20)
         .background(

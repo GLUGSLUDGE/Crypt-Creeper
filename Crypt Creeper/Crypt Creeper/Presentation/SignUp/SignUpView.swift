@@ -79,7 +79,7 @@ struct SignUpView: View {
                         .resizable()
                         .scaledToFit()
                         .padding(.bottom, 5)
-                    BoldText(title: "CLICK HERE IF YOU ARE NOT NEW!!!")
+                    BoldText(title: "CLICK HERE IF YOU ARE NOT NEW!!!", fontSize: 30)
                         .foregroundColor(Color.ui.text)
                         .multilineTextAlignment(.leading)
                 }
@@ -104,7 +104,7 @@ struct SignUpView: View {
                         self.sourceType = .photoLibrary
                         self.isImagePickerDisplay.toggle()
                     }
-                    ThinText(title: "Gallery")
+                    ThinText(title: "Gallery", fontSize: 30)
                         .foregroundColor(Color.white)
                 }
                 VStack {
@@ -112,7 +112,7 @@ struct SignUpView: View {
                         self.sourceType = .camera
                         self.isImagePickerDisplay.toggle()
                     }
-                    ThinText(title: "Camera")
+                    ThinText(title: "Camera", fontSize: 30)
                         .foregroundColor(Color.white)
                 }
             }
@@ -144,7 +144,7 @@ struct SignUpView: View {
                 viewModel.isRegistered = true
             }
         } label: {
-            MiniButtonLabel(title: "Sign Up")
+            MiniButtonLabel(title: "Sign Up", fontSize: 30, widthSize: 2.5, heightSize: 11.5)
         }
         .padding(.bottom, 5)
         .padding(.trailing, 35)

@@ -24,7 +24,10 @@ struct SplashView: View {
         NavigationView {
             if isActive {
                 if userDefaults.string(forKey: "savedToken") != nil {
+                    
+                   
                     HomeView()
+                    
                 } else {
                     LoginView()
                 }
@@ -42,6 +45,7 @@ struct SplashView: View {
                         .scaleEffect(size)
                         .opacity(opacity)
                         .onAppear {
+                            
                             withAnimation(.easeIn(duration: 1.2)) {
                                 self.size = 1
                                 self.opacity = 1
@@ -49,6 +53,8 @@ struct SplashView: View {
                         }
                     }
                     .onAppear {
+                        let tokenm = userDefaults.string(forKey: "savedToken")
+                        NetworkHelper.shared.setToken(tokens: "\(tokenm ?? "")")
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                             withAnimation {
                                 self.isActive = true

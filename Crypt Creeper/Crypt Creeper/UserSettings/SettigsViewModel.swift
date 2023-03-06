@@ -59,6 +59,7 @@ class SettingsViewModel : ObservableObject {
     @Published var newPass = ""
     @Published var repitNewPass = ""
     @Published var email = ""
+    @Published var showAlet1 = false
     @Published var showCN = false
     @Published var showCP = false
     @Published var showCPic = false
@@ -73,10 +74,9 @@ class SettingsViewModel : ObservableObject {
     
     
     func ChangeName(completion: @escaping (Result<String, Error>) -> Void) {
-        NetworkHelper.shared.setToken(tokens: "tx7ptTbyy7EzahdvGnbmt3c0T2PBdVXPf6pim3ay")
+       
         let url =  "http://127.0.0.1:8000/api/user/change-name"
-      
-        
+
         let parametros : [String:Any] = ["name": userName]
         
         NetworkHelper.shared.requestProvider(url: url, type:.POST, params: parametros) { data, response, error in
@@ -104,27 +104,14 @@ class SettingsViewModel : ObservableObject {
                 completion(.failure(NetworkError.invalidData))
             }
         }
-        
-        //            if let data = data {
-        //                do {
-        //                    let decoder = JSONDecoder()
-        //                    let objects = try decoder.decode([user].self, from: data)
-        //                    self.data = objects
-        //                } catch {
-        //                    self.message = ("Error decoding JSON: \(error.localizedDescription)")
-        //                }
-        //            } else if let error = error {
-        //                self.message = ("Error fetching data: \(error.localizedDescription)")
     }
     func changePassword(completion: @escaping (Result<String, Error>) -> Void)  {
         
-        NetworkHelper.shared.setToken(tokens: "nxGWRjO9GXm8JetdWjtiMswTXGOAWYHoDm1ERb1D")
         
-        let  url =  "http://127.0.0.1:8000/api/user/change-password"
-        
+        let url =  "http://127.0.0.1:8000/api/user/change-password"
         let parametros : [String:Any] = [
             "password": pass,
-            "new_password" : newPass ,
+            "new_password" : newPass,
             "repit_new_password" : repitNewPass]
         
         NetworkHelper.shared.requestProvider(url: url, type:.POST , params: parametros) { data, response, error in
@@ -155,8 +142,7 @@ class SettingsViewModel : ObservableObject {
     
     func changePhoto(completion: @escaping (Result<String, Error>) -> Void){
         
-        NetworkHelper.shared.setToken(tokens: "oGVUKaWM2PMzx5AS3oK40PwrjO7x2DBQGEYv97jr")
-        
+      
         let  url =  "http://127.0.0.1:8000/api/user/change-photo"
        
         let parametros : [String: Any] = [
@@ -190,7 +176,7 @@ class SettingsViewModel : ObservableObject {
     
     func logOut(completion:@escaping (Result<String, Error>) -> Void){
         
-        NetworkHelper.shared.setToken(tokens: "tx7ptTbyy7EzahdvGnbmt3c0T2PBdVXPf6pim3ay")
+       
         
         let  url =  "http://127.0.0.1:8000/api/user/logout"
         // Verificar si se recibió una respuesta válida
@@ -214,6 +200,39 @@ class SettingsViewModel : ObservableObject {
         }
         
     }
+    func destryAccount(completion: @escaping (Result<String, Error>) -> Void) {
+       
+        let url =  "http://127.0.0.1:8000/api/user/change-name"
+
+        let parametros : [String:Any] = ["name": pass]
+        
+        NetworkHelper.shared.requestProvider(url: url, type:.POST, params: parametros) { data, response, error in
+            
+            // Verificar si hay un error
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            // Verificar si se recibió una respuesta válida
+            guard let data = data, let httpResponse = response as? HTTPURLResponse, (200..<599).contains(httpResponse.statusCode) else {
+                completion(.failure(NetworkError.invalidResponse))
+                return
+            }
+            
+            // Procesar la respuesta
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                if let responseJson = json as? [String: Any], let message = responseJson["message"] as? String {
+                    completion(.success(message))
+                } else {
+                    completion(.failure(NetworkError.invalidData))
+                }
+            } catch {
+                completion(.failure(NetworkError.invalidData))
+            }
+        }
+    }
+
     
 }
 

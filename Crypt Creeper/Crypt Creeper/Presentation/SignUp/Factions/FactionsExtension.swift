@@ -22,4 +22,11 @@ extension FactionsView {
         )
     }
     
+    func sigError(){
+        if let window = UIApplication.shared.windows.first {
+            window.rootViewController = UIHostingController(rootView: LoginView())
+            window.makeKeyAndVisible()
+        }
+    }
+    
 }

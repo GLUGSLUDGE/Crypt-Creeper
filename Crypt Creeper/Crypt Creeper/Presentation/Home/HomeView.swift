@@ -18,7 +18,7 @@ struct HomeView: View {
                         .padding(-10)
                     Color.ui.colorBGBlack
                 }
-                Image("ImageBGWin03")
+                Image(uiImage: UIImage(named: "ImageBGTitle03")!)
                     .resizable()
                     .scaledToFill()
                     .frame(width: geo.size.width)
@@ -85,12 +85,14 @@ struct HomeView: View {
                     }
                 }.padding(.bottom, 30)
                 
-               HowToPlayView(show: $showHowToPlay)
-                    
-                SettingsView(show: $showSettings)
+            
                 
             }
             .ignoresSafeArea()
+                HowToPlayView(show: $showHowToPlay)
+                 
+                SettingsView(show: $showSettings)
+            
         }
         .navigationBarBackButtonHidden()
     }
