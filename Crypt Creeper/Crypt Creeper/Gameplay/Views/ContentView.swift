@@ -13,28 +13,7 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
-enum EntityType: CaseIterable{
-    case Empty
-    case Player
-    case Portal
-    case Enemy
-    case Sword
-    case Shield
-    case Potion
-    case Coin
-    case Shop
-    case Temple
-    case Boss
-}
-class Tile: SKSpriteNode, Identifiable{
-    var type:EntityType = EntityType.Empty
-    var power:Int = 0
-    var x:Int = 0
-    var y:Int = 0
-}
-//MARK: - View
 struct ContentView: View {
-    
     @StateObject var scene: GameScene = {
         let scene = GameScene()
         scene.size = CGSize(width: 100, height: 100)
@@ -46,11 +25,56 @@ struct ContentView: View {
     @State var showGameOver:Bool = false
     @State var showWin:Bool = false
     
-    var shieldImage:String {
+    private var shieldImage:String {
         return "ICON_SHIELD_\(scene.shieldPower)"
     }
-    var swordImage: String {
+    private var swordImage: String {
         return "ICON_SWORD_\(scene.swordPower)"
+    }
+    private var slotSize: CGFloat {
+        return UIScreen.main.bounds.width / 6
+    }
+    private var uiLevel:String {
+        return (scene.level < 10) ? "0\(scene.level)" : "\(scene.level)"
+    }
+    private var uiScore:String {
+        if scene.score < 1 {
+            return "00000\(scene.score)"
+        }
+        if scene.score < 10 {
+            return "00000\(scene.score)"
+        }
+        if scene.score < 100 {
+            return "0000\(scene.score)"
+        }
+        if scene.score < 1000 {
+            return "000\(scene.score)"
+        }
+        if scene.score < 10000 {
+            return "00\(scene.score)"
+        }
+        if scene.score < 100000 {
+            return "0\(scene.score)"
+        }
+        return "\(scene.score)"
+    }
+    private var uiXP:String{
+        if scene.xp < 1 {
+            return "000\(scene.xp)"
+        }
+        if scene.xp < 10 {
+            return "00\(scene.xp)"
+        }
+        if scene.xp < 100 {
+            return "0\(scene.xp)"
+        }
+        return "\(scene.xp)"
+    }
+    private var healthBarPC:Float{
+        if scene.health == 0 {
+            return 0
+        }
+        return (Float(scene.health) / Float(scene.maxHealth))
     }
     
     var body: some View {
@@ -66,9 +90,11 @@ struct ContentView: View {
                         Spacer()
                         HStack{
                             Spacer()
-                            Text("\(scene.score)")
+                            Text("\(uiScore)")
                                 .foregroundColor(Color.ui.text)
+                                .font(.system(size: 24, weight: .heavy, design: .rounded))
                         }
+                        .padding(.horizontal, 12)
                         SpriteView(scene: scene)
                             .frame(width: geo.size.width, height: geo.size.width)
                             .border(Color.ui.gameBackground)
@@ -76,29 +102,37 @@ struct ContentView: View {
                             Image("ICON_UI_HEALTH")
                                 .resizable()
                                 .frame(width: 20, height: 20)
-                                .padding(.leading, 6)
                             Text(": \(scene.health) / \(scene.maxHealth)")
                                 .foregroundColor(Color.ui.text)
-                            Rectangle()
-                                .foregroundColor(.red)
-                                .frame(width: 90, height: 20)
-                                .onTapGesture {
-                                    scene.xp = 80
-                                    scene.showTemple = true
+                                .font(.system(size: 18, weight: .heavy, design: .rounded))
+                            ZStack {
+                                Rectangle()
+                                    .foregroundColor(.white)
+                                    .frame(width: 75, height: 20)
+                                HStack{
+                                    Rectangle()
+                                        .frame(width: CGFloat(90*healthBarPC), height: 20)
+                                        .foregroundColor(.red)
+                                        .border(.white)
+                                    Spacer()
                                 }
+                                
+                            }
+                            .frame(width: 90, height: 20, alignment: .center)
                             Spacer()
-                            Text("LVL: \(scene.level)")
+                            Text("LVL: \(uiLevel)")
                                 .foregroundColor(Color.ui.text)
-                                .padding(.trailing, 6)
+                                .font(.system(size: 18, weight: .heavy, design: .rounded))
                         }
+                        .padding(.horizontal, 12)
                         HStack{
                             ZStack{
                                 Image("ICON_ENTITY_EMPTY")
                                     .resizable()
-                                    .frame(width:80, height: 80)
+                                    .frame(width:slotSize, height: slotSize)
                                 Image("\(swordImage)")
                                     .resizable()
-                                    .frame(width:80, height: 80)
+                                    .frame(width:slotSize, height: slotSize)
                                     .onTapGesture {
                                         scene.saveSword()
                                     }
@@ -113,18 +147,16 @@ struct ContentView: View {
                                                 .padding(6)
                                         }
                                     }
-                                    
                                 }
-                                
                             }
-                            .frame(width: 80, height: 80)
+                            .frame(width:slotSize, height: slotSize)
                             ZStack{
                                 Image("ICON_ENTITY_EMPTY")
                                     .resizable()
-                                    .frame(width:80, height: 80)
+                                    .frame(width:slotSize, height: slotSize)
                                 Image("\(shieldImage)")
                                     .resizable()
-                                    .frame(width:80, height: 80)
+                                    .frame(width:slotSize, height: slotSize)
                                     .onTapGesture {
                                         scene.saveShield()
                                     }
@@ -143,16 +175,16 @@ struct ContentView: View {
                                 }
                                 
                             }
-                            .frame(width: 80, height: 80)
+                            .frame(width:slotSize, height: slotSize)
                             Spacer()
                             ForEach (scene.inventorySlots) {item in
                                 ZStack{
                                     Image("ICON_ENTITY_EMPTY")
                                         .resizable()
-                                        .frame(width:80, height: 80)
+                                        .frame(width:slotSize, height: slotSize)
                                     item.sprite
                                         .resizable()
-                                        .frame(width:80, height: 80)
+                                        .frame(width:slotSize, height: slotSize)
                                         .onTapGesture {
                                             scene.useItem(item: item)
                                         }
@@ -170,25 +202,28 @@ struct ContentView: View {
                                     }
                                     
                                 }
-                                .frame(width: 80, height: 80)
+                                .frame(width:slotSize, height: slotSize)
                             }
                         }
+                        .padding(.horizontal, 12)
                         HStack{
                             Image("ICON_UI_COIN")
                                 .resizable()
                                 .frame(width: 20, height: 20)
-                                .padding(.leading, 6)
                             Text(": \(scene.coins)")
                                 .foregroundColor(Color.ui.textYellow)
+                                .font(.system(size: 18, weight: .heavy, design: .rounded))
                             Spacer()
                             Image("ICON_UI_XP")
                                 .resizable()
                                 .frame(width: 20, height: 20)
-                            Text(": \(scene.xp)")
+                            Text(": \(uiXP)")
                                 .foregroundColor(Color.ui.textGreen)
-                                .padding(.trailing, 6)
+                                .font(.system(size: 18, weight: .heavy, design: .rounded))
+                            
                             
                         }
+                        .padding(.horizontal, 12)
                         Spacer()
                     }
                 }
@@ -201,12 +236,12 @@ struct ContentView: View {
                 }
                 ZStack{
                     NavigationLink(isActive: $scene.showWin) {
-                        WinView(score: scene.score, scene: scene)
+                        WinView(currentScore: scene.score, scene: scene)
                     } label: {
                         EmptyView()
                     }
                     NavigationLink(isActive: $scene.showGameOver) {
-                        GameOverView(score: scene.score, scene: scene)
+                        GameOverView(currentScore: scene.score, scene: scene)
                     } label: {
                         EmptyView()
                     }
