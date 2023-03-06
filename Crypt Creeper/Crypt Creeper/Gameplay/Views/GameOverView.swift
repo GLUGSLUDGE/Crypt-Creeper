@@ -9,8 +9,10 @@ import SwiftUI
 
 struct GameOverView: View {
     @Environment(\.dismiss) private var dismiss
-    @State var score:Int
+    @State var currentScore:Int
     @ObservedObject var scene:GameScene
+    @ObservedObject var vm = GameOverViewModel()
+    @State private var showHighscorelabel = false
     var body: some View {
         ZStack{
             Color.ui.colorBGBlack
@@ -19,10 +21,12 @@ struct GameOverView: View {
                 ZStack{
                     VStack{
                         Spacer()
-                        Text("NEW HIGHSCORE!")
-                            .font(.system(size: 24, weight: .heavy, design: .rounded))
-                            .foregroundColor(Color.ui.textYellow)
-                        Text("SCORE: \(score)")
+                        if showHighscorelabel {
+                            Text("NEW HIGHSCORE!")
+                                .font(.system(size: 24, weight: .heavy, design: .rounded))
+                                .foregroundColor(Color.ui.textYellow)
+                        }
+                        Text("SCORE: \(currentScore)")
                             .font(.system(size: 36, weight: .heavy, design: .rounded))
                             .foregroundColor(Color.ui.text)
                     }
@@ -73,11 +77,22 @@ struct GameOverView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            vm.getScoreFromPlayer { score, error  in
+                if let score = score {
+                    if currentScore > score {
+                        vm.showHighscoreLabel = true
+                    }
+                } else if let error = error {
+                    print(error)
+                }
+            }
+        }
     }
 }
 
 struct GameOverView_Previews: PreviewProvider {
     static var previews: some View {
-        GameOverView(score: 99999, scene: GameScene())
+        GameOverView(currentScore: 99999, scene: GameScene())
     }
 }

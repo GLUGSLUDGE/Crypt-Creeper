@@ -236,12 +236,12 @@ struct ContentView: View {
                 }
                 ZStack{
                     NavigationLink(isActive: $scene.showWin) {
-                        WinView(score: scene.score, scene: scene)
+                        WinView(currentScore: scene.score, scene: scene)
                     } label: {
                         EmptyView()
                     }
                     NavigationLink(isActive: $scene.showGameOver) {
-                        GameOverView(score: scene.score, scene: scene)
+                        GameOverView(currentScore: scene.score, scene: scene)
                     } label: {
                         EmptyView()
                     }
