@@ -13,6 +13,7 @@ class NetworkHelper {
         case PUT
         case POST
         case GET
+        case DELETE
     }
     
     private var token : String = ""

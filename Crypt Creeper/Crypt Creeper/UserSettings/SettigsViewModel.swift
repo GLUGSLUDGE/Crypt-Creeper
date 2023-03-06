@@ -202,11 +202,11 @@ class SettingsViewModel : ObservableObject {
     }
     func destryAccount(completion: @escaping (Result<String, Error>) -> Void) {
        
-        let url =  "http://127.0.0.1:8000/api/user/change-name"
+        let url =  "http://127.0.0.1:8000/api/user/delete-user"
 
-        let parametros : [String:Any] = ["name": pass]
+        let parametros : [String:Any] = ["password": pass]
         
-        NetworkHelper.shared.requestProvider(url: url, type:.POST, params: parametros) { data, response, error in
+        NetworkHelper.shared.requestProvider(url: url, type:.DELETE, params: parametros) { data, response, error in
             
             // Verificar si hay un error
             if let error = error {
