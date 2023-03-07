@@ -106,40 +106,7 @@ struct WinView_Previews: PreviewProvider {
 
 class GameOverViewModel: ObservableObject {
     @Published var showHighscoreLabel = false
-    enum NetworkError: Error {
-        case invalidUrl
-        case invalidResponse
-        case invalidData
-        case requestFailed
-        case authenticationError
-        case badRequest
-        case outdated
-        case failed
-        case unknown
-        
-        var localizedDescription: String {
-            switch self {
-            case .invalidUrl:
-                return "The URL is not valid"
-            case .invalidResponse:
-                return "The response received from the server is not valid"
-            case .invalidData:
-                return "The data received from the server is not valid"
-            case .requestFailed:
-                return "The request failed"
-            case .authenticationError:
-                return "There was an authentication error"
-            case .badRequest:
-                return "The request is not valid"
-            case .outdated:
-                return "The request is outdated"
-            case .failed:
-                return "The request failed for an unknown reason"
-            case .unknown:
-                return "An unknown error occurred"
-            }
-        }
-    }
+   
     func getScoreFromPlayer(completion: @escaping (_ maxScore: Int?, _ error: NetworkError?) -> ()) {
         let url = "http://127.0.0.1:8000/api/play/get_higher_points"
         
@@ -150,7 +117,7 @@ class GameOverViewModel: ObservableObject {
             
             // Verificar si se recibió una respuesta válida
             guard let data = data, let httpResponse = response as? HTTPURLResponse, (200..<599).contains(httpResponse.statusCode) else {
-                completion(nil, NetworkError.invalidResponse)
+                completion(nil, NetworkError.networkErrorEnum.invalidResponse as? NetworkError)
                 return
             }
             // Procesar la respuesta
@@ -159,7 +126,7 @@ class GameOverViewModel: ObservableObject {
                 let maxScore = scoreResponse.MAXSCORE.first?.SCORE
                 completion(maxScore, nil)
            } catch {
-               completion(nil, NetworkError.requestFailed)
+               completion(nil, NetworkError.networkErrorEnum.requestFailed as? NetworkError)
            }
             
         }
