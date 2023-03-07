@@ -28,14 +28,14 @@ struct PopUpsView<BodyContent: View>: View {
     @State private var show:Bool = true
     @State var canHide = false
     let bodyContent : () -> BodyContent
-
+    
     var body: some View {
         if show{
             VStack {
                 HStack{
                     Text(title)
                         .foregroundColor(Color.ui.popUpColor)
-                        .font(.custom("m6x11", fixedSize: 30))
+                        .font(.custom("m6x11", fixedSize: 24))
                         .padding(7)
                     Spacer()
                     Image("cross")
