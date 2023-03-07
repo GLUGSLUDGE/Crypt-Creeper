@@ -8,8 +8,17 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    
+    // MARK: - Properties
+    
     @State var showHowToPlay = false
     @State var showSettings = false
+    @State var showProfile = false
+    
+    
+    // MARK: - Body
+    
     var body: some View {
         GeometryReader { geo in
             ZStack{
@@ -37,28 +46,25 @@ struct HomeView: View {
                         .foregroundColor(Color.ui.colorBGBlack)
                         .frame(width: geo.size.width, height: geo.size.width/4)
                 }
-                
                 Image("ImageKeyHero")
                     .resizable()
                     .scaledToFit()
                     .aspectRatio(contentMode: .fit)
                 VStack{
                     VStack(alignment: .center){
-                       
+                        
                         Image("ImageCryptCreeperLogo")
                             .resizable()
                             .scaledToFit()
                             .padding(.horizontal, 10)
                             .padding(.top,50)
                         Spacer()
-                            
+                        
                     }
-                   
-                   Spacer()
+                    Spacer()
                     NavigationLink(destination: ContentView()) {
                         MenuButtonLabel(title: "PLAY")
                     }
-                    
                     Button {
                         showHowToPlay.toggle()
                     } label: {
@@ -67,6 +73,7 @@ struct HomeView: View {
                     HStack{
                         Button {
                             //Profile
+                            showProfile.toggle()
                         } label: {
                             MenuButtonImageLabel(SFSymbolName: "person.fill")
                         }
@@ -81,18 +88,13 @@ struct HomeView: View {
                         } label: {
                             MenuButtonImageLabel(SFSymbolName: "gearshape.fill")
                         }
-                        
                     }
                 }.padding(.bottom, 30)
-                
-            
-                
             }
             .ignoresSafeArea()
-                HowToPlayView(show: $showHowToPlay)
-                 
-                SettingsView(show: $showSettings)
-            
+            HowToPlayView(show: $showHowToPlay)
+            UserProfileView(show: $showProfile)
+            SettingsView(show: $showSettings)
         }
         .navigationBarBackButtonHidden()
     }

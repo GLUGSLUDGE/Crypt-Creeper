@@ -10,11 +10,10 @@ import SwiftUI
 
 extension SettingsView{
     
-    
     func changeName(shows: Binding<Bool>) -> some View {
         VStack{
             if shows.wrappedValue{
-                PopUpsView(title: "CHANGE NAME",canHide:true,bodyContent: {
+                PopUpsView(title: "CHANGE NAME",bodyContent: {
                     VStack {
                         HStack {
                             ThinText(title: "Username:",fontSize: 30)
@@ -54,7 +53,23 @@ extension SettingsView{
                                 .padding(.leading,85)
                         }
                     }
-                })
+                }).overlay(content: {
+                    VStack{
+                        HStack{
+                            Spacer()
+                            Button {
+                                shows.wrappedValue.toggle()
+                            } label: {
+                                Image("")
+                                    .resizable()
+                                    .frame(width: 30,height:30)
+                                    .padding(.trailing,15)
+                                    .padding(.top,20)
+                                    .foregroundColor(Color.clear)
+                            }
+                        }
+                        Spacer()
+                    }})
                 .frame(width: 300, height: 300)
             }
         }
