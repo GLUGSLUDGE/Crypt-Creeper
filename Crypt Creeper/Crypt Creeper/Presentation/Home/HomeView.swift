@@ -15,6 +15,8 @@ struct HomeView: View {
     @State var showHowToPlay = false
     @State var showSettings = false
     @State var showProfile = false
+    @State var showLeaderboards = false
+
     
     
     // MARK: - Body
@@ -79,6 +81,7 @@ struct HomeView: View {
                         }
                         Button {
                             //Leaderboards
+                            showLeaderboards.toggle()
                         } label: {
                             MenuButtonImageLabel(SFSymbolName: "trophy.fill")
                         }
@@ -95,6 +98,7 @@ struct HomeView: View {
             HowToPlayView(show: $showHowToPlay)
             UserProfileView(show: $showProfile)
             SettingsView(show: $showSettings)
+            LeaderboardsView(show: $showLeaderboards)
         }
         .navigationBarBackButtonHidden()
     }
