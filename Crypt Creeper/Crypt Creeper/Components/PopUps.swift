@@ -14,9 +14,22 @@ struct PopUps : View {
             Color.ui.popUpColor
                 .ignoresSafeArea()
             VStack {
-                PopUpsView(title: "", canHide: true) {
-                    Text("hola")
+                PopUpsView(title: "test", canHide: true) {
+                    VStack{
+                        ScrollView(){
+                            VStack{
+                                LeaderBoardItem()
+                                LeaderBoardItem()
+                                LeaderBoardItem()
+                                LeaderBoardItem()
+                                LeaderBoardItem()
+                            }
+                        }
+                        Text("hola")
+                    }
+                    
                 }
+                
             }
             .padding()
         }
@@ -53,7 +66,7 @@ struct PopUpsView<BodyContent: View>: View {
             }
             .border(.white, width: 1)
             .background(Color.ui.popUpColor)
-            .padding()
+            .padding(1)
         }
     }
 }
