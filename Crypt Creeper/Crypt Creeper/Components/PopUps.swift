@@ -24,7 +24,7 @@ struct PopUps : View {
 }
 
 struct PopUpsView<BodyContent: View>: View {
-    @State var title:String
+    var title:String
     @State private var show:Bool = true
     @State var canHide = false
     let bodyContent : () -> BodyContent

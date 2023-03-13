@@ -18,61 +18,96 @@ struct UserProfileView: View {
     
     @Binding var show: Bool
     
+    @State var facTitle: String = ""
+    @State var facImage: String = ""
+    
+    @ObservedObject var viewModel: ViewModel = ViewModel()
+    
     
     // MARK: - Body
     
     var body: some View {
         if show {
             ZStack {
-                PopUpsView(title: "(USERNAME) Profile",bodyContent:{
-                    VStack(spacing: 0) {
-                        HStack(spacing: 0) {
-                            profilePicture
-                            factionImage
+                PopUpsView(title: "\(viewModel.profile.name)'s Profile",bodyContent:{
+                    Spacer()
+                })
+                .padding(.horizontal, 8)
+                VStack {
+                    HStack(spacing: 0) {
+                        PopUpsView(title: "PFP") {
+                            ImageFromAssets(image: "Ghost")
                         }
-                        PopUpsView(title: "Top Plays") {
-                            topPlaysScroll
+                        .padding(.top, 40)
+                        PopUpsView(title: facTitle) {
+                            ImageFromAssets(image: facImage)
                         }
-                        .frame(height: 230)
-                        PopUpsView(title: "Achievements") {
-                            achievementsScroll
+                        .frame(width: 190, height: 190)
+                        .padding(.top, 40)
+                    }
+                    PopUpsView(title: "Top Plays") {
+                        topPlaysScroll
+                    }
+                    PopUpsView(title: "Achievements") {
+                        achievementsScroll
+                    }
+                    .padding(.bottom)
+                }
+            }.overlay(content: {
+                VStack{
+                    HStack{
+                        Spacer()
+                        Button {
+                            show.toggle()
+                        } label: {
+                            Image("")
+                                .resizable()
+                                .frame(width: 30,height:30)
+                                .padding(.trailing,15)
+                                .padding(.top,20)
+                                .foregroundColor(Color.clear)
                         }
                     }
-                }).overlay(content: {
-                    VStack{
-                        HStack{
-                            Spacer()
-                            Button {
-                                show.toggle()
-                            } label: {
-                                Image("")
-                                    .resizable()
-                                    .frame(width: 30,height:30)
-                                    .padding(.trailing,15)
-                                    .padding(.top,20)
-                                    .foregroundColor(Color.clear)
-                            }
-                        }
-                        Spacer()
-                    }})
+                    Spacer()
+                }})
+            .onAppear {
+                factionName()
+                viewModel.getUser()
             }
-            
         }
     }
     
     
     // MARK: - Accesory Views
     
-    var profilePicture: some View {
-        PopUpsView(title: "PFP") {
-            // TODO: - Cuando esté el backend poner la foto del usuario
-            ImageFromAssets(image: "Ghost")
-        }
-    }
-    
-    var factionImage: some View {
-        PopUpsView(title: "Tia") {
-            ImageFromAssets(image: "Tía")
+    func factionName() {
+        switch viewModel.profile.factionId {
+        case 1:
+            facTitle = "Ghost"
+            facImage = "Ghost"
+        case 2:
+            facTitle = "Hans"
+            facImage = "Hans"
+        case 3:
+            facTitle = "Mosca"
+            facImage = "Mosca"
+        case 4:
+            facTitle = "Double2"
+            facImage = "Double_double"
+        case 5:
+            facTitle = "Uzzi"
+            facImage = "Uzzi"
+        case 6:
+            facTitle = "Tia"
+            facImage = "Tía"
+        case 7:
+            facTitle = "KingEyes"
+            facImage = "Kingeyes"
+        case 8:
+            facTitle = "Big Mud"
+            facImage = "Big_mud"
+        default:
+            facTitle = "WTF"
         }
     }
     
