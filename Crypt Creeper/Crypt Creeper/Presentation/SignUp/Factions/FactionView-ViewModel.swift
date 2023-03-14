@@ -14,7 +14,10 @@ extension FactionsView {
         
         @Published var isLoged: Bool = false
         @Published var formError: Bool = false
+        @Published var alertTitle: String = ""
+        @Published var alertMessage: String = ""
         
+       
         let userDefaults = UserDefaults.standard
         private var token: String = ""
         
@@ -28,8 +31,9 @@ extension FactionsView {
             case outdated
             case failed
             case unknown
+            case validationError(String)
             
-            var localizedDescription: String {
+            var customLocalizedDescription: String {
                 switch self {
                 case .invalidUrl:
                     return "The URL is not valid"
@@ -49,11 +53,13 @@ extension FactionsView {
                     return "The request failed for an unknown reason"
                 case .unknown:
                     return "An unknown error occurred"
+                case .validationError(let messageErrors):
+                    return messageErrors
                 }
             }
         }
         
-        func signUp(user: UserModel, completion: @escaping (Result<String, Error>) -> Void) {
+        func signUp(user: UserModel, completion: @escaping (_ result: String? , _ error: NetworkError?) -> Void) {
             let url = "http://127.0.0.1:8000/api/user/create"
             let dictionary: [String: Any] = [
                 "name" : user.username,
@@ -71,36 +77,48 @@ extension FactionsView {
                 
                 // Verificar si se recibió una respuesta válida
                 guard let data = data, let httpResponse = response as? HTTPURLResponse, (200..<599).contains(httpResponse.statusCode) else {
-                    completion(.failure(NetworkError.invalidResponse))
+                    completion(nil,NetworkError.invalidResponse)
                     return
                 }
-                
                 // Procesar la respuesta
                 do {
-                   let json = try JSONSerialization.jsonObject(with: data, options: [])
-                    if let responseJson = json as? [String: Any], let message = responseJson["Token"] as? String {
-                       completion(.success(message))
-                   } else {
-                       completion(.failure(NetworkError.invalidData))
-                   }
-               } catch {
-                   completion(.failure(NetworkError.invalidData))
-               }
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    if let responseJson = json as? [String: Any], let succesResponse = responseJson["Token"] as? String {
+                        self.token = succesResponse
+                        completion(succesResponse,nil)
+                    } else if let response = json as? [String: Any], let message = response["message"] as? String{
+                        completion(message, nil)
+                    }else if let response = json as? [String: Any], let validationErrors = response["Errors"] as? [String:Any]{
+                        let errorMessage = validationErrors.map { _, value in
+                            "\(value)"
+                        }.joined(separator:"" )
+                        completion(nil, NetworkError.validationError(errorMessage))
+                    }
+                } catch {
+                    completion(nil, NetworkError.invalidData)
+                }
             }
         }
         
         func onSuccess(message: String) {
-            isLoged = true
-            self.token = message
-            print(token)
-            userDefaults.set(token, forKey: "savedToken")
-            NetworkHelper.shared.setToken(tokens: token)
+            if !self.token.isEmpty{
+                isLoged = true
+                self.token = message
+                print(token)
+                userDefaults.set(token, forKey: "savedToken")
+                NetworkHelper.shared.setToken(tokens: token)
+            }else{
+                //
+                alertTitle = "Something has gone wrong"
+                alertMessage = message
+                formError = true
+            }
         }
-        
         func onError(error: String) {
             print(error)
+            alertTitle = "Something has gone wrong"
+            alertMessage = error
             formError = true
         }
-        
     }
 }

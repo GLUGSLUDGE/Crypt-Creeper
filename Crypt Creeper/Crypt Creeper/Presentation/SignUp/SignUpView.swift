@@ -59,7 +59,6 @@ struct SignUpView: View {
                 }
             }
         }
-        .alertCustom(title: viewModel.alertTitle, message: viewModel.alertMessage, show: $viewModel.showAlert)
         .sheet(isPresented: $isImagePickerDisplay) {
             ImagePickerView(selectedImage: self.$viewModel.profilePic, sourceType: self.sourceType)
         }
@@ -122,29 +121,16 @@ struct SignUpView: View {
     
     var signUpButton: some View {
         Button {
-            if viewModel.username.isEmpty || viewModel.email.isEmpty || viewModel.password.isEmpty || viewModel.repeatPassword.isEmpty {
-                viewModel.alertTitle = "There are empty fields"
-                viewModel.showAlert = true
-            } else if viewModel.password != viewModel.repeatPassword{
-                viewModel.alertTitle = "The passwords doesn't match"
-                viewModel.showAlert = true
-            } else if !viewModel.email.contains("@") && (!viewModel.email.contains(".com") || !viewModel.email.contains(".es") || !viewModel.email.contains(".net")) {
-                viewModel.alertTitle = "Select a valid email"
-                viewModel.showAlert = true
-            } else if viewModel.profilePic == nil {
-                viewModel.alertTitle = "Empty pic"
-                viewModel.alertMessage = "Select an image to continue"
-                viewModel.showAlert = true
-            } else {
-                viewModel.userModel = .init(username: viewModel.username,
-                                            email: viewModel.email,
-                                            password: viewModel.password,
-                                            factionId: viewModel.factionId,
-                                            profilePic: viewModel.profilePic ?? UIImage())
-                viewModel.isRegistered = true
-            }
+            
+            viewModel.userModel = .init(username: viewModel.username,
+                                        email: viewModel.email,
+                                        password: viewModel.password,
+                                        factionId: viewModel.factionId,
+                                        profilePic: viewModel.profilePic ?? UIImage())
+            viewModel.isRegistered = true
+            
         } label: {
-            MiniButtonLabel(title: "Sign Up", fontSize: 30, widthSize: 2.5, heightSize: 11.5)
+            MiniButtonLabel(title: "Continue", fontSize: 30, widthSize: 2.5, heightSize: 11.5)
         }
         .padding(.bottom, 5)
         .padding(.trailing, 35)

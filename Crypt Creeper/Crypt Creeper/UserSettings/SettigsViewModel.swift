@@ -103,7 +103,7 @@ class SettingsViewModel : ObservableObject {
                 } else if let response = json as? [String: Any], let errors = response["Errors"] as? [String:Any]{
                     let errorMessage = errors.map { _, value in
                         "\(value)"
-                    }.joined(separator: "\n")
+                    }.joined(separator: "")
                     completion(nil, NetworkError.validationError(errorMessage))
                 }
             } catch {
@@ -137,7 +137,7 @@ class SettingsViewModel : ObservableObject {
                 } else if let response = json as? [String: Any], let errors = response["Errors"] as? [String:Any]{
                     let errorMessage = errors.map { _, value in
                         "\(value)"
-                    }.joined(separator: "\n")
+                    }.joined(separator: "")
                     completion(nil, NetworkError.validationError(errorMessage))
                 }
             } catch {
@@ -173,7 +173,7 @@ class SettingsViewModel : ObservableObject {
                 }  else if let response = json as? [String: Any], let errors = response["Errors"] as? [String:Any]{
                     let errorMessage = errors.map { _, value in
                         "\(value)"
-                    }.joined(separator: "\n")
+                    }.joined(separator: "")
                     //             self.message = errorMessage
                     completion(nil, NetworkError.validationError(errorMessage))
                 }
@@ -237,8 +237,7 @@ class SettingsViewModel : ObservableObject {
                 }  else if let response = json as? [String: Any], let errors = response["Errors"] as? [String:Any]{
                     let errorMessage = errors.map { _, value in
                         "\(value)"
-                    }.joined(separator: "\n")
-       //             self.message = errorMessage
+                    }.joined(separator: "")
                     completion(nil, NetworkError.validationError(errorMessage))
                 }
             } catch {

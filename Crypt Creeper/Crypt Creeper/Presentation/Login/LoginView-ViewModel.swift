@@ -98,7 +98,7 @@ extension LoginView {
                     }else if let response = json as? [String: Any], let validationErrors = response["Errors"] as? [String:Any]{
                         let errorMessage = validationErrors.map { _, value in
                             "\(value)"
-                        }.joined(separator: "\n")
+                        }.joined(separator: "")
                         completion(nil, NetworkError.validationError(errorMessage))
                     }
                 } catch {
