@@ -165,19 +165,12 @@ func soundView()->some View {
                         }
                     }
                     .padding(.horizontal,20)
-                    
                 }
             })
             .padding(.horizontal)
         }
     }
-    
 }
-
-
-
-
-
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack{

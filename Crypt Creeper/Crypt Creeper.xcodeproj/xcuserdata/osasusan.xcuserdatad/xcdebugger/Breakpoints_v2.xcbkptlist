@@ -7,22 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F9B75B14-F3BF-4A2C-93C9-0BEB9B993531"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Crypt Creeper/UserSettings/SettigsViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
-            landmarkName = "ChangeName(completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "C2B49B11-2616-4881-A5A4-113A5EBBC656"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -110,57 +94,10 @@
             filePath = "Crypt Creeper/UserSettings/SettigsViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
+            startingLineNumber = "203"
+            endingLineNumber = "203"
             landmarkName = "logOut(completion:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "A345BF56-6629-409C-A9E1-01F8D6B5B313 - 13f045c1365613c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Crypt_Creeper.SettingsViewModel.logOut(completion: (Swift.Optional&lt;Swift.String&gt;, Swift.Optional&lt;Crypt_Creeper.NetworkError&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "Crypt Creeper"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/osasusan/BBDD/Crypt-Creepe_game/Crypt%20Creeper/Crypt%20Creeper/UserSettings/SettigsViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "205"
-                  endingLineNumber = "205"
-                  offsetFromSymbolStart = "824">
-               </Location>
-               <Location
-                  uuid = "A345BF56-6629-409C-A9E1-01F8D6B5B313 - 13f045c1365613c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Crypt_Creeper.SettingsViewModel.logOut(completion: (Swift.Optional&lt;Swift.String&gt;, Swift.Optional&lt;Crypt_Creeper.NetworkError&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "Crypt Creeper"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/osasusan/BBDD/Crypt-Creepe_game/Crypt%20Creeper/Crypt%20Creeper/UserSettings/SettigsViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "205"
-                  endingLineNumber = "205"
-                  offsetFromSymbolStart = "928">
-               </Location>
-               <Location
-                  uuid = "A345BF56-6629-409C-A9E1-01F8D6B5B313 - 13f045c1365613c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Crypt_Creeper.SettingsViewModel.logOut(completion: (Swift.Optional&lt;Swift.String&gt;, Swift.Optional&lt;Crypt_Creeper.NetworkError&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "Crypt Creeper"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/osasusan/BBDD/Crypt-Creepe_game/Crypt%20Creeper/Crypt%20Creeper/UserSettings/SettigsViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "205"
-                  endingLineNumber = "205"
-                  offsetFromSymbolStart = "1232">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

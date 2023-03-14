@@ -99,16 +99,15 @@ class SettingsViewModel : ObservableObject {
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: [])
                 if let responseJson = json as? [String: Any], let message = responseJson["message"] as? String {
-                    completion(message,nil)
+                    completion(message, nil)
                 } else if let response = json as? [String: Any], let errors = response["Errors"] as? [String:Any]{
-                       let errorMessage = errors.map { _, value in
-                           "\(value)"
-                       }.joined(separator: "\n")
-        
-                       completion(nil, NetworkError.validationError(errorMessage))
+                    let errorMessage = errors.map { _, value in
+                        "\(value)"
+                    }.joined(separator: "\n")
+                    completion(nil, NetworkError.validationError(errorMessage))
                 }
             } catch {
-                completion(nil,NetworkError.invalidData)
+                completion(nil, NetworkError.invalidData)
             }
         }
     }
@@ -130,7 +129,6 @@ class SettingsViewModel : ObservableObject {
                 completion(nil, NetworkError.invalidResponse)
                 return
             }
-            
             // Procesar la respuesta
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: [])
