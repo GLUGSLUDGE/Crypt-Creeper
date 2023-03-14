@@ -38,8 +38,9 @@ extension LoginView {
             case outdated
             case failed
             case unknown
+            case validationError(String)
             
-            var localizedDescription: String {
+            var customLocalizedDescription: String {
                 switch self {
                 case .invalidUrl:
                     return "The URL is not valid"
@@ -59,11 +60,13 @@ extension LoginView {
                     return "The request failed for an unknown reason"
                 case .unknown:
                     return "An unknown error occurred"
+                case .validationError(let messageErrors):
+                    return messageErrors
                 }
             }
         }
         
-        func login(completion: @escaping (Result<String, Error>) -> Void) {
+        func login(completion: @escaping (_ result: String? , _ error: NetworkError?) -> Void) {
             let url = "http://127.0.0.1:8000/api/user/login"
             let dictionary: [String: Any] = [
                 "name" : name,
@@ -78,36 +81,50 @@ extension LoginView {
                 
                 // Verificar si se recibió una respuesta válida
                 guard let data = data, let httpResponse = response as? HTTPURLResponse, (200..<599).contains(httpResponse.statusCode) else {
-                    completion(.failure(NetworkError.invalidResponse))
+                    completion(nil,NetworkError.invalidResponse)
                     return
                 }
                 
                 // Procesar la respuesta
                 do {
-                   let json = try JSONSerialization.jsonObject(with: data, options: [])
-                    if let responseJson = json as? [String: Any], let message = responseJson["Token"] as? String {
-                       completion(.success(message))
-                   } else {
-                       completion(.failure(NetworkError.invalidData))
-                   }
-               } catch {
-                   completion(.failure(NetworkError.invalidData))
-               }
+                    let json = try JSONSerialization.jsonObject(with: data, options: [])
+                    if let responseJson = json as? [String: Any], let succesResponse = responseJson["Token"] as? String {
+                        self.token = succesResponse
+                        completion(succesResponse, nil)
+                       
+                    } else if let response = json as? [String: Any], let message = response["message"] as? String{
+                        completion(message, nil)
+                        
+                    }else if let response = json as? [String: Any], let validationErrors = response["Errors"] as? [String:Any]{
+                        let errorMessage = validationErrors.map { _, value in
+                            "\(value)"
+                        }.joined(separator: "")
+                        completion(nil, NetworkError.validationError(errorMessage))
+                    }
+                } catch {
+                    completion(nil, NetworkError.invalidData)
+                }
             }
         }
         
         func onSuccess(message: String) {
-            isLoged = true
-            self.token = message
-            print(token)
-            userDefaults.set(token, forKey: "savedToken")
-            NetworkHelper.shared.setToken(tokens: token)
+            
+            if !self.token.isEmpty{
+                isLoged = true
+                print(self.token)
+                userDefaults.set(token, forKey: "savedToken")
+                NetworkHelper.shared.setToken(tokens: self.token)
+            }else{
+                alertTitle = "Something has gone wrong"
+                alertMessage = message
+                showAlert = true
+            }
         }
         
         func onError(error: String) {
             print(error)
             alertTitle = "User or password incorrect"
-            alertMessage = "Make sure you write it all correctly"
+            alertMessage = error
             showAlert = true
         }
     }

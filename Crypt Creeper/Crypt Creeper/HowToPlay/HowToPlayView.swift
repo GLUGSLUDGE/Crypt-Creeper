@@ -57,6 +57,7 @@ struct HowToPlayView: View {
                     Spacer()
                 }})
             .padding(.vertical,50)
+            .padding(.horizontal)
         }
     }
 }

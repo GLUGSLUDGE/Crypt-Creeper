@@ -33,9 +33,12 @@ struct UserModel {
 
 struct FactionsView: View {
     
+    
     @State var userModel: UserModel = .init()
     
     @ObservedObject var viewModel: ViewModel = ViewModel()
+    
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
         ZStack {
@@ -48,14 +51,13 @@ struct FactionsView: View {
                         .onTapGesture {
                             userModel.factionId = 1
                             
-                            viewModel.signUp(user: userModel) { result in
-                                switch result {
-                                    case .success(let message):
-                                        viewModel.onSuccess(message: message)
-                                    case .failure(let error):
-                                        print(userModel)
-                                        viewModel.onError(error: error.localizedDescription)
-                                    }
+                            viewModel.signUp(user: userModel) { result, error in
+                                if let message = result {
+                                    viewModel.onSuccess(message: message)
+                                }else if let error = error {
+                                    //  self.viewModel.message = error.customLocalizedDescription
+                                    self.viewModel.onError(error: error.customLocalizedDescription)
+                                }
                             }
                         }
                     Spacer()
@@ -68,13 +70,14 @@ struct FactionsView: View {
                     popUp(image: "Hans", title: "Hans", id: 2)
                         .onTapGesture {
                             userModel.factionId = 2
-                            viewModel.signUp(user: userModel) { result in
-                                switch result {
-                                    case .success(let message):
-                                        viewModel.onSuccess(message: message)
-                                    case .failure(let error):
-                                        viewModel.onError(error: error.localizedDescription)
-                                    }
+                            viewModel.signUp(user: userModel) {  result, error in
+                                if let message = result {
+                                    viewModel.onSuccess(message: message)
+                                }else if let error = error {
+                                    //  self.viewModel.message = error.customLocalizedDescription
+                                    self.viewModel.onError(error: error.customLocalizedDescription)
+                                    backToLogin()
+                                }
                             }
                         }
                 }
@@ -90,15 +93,14 @@ struct FactionsView: View {
                         popUp(image: "Mosca", title: "Mosca", id: 3)
                             .onTapGesture {
                                 userModel.factionId = 3
-                                viewModel.signUp(user: userModel) { result in
-                                    switch result {
-                                        case .success(let message):
-                                            viewModel.onSuccess(message: message)
-                                        case .failure(let error):
-                                            viewModel.onError(error: error.localizedDescription)
-                                            sigError()
-//                                            NavigationLink("", destination: SignUpView(), isActive: $viewModel.formError)
-                                        }
+                                viewModel.signUp(user: userModel) {  result, error in
+                                    if let message = result {
+                                        viewModel.onSuccess(message: message)
+                                    }else if let error = error {
+                                        //  self.viewModel.message = error.customLocalizedDescription
+                                        self.viewModel.onError(error: error.customLocalizedDescription)
+                                        backToLogin()
+                                    }
                                 }
                             }
                         Spacer()
@@ -112,14 +114,14 @@ struct FactionsView: View {
                         popUp(image: "Double_double", title: "Double2", id: 4)
                             .onTapGesture {
                                 userModel.factionId = 4
-                                viewModel.signUp(user: userModel) { result in
-                                    switch result {
-                                        case .success(let message):
-                                            viewModel.onSuccess(message: message)
-                                        case .failure(let error):
-                                            viewModel.onError(error: error.localizedDescription)
-                                            sigError()
-                                        }
+                                viewModel.signUp(user: userModel) {result, error in
+                                    if let message = result {
+                                        viewModel.onSuccess(message: message)
+                                    }else if let error = error {
+                                        //  self.viewModel.message = error.customLocalizedDescription
+                                        self.viewModel.onError(error: error.customLocalizedDescription)
+                                        backToLogin()
+                                    }
                                 }
                             }
                     }
@@ -134,20 +136,20 @@ struct FactionsView: View {
                         popUp(image: "Uzzi", title: "Uzzi", id: 5)
                             .onTapGesture {
                                 userModel.factionId = 5
-                                viewModel.signUp(user: userModel) { result in
-                                    switch result {
-                                        case .success(let message):
-                                            viewModel.onSuccess(message: message)
-                                        case .failure(let error):
-                                            viewModel.onError(error: error.localizedDescription)
-                                        }
+                                viewModel.signUp(user: userModel) { result, error in
+                                    if let message = result {
+                                        viewModel.onSuccess(message: message)
+                                    }else if let error = error {
+                                        //  self.viewModel.message = error.customLocalizedDescription
+                                        self.viewModel.onError(error: error.customLocalizedDescription)
+                                        backToLogin()
+                                    }
                                 }
                             }
                     }
                     .padding(.leading, 30)
                     Spacer()
                 }
-                
                 .padding(.top, 170)
             }
             ZStack {
@@ -158,20 +160,20 @@ struct FactionsView: View {
                         popUp(image: "Tía", title: "Tia", id: 6)
                             .onTapGesture {
                                 userModel.factionId = 6
-                                viewModel.signUp(user: userModel) { result in
-                                    switch result {
-                                        case .success(let message):
-                                            viewModel.onSuccess(message: message)
-                                        case .failure(let error):
-                                            viewModel.onError(error: error.localizedDescription)
-                                        }
+                                viewModel.signUp(user: userModel) { result, error in
+                                    if let message = result {
+                                        viewModel.onSuccess(message: message)
+                                    }else if let error = error {
+                                        //  self.viewModel.message = error.customLocalizedDescription
+                                        self.viewModel.onError(error: error.customLocalizedDescription)
+                                        backToLogin()
+                                    }
                                 }
                             }
                         Spacer()
                     }
                     .padding(.leading, -10)
                 }
-                
                 .padding(.bottom, 70)
                 // King Eyes
                 VStack {
@@ -181,13 +183,14 @@ struct FactionsView: View {
                         popUp(image: "Kingeyes", title: "   KEyes", id: 7)
                             .onTapGesture {
                                 userModel.factionId = 7
-                                viewModel.signUp(user: userModel) { result in
-                                    switch result {
-                                        case .success(let message):
-                                            viewModel.onSuccess(message: message)
-                                        case .failure(let error):
-                                            viewModel.onError(error: error.localizedDescription)
-                                        }
+                                viewModel.signUp(user: userModel) {result, error in
+                                    if let message = result {
+                                        viewModel.onSuccess(message: message)
+                                    }else if let error = error {
+                                        //  self.viewModel.message = error.customLocalizedDescription
+                                        self.viewModel.onError(error: error.customLocalizedDescription)
+                                        backToLogin()
+                                    }
                                 }
                             }
                     }
@@ -200,20 +203,23 @@ struct FactionsView: View {
                         popUp(image: "Big_mud", title: "Big Mud", id: 8)
                             .onTapGesture {
                                 userModel.factionId = 8
-                                viewModel.signUp(user: userModel) { result in
-                                    switch result {
-                                        case .success(let message):
-                                            viewModel.onSuccess(message: message)
-                                        case .failure(let error):
-                                            viewModel.onError(error: error.localizedDescription)
-                                        }
+                                viewModel.signUp(user: userModel) {result, error in
+                                    if let message = result {
+                                        viewModel.onSuccess(message: message)
+                                    }else if let error = error {
+                                        //  self.viewModel.message = error.customLocalizedDescription
+                                        self.viewModel.onError(error: error.customLocalizedDescription)
+                                        backToLogin()
+                                    }
                                 }
                             }
                     }
                     .padding(.trailing, 30)
                 }
                 .padding(.bottom, 20)
+                
             }
+            .alertCustom(title: viewModel.alertTitle, message: viewModel.alertMessage, show: $viewModel.formError)
         }
         .navigationBarBackButtonHidden()
     }

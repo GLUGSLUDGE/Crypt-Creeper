@@ -24,7 +24,7 @@ extension LoginView {
                         .foregroundColor(Color.ui.text)
                         .multilineTextAlignment(.leading)
                 }
-            }
+            }.padding()
         }
         .frame(width: 300)
         .padding(.leading, -10)
@@ -63,33 +63,24 @@ extension LoginView {
                 }
             }
             .padding(.top)
+            .padding(.horizontal)
         }
         .padding(.bottom, 100)
     }
     
     func loginButton() -> some View {
         Button {
-            if viewModel.name.isEmpty {
-                print("no name")
-                viewModel.alertTitle = "Name field incomplete"
-                viewModel.showAlert = true
-                focusedField = .userField
-            } else if viewModel.password.isEmpty {
-                viewModel.alertTitle = "Password field incomplete"
-                viewModel.showAlert = true
-                focusedField = .passwordField
-            } else {
-                viewModel.login { result in
-                    switch result {
-                    case .success(let message):
-                        self.viewModel.message = message
-                        viewModel.onSuccess(message: message)
-                    case .failure(let error):
-                        self.viewModel.message = error.localizedDescription
-                        viewModel.onError(error: error.localizedDescription)
-                    }
+            
+            viewModel.login { result, error in
+                if let message = result {
+                    self.viewModel.message = message
+                    viewModel.onSuccess(message: message)
+                }else if let error = error {
+                  //  self.viewModel.message = error.customLocalizedDescription
+                    self.viewModel.onError(error: error.customLocalizedDescription)
                 }
             }
+
         } label: {
             MiniButtonLabel(title: "Login", fontSize:30, widthSize: 2.5,heightSize:11.5)
         }
