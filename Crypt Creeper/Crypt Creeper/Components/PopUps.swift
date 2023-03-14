@@ -37,7 +37,7 @@ struct PopUps : View {
 }
 
 struct PopUpsView<BodyContent: View>: View {
-    @State var title:String
+    var title:String
     @State private var show:Bool = true
     @State var canHide = false
     let bodyContent : () -> BodyContent
@@ -66,7 +66,7 @@ struct PopUpsView<BodyContent: View>: View {
             }
             .border(.white, width: 1)
             .background(Color.ui.popUpColor)
-            .padding(1)
+            .padding(5)
         }
     }
 }

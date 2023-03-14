@@ -44,3 +44,11 @@ struct ImageFromAssets: View {
             .padding(.horizontal, 10)
     }
 }
+
+struct ImageFromUrl: View {
+    var image: String
+    var body: some View {
+        AsyncImage(url: URL(string: image))
+            .scaledToFit()
+    }
+}
