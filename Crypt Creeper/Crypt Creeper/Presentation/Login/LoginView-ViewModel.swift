@@ -48,7 +48,7 @@ extension LoginView {
                     if let responseJson = json as? [String: Any], let message = responseJson["Token"] as? String {
                        completion(.success(message))
                    } else {
-                       completion(.failure(NetworkError.networkErrorEnum.invalidData))
+                       completion(.failure(NetworkError.networkErrorEnum.validationError("Chucha")))
                    }
                } catch {
                    completion(.failure(NetworkError.networkErrorEnum.invalidData))

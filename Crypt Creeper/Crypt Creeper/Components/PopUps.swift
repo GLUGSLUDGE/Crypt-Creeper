@@ -53,7 +53,7 @@ struct PopUpsView<BodyContent: View>: View {
             }
             .border(.white, width: 1)
             .background(Color.ui.popUpColor)
-            .padding()
+            .padding(5)
         }
     }
 }

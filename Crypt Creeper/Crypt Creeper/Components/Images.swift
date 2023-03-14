@@ -45,6 +45,10 @@ struct ImageFromAssets: View {
     }
 }
 
-//struct ImageFromUrl: View {
-//
-//}
+struct ImageFromUrl: View {
+    var image: String
+    var body: some View {
+        AsyncImage(url: URL(string: image))
+            .scaledToFit()
+    }
+}

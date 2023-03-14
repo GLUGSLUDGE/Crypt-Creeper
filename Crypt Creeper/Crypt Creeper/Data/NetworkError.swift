@@ -19,6 +19,7 @@ class NetworkError {
         case outdated
         case failed
         case unknown
+        case validationError(String)
         
         var localizedDescription: String {
             switch self {
@@ -40,6 +41,8 @@ class NetworkError {
                 return "The request failed for an unknown reason"
             case .unknown:
                 return "An unknown error occurred"
+            case .validationError(let validationError):
+                return validationError
             }
         }
     }
