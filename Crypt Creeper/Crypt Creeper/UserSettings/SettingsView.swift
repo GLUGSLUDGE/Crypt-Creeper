@@ -73,6 +73,7 @@ struct SettingsView: View {
                             }
                         }
                     }
+                    .padding(.horizontal)
                     soundView()
                 }.overlay(content: {
                     VStack{
@@ -167,6 +168,7 @@ func soundView()->some View {
                     
                 }
             })
+            .padding(.horizontal)
         }
     }
     

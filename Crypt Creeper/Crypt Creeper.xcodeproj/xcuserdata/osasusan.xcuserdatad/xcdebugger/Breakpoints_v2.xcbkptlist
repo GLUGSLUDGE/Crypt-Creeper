@@ -14,24 +14,8 @@
             filePath = "Crypt Creeper/UserSettings/SettigsViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
-            landmarkName = "ChangeName(completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B6910D02-2B83-47B1-87ED-4D767B2DED89"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Crypt Creeper/UserSettings/SettigsViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
             landmarkName = "ChangeName(completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -94,8 +78,8 @@
             filePath = "Crypt Creeper/UserSettings/settingsViewExtension.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "255"
-            endingLineNumber = "255"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
             landmarkName = "destryAccount(shows:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -110,41 +94,9 @@
             filePath = "Crypt Creeper/UserSettings/settingsViewExtension.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "258"
-            endingLineNumber = "258"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
             landmarkName = "destryAccount(shows:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B92783A6-74DC-4B8E-91D1-EC9C1C688079"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Crypt Creeper/UserSettings/SettigsViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
-            landmarkName = "changePassword(completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "9746DF1A-55EA-4FBA-908E-0308A0A7230B"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Crypt Creeper/UserSettings/SettigsViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
-            landmarkName = "changePassword(completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -158,9 +110,72 @@
             filePath = "Crypt Creeper/UserSettings/SettigsViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
             landmarkName = "logOut(completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A345BF56-6629-409C-A9E1-01F8D6B5B313 - 13f045c1365613c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Crypt_Creeper.SettingsViewModel.logOut(completion: (Swift.Optional&lt;Swift.String&gt;, Swift.Optional&lt;Crypt_Creeper.NetworkError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Crypt Creeper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/osasusan/BBDD/Crypt-Creepe_game/Crypt%20Creeper/Crypt%20Creeper/UserSettings/SettigsViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "205"
+                  endingLineNumber = "205"
+                  offsetFromSymbolStart = "824">
+               </Location>
+               <Location
+                  uuid = "A345BF56-6629-409C-A9E1-01F8D6B5B313 - 13f045c1365613c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Crypt_Creeper.SettingsViewModel.logOut(completion: (Swift.Optional&lt;Swift.String&gt;, Swift.Optional&lt;Crypt_Creeper.NetworkError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Crypt Creeper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/osasusan/BBDD/Crypt-Creepe_game/Crypt%20Creeper/Crypt%20Creeper/UserSettings/SettigsViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "205"
+                  endingLineNumber = "205"
+                  offsetFromSymbolStart = "928">
+               </Location>
+               <Location
+                  uuid = "A345BF56-6629-409C-A9E1-01F8D6B5B313 - 13f045c1365613c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Crypt_Creeper.SettingsViewModel.logOut(completion: (Swift.Optional&lt;Swift.String&gt;, Swift.Optional&lt;Crypt_Creeper.NetworkError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Crypt Creeper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/osasusan/BBDD/Crypt-Creepe_game/Crypt%20Creeper/Crypt%20Creeper/UserSettings/SettigsViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "205"
+                  endingLineNumber = "205"
+                  offsetFromSymbolStart = "1232">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7688934C-3777-4555-A9F0-F200A1872957"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Crypt Creeper/UserSettings/SettingsViewExtension.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "changeName(shows:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
