@@ -12,11 +12,17 @@ import SwiftUI
 extension FactionsView {
     class ViewModel: ObservableObject{
         
+        
+        // MARK: - Properties
+        
         @Published var isLoged: Bool = false
         @Published var formError: Bool = false
         
         let userDefaults = UserDefaults.standard
         private var token: String = ""
+        
+        
+        // MARK: - Methods
         
         func signUp(user: UserModel, completion: @escaping (Result<String, Error>) -> Void) {
             let url = "http://127.0.0.1:8000/api/user/create"

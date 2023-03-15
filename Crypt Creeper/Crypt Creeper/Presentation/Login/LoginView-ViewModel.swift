@@ -12,6 +12,9 @@ extension LoginView {
     
     class ViewModel: ObservableObject {
         
+        
+        // MARK: - Properties
+        
         @Published var name: String = ""
         @Published var password: String = ""
         @Published var alertTitle: String = ""
@@ -22,6 +25,9 @@ extension LoginView {
         
         let userDefaults = UserDefaults.standard
         private var token: String = ""
+        
+        
+        // MARK: - Methods
         
         func login(completion: @escaping (Result<String, Error>) -> Void) {
             let url = "http://127.0.0.1:8000/api/user/login"

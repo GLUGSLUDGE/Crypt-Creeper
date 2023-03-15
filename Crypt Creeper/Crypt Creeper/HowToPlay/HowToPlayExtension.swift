@@ -43,6 +43,7 @@ extension HowToPlayView {
             }
         }
     }
+    
     private struct dividerImage: View{
         @State var setImage:String
         @State var setText:String
@@ -165,6 +166,7 @@ extension HowToPlayView {
             
         }
     }
+    
     func vMovements()->some View{
         VStack{
             divider(setText: "MOVEMENTS")
@@ -232,6 +234,7 @@ extension HowToPlayView {
             textView(text: "HOLD SLOTS work by moving a PICK UP into the slot for later use.\n\nTap the HOLD SLOT tile while empty and select an available pick up to grab.\n\nTap the HOLD SLOT while holding to activate that PICKUP.")
         }
     }
+    
     func vShop()-> some View {
         VStack{
             dividerImage(setImage: "ICON_ENTITY_SHOP", setText: "SHOP")
@@ -240,10 +243,9 @@ extension HowToPlayView {
             columView(setImage: "ICON_C_BOMB", setText: "Deals 2 damage to every MONSTER.")
             columView(setImage: "ICON_C_GREENP", setText: "Turns every empty tile into a POWER 1 monster.")
             columView(setImage: "ICON_C_RERROLL", setText: "REROLL level, PLAYER returns to starting tile.")
-            
-            
         }
     }
+    
     func vLevels()-> some View{
         VStack{
             dividerImage(setImage: "ICON_ENTITY_PORTAL", setText: "LEVELS")
@@ -251,6 +253,7 @@ extension HowToPlayView {
             
         }
     }
+    
     func vGoal()-> some View{
         VStack{
             

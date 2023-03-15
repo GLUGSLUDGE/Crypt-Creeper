@@ -43,14 +43,19 @@ extension UserProfileView {
     
     class ViewModel: ObservableObject {
         
+        
+        // MARK: - Properties
+        
         @Published var profile: UserPresentationModel = .init()
         
         @Published var facTitle: String = ""
         @Published var facImage: String = ""
         @Published var userPoints: [Int] = []
         
+        
+        // MARK: - Methods
+        
         func getUser() {
-            
             let url = "http://127.0.0.1:8000/api/user/getUserData"
             
             NetworkHelper.shared.requestProvider(url: url, type: .GET) { data, response, error in
@@ -74,7 +79,6 @@ extension UserProfileView {
         }
         
         func getUserPoints() {
-            
             let url = "http://127.0.0.1:8000/api/user/getTop8"
             
             NetworkHelper.shared.requestProvider(url: url, type: .GET) { data, response, error in

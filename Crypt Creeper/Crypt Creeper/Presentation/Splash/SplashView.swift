@@ -24,10 +24,7 @@ struct SplashView: View {
         NavigationView {
             if isActive {
                 if userDefaults.string(forKey: "savedToken") != nil {
-                    
-                   
                     HomeView()
-                    
                 } else {
                     LoginView()
                 }

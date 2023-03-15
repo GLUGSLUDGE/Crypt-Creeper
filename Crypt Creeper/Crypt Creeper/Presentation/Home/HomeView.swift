@@ -18,7 +18,6 @@ struct HomeView: View {
     @State var showLeaderboards = false
 
     
-    
     // MARK: - Body
     
     var body: some View {
@@ -54,14 +53,12 @@ struct HomeView: View {
                     .aspectRatio(contentMode: .fit)
                 VStack{
                     VStack(alignment: .center){
-                        
                         Image("ImageCryptCreeperLogo")
                             .resizable()
                             .scaledToFit()
                             .padding(.horizontal, 10)
                             .padding(.top,50)
                         Spacer()
-                        
                     }
                     Spacer()
                     NavigationLink(destination: ContentView()) {

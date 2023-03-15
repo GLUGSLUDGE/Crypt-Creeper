@@ -74,6 +74,7 @@ extension SettingsView{
             }
         }
     }
+    
     func changePass(shows: Binding<Bool>) -> some View {
         VStack{
             if shows.wrappedValue{
@@ -145,6 +146,7 @@ extension SettingsView{
             }
         }
     }
+    
     func changePic(shows: Binding<Bool>) -> some View {
         VStack{
             if shows.wrappedValue{
@@ -221,8 +223,8 @@ extension SettingsView{
             }
         }
     }
+    
     func logOut() {
-        
         viewModel.logOut {result in
             switch result {
             case .success(let message):
@@ -244,6 +246,7 @@ extension SettingsView{
             }
         }
     }
+    
     func destryAccount(shows: Binding<Bool>) -> some View {
         VStack{
             if shows.wrappedValue{
@@ -329,7 +332,4 @@ extension SettingsView{
           .rotationEffect(.degrees(25))
           .padding(.horizontal, 10)
       }
-
-
-
 }

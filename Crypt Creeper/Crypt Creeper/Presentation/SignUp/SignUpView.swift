@@ -37,7 +37,7 @@ struct SignUpView: View {
                     // MARK: - Sign Up Form Stack
                     VStack {
                         HStack {
-                            signUpPopUp()
+                            signUpPopUp
                             Spacer()
                         }
                         Spacer()
@@ -151,6 +151,54 @@ struct SignUpView: View {
         .background {
             NavigationLink("", destination: FactionsView(userModel: viewModel.userModel), isActive: $viewModel.isRegistered)
         }
+    }
+    
+    var textfieldsViews: some View {
+        VStack(spacing: 10) {
+            VStack(alignment: .leading, spacing: 0) {
+                ThinText(title: "Username:", fontSize: 30)
+                    .foregroundColor(Color.ui.text)
+                    .padding(.leading, 20)
+                
+                TextFieldLabel(field: $viewModel.username)
+                    .padding(.horizontal, 20)
+            }
+            VStack(alignment: .leading, spacing: 0) {
+                ThinText(title: "Email:", fontSize: 30)
+                    .foregroundColor(Color.ui.text)
+                    .padding(.leading, 20)
+                
+                TextFieldLabel(field: $viewModel.email)
+                    .padding(.horizontal, 20)
+            }
+            VStack(alignment: .leading, spacing: 0) {
+                ThinText(title: "Password:", fontSize: 30)
+                    .foregroundColor(Color.ui.text)
+                    .padding(.leading, 20)
+                
+                PasswordField(field: $viewModel.password)
+                    .padding(.leading, 20)
+                    .padding(.trailing, 120)
+            }
+            
+            VStack(alignment: .leading, spacing: 0) {
+                ThinText(title: "Repeat password:", fontSize: 30)
+                    .foregroundColor(Color.ui.text)
+                    .padding(.leading, 20)
+                
+                PasswordField(field: $viewModel.repeatPassword)
+                    .padding(.leading, 20)
+                    .padding(.trailing, 120)
+                    .padding(.bottom, 30)
+            }
+        }
+    }
+    
+    var signUpPopUp: some View {
+        PopUpsView(title: "SIGN UP") {
+            textfieldsViews
+        }
+        .frame(width: 300)
     }
 }
 

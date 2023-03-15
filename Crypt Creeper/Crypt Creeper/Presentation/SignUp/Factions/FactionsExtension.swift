@@ -21,12 +21,4 @@ extension FactionsView {
             NavigationLink("", destination: HomeView(), isActive: $viewModel.isLoged)
         )
     }
-    
-    func sigError(){
-        if let window = UIApplication.shared.windows.first {
-            window.rootViewController = UIHostingController(rootView: LoginView())
-            window.makeKeyAndVisible()
-        }
-    }
-    
 }

@@ -9,10 +9,16 @@ import SwiftUI
 
 struct FactionsView: View {
     
+    
+    // MARK: - Properties
+    
     @State var userModel: UserModel = .init()
     
     @ObservedObject var viewModel: ViewModel = ViewModel()
-
+    
+    
+    // MARK: - Body
+    
     var body: some View {
         ZStack {
             Color.ui.popUpColor
@@ -26,12 +32,12 @@ struct FactionsView: View {
                             
                             viewModel.signUp(user: userModel) { result in
                                 switch result {
-                                    case .success(let message):
-                                        viewModel.onSuccess(message: message)
-                                    case .failure(let error):
-                                        print(userModel)
-                                        viewModel.onError(error: error.localizedDescription)
-                                    }
+                                case .success(let message):
+                                    viewModel.onSuccess(message: message)
+                                case .failure(let error):
+                                    print(userModel)
+                                    viewModel.onError(error: error.localizedDescription)
+                                }
                             }
                         }
                     Spacer()
@@ -46,11 +52,11 @@ struct FactionsView: View {
                             userModel.factionId = 2
                             viewModel.signUp(user: userModel) { result in
                                 switch result {
-                                    case .success(let message):
-                                        viewModel.onSuccess(message: message)
-                                    case .failure(let error):
-                                        viewModel.onError(error: error.localizedDescription)
-                                    }
+                                case .success(let message):
+                                    viewModel.onSuccess(message: message)
+                                case .failure(let error):
+                                    viewModel.onError(error: error.localizedDescription)
+                                }
                             }
                         }
                 }
@@ -68,13 +74,11 @@ struct FactionsView: View {
                                 userModel.factionId = 3
                                 viewModel.signUp(user: userModel) { result in
                                     switch result {
-                                        case .success(let message):
-                                            viewModel.onSuccess(message: message)
-                                        case .failure(let error):
-                                            viewModel.onError(error: error.localizedDescription)
-                                            sigError()
-//                                            NavigationLink("", destination: SignUpView(), isActive: $viewModel.formError)
-                                        }
+                                    case .success(let message):
+                                        viewModel.onSuccess(message: message)
+                                    case .failure(let error):
+                                        viewModel.onError(error: error.localizedDescription)
+                                    }
                                 }
                             }
                         Spacer()
@@ -90,12 +94,11 @@ struct FactionsView: View {
                                 userModel.factionId = 4
                                 viewModel.signUp(user: userModel) { result in
                                     switch result {
-                                        case .success(let message):
-                                            viewModel.onSuccess(message: message)
-                                        case .failure(let error):
-                                            viewModel.onError(error: error.localizedDescription)
-                                            sigError()
-                                        }
+                                    case .success(let message):
+                                        viewModel.onSuccess(message: message)
+                                    case .failure(let error):
+                                        viewModel.onError(error: error.localizedDescription)
+                                    }
                                 }
                             }
                     }
@@ -112,18 +115,17 @@ struct FactionsView: View {
                                 userModel.factionId = 5
                                 viewModel.signUp(user: userModel) { result in
                                     switch result {
-                                        case .success(let message):
-                                            viewModel.onSuccess(message: message)
-                                        case .failure(let error):
-                                            viewModel.onError(error: error.localizedDescription)
-                                        }
+                                    case .success(let message):
+                                        viewModel.onSuccess(message: message)
+                                    case .failure(let error):
+                                        viewModel.onError(error: error.localizedDescription)
+                                    }
                                 }
                             }
                     }
                     .padding(.leading, 30)
                     Spacer()
                 }
-                
                 .padding(.top, 170)
             }
             ZStack {
@@ -136,18 +138,17 @@ struct FactionsView: View {
                                 userModel.factionId = 6
                                 viewModel.signUp(user: userModel) { result in
                                     switch result {
-                                        case .success(let message):
-                                            viewModel.onSuccess(message: message)
-                                        case .failure(let error):
-                                            viewModel.onError(error: error.localizedDescription)
-                                        }
+                                    case .success(let message):
+                                        viewModel.onSuccess(message: message)
+                                    case .failure(let error):
+                                        viewModel.onError(error: error.localizedDescription)
+                                    }
                                 }
                             }
                         Spacer()
                     }
                     .padding(.leading, -10)
                 }
-                
                 .padding(.bottom, 70)
                 // King Eyes
                 VStack {
@@ -159,16 +160,15 @@ struct FactionsView: View {
                                 userModel.factionId = 7
                                 viewModel.signUp(user: userModel) { result in
                                     switch result {
-                                        case .success(let message):
-                                            viewModel.onSuccess(message: message)
-                                        case .failure(let error):
-                                            viewModel.onError(error: error.localizedDescription)
-                                        }
+                                    case .success(let message):
+                                        viewModel.onSuccess(message: message)
+                                    case .failure(let error):
+                                        viewModel.onError(error: error.localizedDescription)
+                                    }
                                 }
                             }
                     }
                 }
-                
                 // Big Mud
                 VStack {
                     Spacer()
@@ -178,11 +178,11 @@ struct FactionsView: View {
                                 userModel.factionId = 8
                                 viewModel.signUp(user: userModel) { result in
                                     switch result {
-                                        case .success(let message):
-                                            viewModel.onSuccess(message: message)
-                                        case .failure(let error):
-                                            viewModel.onError(error: error.localizedDescription)
-                                        }
+                                    case .success(let message):
+                                        viewModel.onSuccess(message: message)
+                                    case .failure(let error):
+                                        viewModel.onError(error: error.localizedDescription)
+                                    }
                                 }
                             }
                     }

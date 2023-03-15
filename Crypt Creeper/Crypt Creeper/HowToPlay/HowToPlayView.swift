@@ -9,36 +9,34 @@ import SwiftUI
 struct HowToPlay: View {
     @State var ver = true
     var body: some View {
-        HowToPlayView(show: $ver )
+        HowToPlayView(show: $ver)
     }
 }
 
 struct HowToPlayView: View {
+    
+    
+    // MARK: - Properties
+    
     @Binding var show :Bool
+    
+    
+    // MARK: - Body
+    
     var body: some View {
         if show{
             PopUpsView(title: "How to play", bodyContent: {
                 ScrollView{
                     vPlayer()
-                    
                     vMovements()
-                    
                     vPICKUPS()
-                    
                     vMonsters()
-                    
                     vTemple()
-                    
                     vShop()
-                    
                     vLevels()
-                    
                     vGoal()
-                    
                     vScore()
-                    
                 }
-                
             }).overlay(content: {
                 VStack{
                     HStack{
@@ -62,7 +60,6 @@ struct HowToPlayView: View {
 }
 
 struct HowToPlay_Previews: PreviewProvider {
-    
     static var previews: some View {
         ZStack{
             Color.ui.popUpColor

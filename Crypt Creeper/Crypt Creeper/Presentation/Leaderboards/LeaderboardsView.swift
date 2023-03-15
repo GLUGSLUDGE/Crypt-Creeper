@@ -8,7 +8,15 @@
 import SwiftUI
 
 struct LeaderboardsView: View {
+    
+    
+    // MARK: - Properties
+    
     @Binding var show:Bool
+    
+    
+    // MARK: - Body
+    
     var body: some View {
         if show {
             ZStack{
@@ -50,7 +58,6 @@ struct LeaderboardsView: View {
                     }
                 }
                 .padding(.top, 32)
-                
             }
             .overlay(content: {
                 VStack{
@@ -70,7 +77,6 @@ struct LeaderboardsView: View {
                     Spacer()
                 }})
         }
-        
     }
 }
 

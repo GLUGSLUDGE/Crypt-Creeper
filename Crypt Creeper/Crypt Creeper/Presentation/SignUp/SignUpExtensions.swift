@@ -7,66 +7,7 @@
 
 import SwiftUI
 
-extension SignUpView {
-    
-    func signUpPopUp() -> some View {
-        PopUpsView(title: "SIGN UP") {
-            textfieldsViews
-        }
-        .frame(width: 300)
-    }
-    
-    var textfieldsViews: some View {
-        VStack(spacing: 10) {
-            VStack(alignment: .leading, spacing: 0) {
-                ThinText(title: "Username:", fontSize: 30)
-                    .foregroundColor(Color.ui.text)
-                    .padding(.leading, 20)
-                
-                TextFieldLabel(field: $viewModel.username)
-                    .padding(.horizontal, 20)
-            }
-            VStack(alignment: .leading, spacing: 0) {
-                ThinText(title: "Email:", fontSize: 30)
-                    .foregroundColor(Color.ui.text)
-                    .padding(.leading, 20)
-                
-                TextFieldLabel(field: $viewModel.email)
-                    .padding(.horizontal, 20)
-            }
-            VStack(alignment: .leading, spacing: 0) {
-                ThinText(title: "Password:", fontSize: 30)
-                    .foregroundColor(Color.ui.text)
-                    .padding(.leading, 20)
-                
-                PasswordField(field: $viewModel.password)
-                    .padding(.leading, 20)
-                    .padding(.trailing, 120)
-            }
-            
-            VStack(alignment: .leading, spacing: 0) {
-                ThinText(title: "Repeat password:", fontSize: 30)
-                    .foregroundColor(Color.ui.text)
-                    .padding(.leading, 20)
-                
-                PasswordField(field: $viewModel.repeatPassword)
-                    .padding(.leading, 20)
-                    .padding(.trailing, 120)
-                    .padding(.bottom, 30)
-            }
-        }
-    }
-    
-    func signUpForm(titleText: String, paddingTextEdge: Edge.Set, paddingFieldEdge: Edge.Set, paddingTextSize: CGFloat, paddingFieldSize: CGFloat, feidl: Binding<String>) -> some View {
-        VStack(alignment: .leading, spacing: 0) {
-            ThinText(title: titleText, fontSize: 20)
-                .foregroundColor(Color.ui.text)
-                .padding(paddingTextEdge, paddingTextSize)
-            
-            TextFieldLabel(field: feidl)
-                .padding(paddingFieldEdge, paddingFieldSize)
-        }
-    }
+extension SignUpView {   
     
     @ViewBuilder func galleryImage(completion: @escaping () -> ()) -> some View {
         ImageSysName(image: "photo.on.rectangle.angled") {

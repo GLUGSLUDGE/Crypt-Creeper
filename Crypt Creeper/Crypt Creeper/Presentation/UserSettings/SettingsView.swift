@@ -15,11 +15,20 @@ struct Settings: View{
 }
 
 struct SettingsView: View {
+    
+    
+    // MARK: - Properties
+    
     @ObservedObject var viewModel = SettingsViewModel()
+    
     @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @State var shouldShowImagePicker = false
     @State var image: UIImage?
+    
     @Binding var show : Bool
+    
+    
+    // MARK: - Body
     
     var body: some View {
         if show{
@@ -36,27 +45,26 @@ struct SettingsView: View {
                                 Spacer()
                             }
                             Button {
-                                //Cambiar NOMBRE
+                                // Cambiar NOMBRE
                                 viewModel.showCN.toggle()
                             } label: {
-                                
                                 MiniButtonLabel(title: "CHANGE NAME", fontSize: 30, widthSize: 1.2,heightSize: 11.5)
                             }
                             Button {
+                                // Cambiar CONTRASEÑA
                                 viewModel.showCP.toggle()
                             } label: {
-                                
                                 MiniButtonLabel(title: "CHANGE PASSWORD", fontSize: 30, widthSize: 1.2,heightSize: 11.5)
                             }
                             Button {
+                                // Cambiar Foto
                                 viewModel.showCPic.toggle()
-                                
                             } label: {
-                                
-                                MiniButtonLabel(title: "CHANGE PERFIL PICTURE", fontSize: 30, widthSize: 1.2,heightSize: 11.5)
+                                MiniButtonLabel(title: "CHANGE PROFILE PICTURE", fontSize: 30, widthSize: 1.2,heightSize: 11.5)
                             }
                             HStack(spacing:10){
                                 Button {
+                                    // Destruir cuenta
                                     viewModel.showDestry.toggle()
                                 } label: {
                                     MiniButtonLabel(title: "DESTRY\nACCOUNT?", fontSize: 30, widthSize: 2.5,heightSize: 11.5)
@@ -64,7 +72,7 @@ struct SettingsView: View {
                                         .padding(.bottom,20)
                                 }
                                 Button {
-                                    //  CERRAR SEION
+                                    // CERRAR SEION
                                     logOut()
                                 } label: {
                                     MiniButtonLabel(title: "LOG OUT", fontSize: 30, widthSize: 2.5, heightSize: 11.5)
@@ -73,7 +81,7 @@ struct SettingsView: View {
                             }
                         }
                     }
-                    soundView()
+                    soundView
                 }.overlay(content: {
                     VStack{
                         HStack{
@@ -103,15 +111,12 @@ struct SettingsView: View {
             .padding(.vertical,50)
             .padding(.bottom,20)
         }
-        
     }
-    
 }
 
 
 
-func soundView()->some View {
-    
+var soundView: some View {
     ZStack{
         VStack{
             PopUpsView(title:"Sound Settings",canHide: false,bodyContent: {
@@ -124,8 +129,8 @@ func soundView()->some View {
                         VStack(alignment: .leading){
                             BoldText(title: "SFX:", fontSize: 30)
                                 .foregroundColor(Color.white)
-                            
                             Button {
+                                
                                 //speaker.slash.fillCambiar NOMBRE
                             } label: {
                                 Rectangle()
@@ -145,7 +150,6 @@ func soundView()->some View {
                         VStack(alignment: .leading){
                             BoldText(title: "MUSIC:", fontSize: 30)
                                 .foregroundColor(Color.white)
-                            
                             Button {
                                 //
                             } label: {
@@ -164,17 +168,11 @@ func soundView()->some View {
                         }
                     }
                     .padding(.horizontal,20)
-                    
                 }
             })
         }
     }
-    
 }
-
-
-
-
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
@@ -183,7 +181,6 @@ struct SettingsView_Previews: PreviewProvider {
                 .ignoresSafeArea()
             Settings()
         }
-        
     }
 }
 

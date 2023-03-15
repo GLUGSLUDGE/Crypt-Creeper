@@ -10,6 +10,9 @@ import UIKit
 
 class SettingsViewModel : ObservableObject {
     
+    
+    // MARK: - Porperties
+    
     @Published var userName = ""
     @Published var pass = ""
     @Published var newPass = ""
@@ -25,14 +28,12 @@ class SettingsViewModel : ObservableObject {
     
     @Published var profile_pic : UIImage?
     @Published var message = ""
-    //b @Published var data : [user] = []
     
     
+    // MARK: - Methods
     
     func ChangeName(completion: @escaping (Result<String, Error>) -> Void) {
-       
         let url =  "http://127.0.0.1:8000/api/user/change-name"
-
         let parametros : [String:Any] = ["name": userName]
         
         NetworkHelper.shared.requestProvider(url: url, type:.POST, params: parametros) { data, response, error in
@@ -61,9 +62,8 @@ class SettingsViewModel : ObservableObject {
             }
         }
     }
+    
     func changePassword(completion: @escaping (Result<String, Error>) -> Void)  {
-        
-        
         let url =  "http://127.0.0.1:8000/api/user/change-password"
         let parametros : [String:Any] = [
             "password": pass,
@@ -97,12 +97,10 @@ class SettingsViewModel : ObservableObject {
     }
     
     func changePhoto(completion: @escaping (Result<String, Error>) -> Void){
-        
-      
         let  url =  "http://127.0.0.1:8000/api/user/change-photo"
-       
         let parametros : [String: Any] = [
-            "profile_pic": Base64.shared.convertImageToBase64(image: profile_pic ?? UIImage())]
+            "profile_pic": Base64.shared.convertImageToBase64(image: profile_pic ?? UIImage())
+        ]
         
         NetworkHelper.shared.requestProvider(url: url, type:.POST , params: parametros) { data, response, error in
             
@@ -131,17 +129,15 @@ class SettingsViewModel : ObservableObject {
     
     
     func logOut(completion:@escaping (Result<String, Error>) -> Void){
-        
-       
-        
         let  url =  "http://127.0.0.1:8000/api/user/logout"
+        
         // Verificar si se recibió una respuesta válida
         NetworkHelper.shared.requestProvider(url: url) { data, response, error in
             guard let data = data, let httpResponse = response as? HTTPURLResponse, (200..<599).contains(httpResponse.statusCode) else {
                 completion(.failure(NetworkError.networkErrorEnum.invalidResponse))
                 return
             }
-    
+            
             // Procesar la respuesta
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: [])
@@ -156,10 +152,9 @@ class SettingsViewModel : ObservableObject {
         }
         
     }
+    
     func destryAccount(completion: @escaping (Result<String, Error>) -> Void) {
-       
         let url =  "http://127.0.0.1:8000/api/user/delete-user"
-
         let parametros : [String:Any] = ["password": pass]
         
         NetworkHelper.shared.requestProvider(url: url, type:.DELETE, params: parametros) { data, response, error in
@@ -188,7 +183,7 @@ class SettingsViewModel : ObservableObject {
             }
         }
     }
-
+    
     
 }
 

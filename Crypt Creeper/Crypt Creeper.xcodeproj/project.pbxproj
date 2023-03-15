@@ -35,7 +35,6 @@
 		2F7AF49429A7B8C5009322FB /* censor.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F7AF49329A7B8C5009322FB /* censor.ttf */; };
 		2F8AA51929B3A413004BFB68 /* FactionView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8AA51829B3A413004BFB68 /* FactionView-ViewModel.swift */; };
 		2F8AA51B29B3A6AD004BFB68 /* FactionsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8AA51A29B3A6AD004BFB68 /* FactionsExtension.swift */; };
-		2F8B6B2729AA6E1100710391 /* LoginExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8B6B2629AA6E1100710391 /* LoginExtensions.swift */; };
 		2F8B6B2929AA73F500710391 /* SignUpExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8B6B2829AA73F500710391 /* SignUpExtensions.swift */; };
 		2F8B6B2D29AA982000710391 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8B6B2C29AA982000710391 /* NetworkHelper.swift */; };
 		2F8B6B2F29AA9A6000710391 /* LoginView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8B6B2E29AA9A6000710391 /* LoginView-ViewModel.swift */; };
@@ -90,7 +89,6 @@
 		2F7AF49329A7B8C5009322FB /* censor.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = censor.ttf; sourceTree = "<group>"; };
 		2F8AA51829B3A413004BFB68 /* FactionView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FactionView-ViewModel.swift"; sourceTree = "<group>"; };
 		2F8AA51A29B3A6AD004BFB68 /* FactionsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactionsExtension.swift; sourceTree = "<group>"; };
-		2F8B6B2629AA6E1100710391 /* LoginExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginExtensions.swift; sourceTree = "<group>"; };
 		2F8B6B2829AA73F500710391 /* SignUpExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpExtensions.swift; sourceTree = "<group>"; };
 		2F8B6B2C29AA982000710391 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		2F8B6B2E29AA9A6000710391 /* LoginView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginView-ViewModel.swift"; sourceTree = "<group>"; };
@@ -168,8 +166,6 @@
 				2FD2184B29B7C7CA0051CA79 /* Model */,
 				2F8B6B2B29AA97B900710391 /* Data */,
 				2F8B6B2429AA6D5C00710391 /* Presentation */,
-				48255966299A90FF00882744 /* UserSettings */,
-				48F3F40329AA78E100FD0F58 /* HowToPlay */,
 				2F8F3DF7299EABF8004E6700 /* Components */,
 				2842ECA82979A85A00C4B6A3 /* Crypt-Creeper-Info.plist */,
 				2842ECA52979A81F00C4B6A3 /* Fonts */,
@@ -243,7 +239,6 @@
 		2F8B6B2329AA6CA600710391 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				2F8B6B2629AA6E1100710391 /* LoginExtensions.swift */,
 				28A09B2129B03988000C7DBE /* LoginView.swift */,
 				2F8B6B2E29AA9A6000710391 /* LoginView-ViewModel.swift */,
 			);
@@ -253,6 +248,8 @@
 		2F8B6B2429AA6D5C00710391 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				48F3F40329AA78E100FD0F58 /* HowToPlay */,
+				48255966299A90FF00882744 /* UserSettings */,
 				28912E3B29BA272D00029ABA /* Leaderboards */,
 				2F184DB729B645400029D3C5 /* UserProfile */,
 				2F8B6B3429AD04DB00710391 /* Splash */,
@@ -348,7 +345,8 @@
 				48F3F3FF29AA35F100FD0F58 /* HowToPlayView.swift */,
 				48F3F40429AA797000FD0F58 /* HowToPlayExtension.swift */,
 			);
-			path = HowToPlay;
+			name = HowToPlay;
+			path = ../HowToPlay;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -434,7 +432,6 @@
 				28CC64C429AFC42B007FFB1A /* GameScene.swift in Sources */,
 				28D180A329B04026009AADAC /* Tile.swift in Sources */,
 				2F8F3DF2299E7E5F004E6700 /* PopUps.swift in Sources */,
-				2F8B6B2729AA6E1100710391 /* LoginExtensions.swift in Sources */,
 				28A09B2229B03988000C7DBE /* LoginView.swift in Sources */,
 				2F8B6B3129AAB70300710391 /* Alert.swift in Sources */,
 				28FAF85129799F4E0006BB60 /* Buttons.swift in Sources */,
