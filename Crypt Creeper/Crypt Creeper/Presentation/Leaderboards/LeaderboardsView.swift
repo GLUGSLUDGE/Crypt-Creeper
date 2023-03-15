@@ -7,30 +7,41 @@
 
 import SwiftUI
 
+
 struct LeaderboardsView: View {
+    @ObservedObject var viewModel = LeaderboardViewModel()
     @Binding var show:Bool
+    
     var body: some View {
         if show {
             ZStack{
                 Color.ui.UIBackground
                     .ignoresSafeArea()
                 PopUpsView(title: "LEADERBOARDS") {
-                  Spacer()
+                    Spacer()
                 }
                 .padding(.horizontal, 8)
                 VStack{
                     PopUpsView(title: "FACTION LEADERBOARDS") {
                         ScrollView(.horizontal){
                             HStack{
-                                LeaderBoardFactionItem()
-                                LeaderBoardFactionItem()
-                                LeaderBoardFactionItem()
-                                LeaderBoardFactionItem()
-                                LeaderBoardFactionItem()
-                                LeaderBoardFactionItem()
-                                LeaderBoardFactionItem()
-                                LeaderBoardFactionItem()
+                                ForEach(Array(viewModel.topFactionScores.enumerated()) ,id: \.offset) { index ,factionScore in
+                                    LeaderBoardFactionItem(top: index+1,
+                                        faction_name: factionScore.name,
+                                        faction_icon: factionScore.faction_id,
+                                        faction_points: factionScore.points
+                                    )
+                                }
                             }.padding(.bottom, 8)
+                        }
+                    }.onAppear{
+                        viewModel.getTopFactions { result, error in
+                            if let score = result{
+                                viewModel.topFactionScores = score
+                            }
+                            if let error = error{
+                                print(error)
+                            }
                         }
                     }
                     PopUpsView(title: "PLAYER LEADERBOARDS") {

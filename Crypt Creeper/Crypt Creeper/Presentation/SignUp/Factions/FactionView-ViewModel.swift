@@ -21,45 +21,8 @@ extension FactionsView {
         let userDefaults = UserDefaults.standard
         private var token: String = ""
         
-        enum NetworkError: Error {
-            case invalidUrl
-            case invalidResponse
-            case invalidData
-            case requestFailed
-            case authenticationError
-            case badRequest
-            case outdated
-            case failed
-            case unknown
-            case validationError(String)
-            
-            var customLocalizedDescription: String {
-                switch self {
-                case .invalidUrl:
-                    return "The URL is not valid"
-                case .invalidResponse:
-                    return "The response received from the server is not valid"
-                case .invalidData:
-                    return "The data received from the server is not valid"
-                case .requestFailed:
-                    return "The request failed"
-                case .authenticationError:
-                    return "There was an authentication error"
-                case .badRequest:
-                    return "The request is not valid"
-                case .outdated:
-                    return "The request is outdated"
-                case .failed:
-                    return "The request failed for an unknown reason"
-                case .unknown:
-                    return "An unknown error occurred"
-                case .validationError(let messageErrors):
-                    return messageErrors
-                }
-            }
-        }
-        
-        func signUp(user: UserModel, completion: @escaping (_ result: String? , _ error: NetworkError?) -> Void) {
+       
+        func signUp(user: UserModel, completion: @escaping (_ result: String? , _ error: NetworkError.networkErrorEnum?) -> Void) {
             let url = "http://127.0.0.1:8000/api/user/create"
             let dictionary: [String: Any] = [
                 "name" : user.username,
@@ -77,7 +40,7 @@ extension FactionsView {
                 
                 // Verificar si se recibió una respuesta válida
                 guard let data = data, let httpResponse = response as? HTTPURLResponse, (200..<599).contains(httpResponse.statusCode) else {
-                    completion(nil,NetworkError.invalidResponse)
+                    completion(nil,NetworkError.networkErrorEnum.invalidResponse)
                     return
                 }
                 // Procesar la respuesta
@@ -92,10 +55,10 @@ extension FactionsView {
                         let errorMessage = validationErrors.map { _, value in
                             "\(value)"
                         }.joined(separator:"" )
-                        completion(nil, NetworkError.validationError(errorMessage))
+                        completion(nil, NetworkError.networkErrorEnum.validationError(errorMessage))
                     }
                 } catch {
-                    completion(nil, NetworkError.invalidData)
+                    completion(nil, NetworkError.networkErrorEnum.invalidData)
                 }
             }
         }

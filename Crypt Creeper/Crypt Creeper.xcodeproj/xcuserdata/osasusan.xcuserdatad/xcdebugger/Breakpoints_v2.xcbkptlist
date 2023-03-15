@@ -46,8 +46,8 @@
             filePath = "Crypt Creeper/UserSettings/SettigsViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "203"
-            endingLineNumber = "203"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
             landmarkName = "logOut(completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -66,6 +66,86 @@
             endingLineNumber = "47"
             landmarkName = "changeName(shows:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F8E5C395-C835-4DAA-8456-B47D5B491173"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Crypt Creeper/Presentation/Leaderboards/LeaderboardsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D76D53F9-1613-4270-93A4-E17D5B23F067"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Crypt Creeper/Presentation/Leaderboards/LeaderboardsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "28F0963F-EC35-4728-8B48-43EBD1A2099F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Crypt Creeper/Presentation/Leaderboards/LeaderboardsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "28F0963F-EC35-4728-8B48-43EBD1A2099F - 40a4136272100ff4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.ScrollView&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt; in closure #2 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.onAppear(perform: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; some&gt;&gt;.0, Crypt_Creeper.PopUpsView&lt;SwiftUI.ScrollView&lt;SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(Crypt_Creeper.LeaderBoardItem, Crypt_Creeper.LeaderBoardItem, Crypt_Creeper.LeaderBoardItem, Crypt_Creeper.LeaderBoardItem, Crypt_Creeper.LeaderBoardItem, Crypt_Creeper.LeaderBoardItem, Crypt_Creeper.LeaderBoardItem, Crypt_Creeper.LeaderBoardItem)&gt;&gt;&gt;&gt;)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ignoresSafeArea(_: SwiftUI.SafeAreaRegions, edges: SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt; in Crypt_Creeper.LeaderboardsView.body.getter : some"
+                  moduleName = "Crypt Creeper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/osasusan/BBDD/Crypt-Creepe_game/Crypt%20Creeper/Crypt%20Creeper/Presentation/Leaderboards/LeaderboardsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "524">
+               </Location>
+               <Location
+                  uuid = "28F0963F-EC35-4728-8B48-43EBD1A2099F - bdb9b3f43fdbc1e8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Array&lt;Crypt_Creeper.FactionScoreResponseModel&gt;, Foundation.UUID, Crypt_Creeper.LeaderBoardFactionItem&gt;, Crypt_Creeper.LeaderBoardFactionItem, Crypt_Creeper.LeaderBoardFactionItem, Crypt_Creeper.LeaderBoardFactionItem, Crypt_Creeper.LeaderBoardFactionItem, Crypt_Creeper.LeaderBoardFactionItem, Crypt_Creeper.LeaderBoardFactionItem, Crypt_Creeper.LeaderBoardFactionItem, Crypt_Creeper.LeaderBoardFactionItem)&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.ScrollView&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt; in closure #2 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.onAppear(perform: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; some&gt;&gt;.0, Crypt_Creeper.PopUpsView&lt;SwiftUI.ScrollView&lt;SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(Crypt_Creeper.LeaderBoardItem, Crypt_Creeper.LeaderBoardItem, Crypt_Creeper.LeaderBoardItem, Crypt_Creeper.LeaderBoardItem, Crypt_Creeper.LeaderBoardItem, Crypt_Creeper.LeaderBoardItem, Crypt_Creeper.LeaderBoardItem, Crypt_Creeper.LeaderBoardItem)&gt;&gt;&gt;&gt;)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.ignoresSafeArea(_: SwiftUI.SafeAreaRegions, edges: SwiftUI.Edge.Set) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt; in Crypt_Creeper.LeaderboardsView.body.getter : some"
+                  moduleName = "Crypt Creeper"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/osasusan/BBDD/Crypt-Creepe_game/Crypt%20Creeper/Crypt%20Creeper/Presentation/Leaderboards/LeaderboardsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "1360">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

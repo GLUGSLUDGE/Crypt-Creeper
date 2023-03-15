@@ -51,6 +51,8 @@
 		48255968299A91C800882744 /* SettigsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48255967299A91C800882744 /* SettigsViewModel.swift */; };
 		4825596C29A0272800882744 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4825596B29A0272800882744 /* SettingsView.swift */; };
 		486CBBE629B541F900C8C2CD /* SettingsViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486CBBE529B541F900C8C2CD /* SettingsViewExtension.swift */; };
+		486CBBEA29C0F9BC00C8C2CD /* LeaderboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486CBBE929C0F9BC00C8C2CD /* LeaderboardViewModel.swift */; };
+		48BE25D029C0FA9A000A4CDC /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BE25CF29C0FA9A000A4CDC /* NetworkError.swift */; };
 		48F3F40029AA35F100FD0F58 /* HowToPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F3F3FF29AA35F100FD0F58 /* HowToPlayView.swift */; };
 		48F3F40229AA67B700FD0F58 /* Base64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F3F40129AA67B700FD0F58 /* Base64.swift */; };
 		48F3F40529AA797000FD0F58 /* HowToPlayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F3F40429AA797000FD0F58 /* HowToPlayExtension.swift */; };
@@ -103,6 +105,8 @@
 		48255967299A91C800882744 /* SettigsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettigsViewModel.swift; sourceTree = "<group>"; };
 		4825596B29A0272800882744 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		486CBBE529B541F900C8C2CD /* SettingsViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewExtension.swift; sourceTree = "<group>"; };
+		486CBBE929C0F9BC00C8C2CD /* LeaderboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewModel.swift; sourceTree = "<group>"; };
+		48BE25CF29C0FA9A000A4CDC /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		48F3F3FF29AA35F100FD0F58 /* HowToPlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HowToPlayView.swift; sourceTree = "<group>"; };
 		48F3F40129AA67B700FD0F58 /* Base64.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base64.swift; sourceTree = "<group>"; };
 		48F3F40429AA797000FD0F58 /* HowToPlayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToPlayExtension.swift; sourceTree = "<group>"; };
@@ -179,6 +183,7 @@
 			children = (
 				28912E3C29BA274600029ABA /* LeaderboardsView.swift */,
 				28912E3E29BA336400029ABA /* LeaderBoardItems.swift */,
+				486CBBE929C0F9BC00C8C2CD /* LeaderboardViewModel.swift */,
 			);
 			path = Leaderboards;
 			sourceTree = "<group>";
@@ -280,6 +285,7 @@
 				2F8B6B2C29AA982000710391 /* NetworkHelper.swift */,
 				48F3F40129AA67B700FD0F58 /* Base64.swift */,
 				2F8B6B4029AD395E00710391 /* Camera&Gallery.swift */,
+				48BE25CF29C0FA9A000A4CDC /* NetworkError.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -424,6 +430,7 @@
 				4825596C29A0272800882744 /* SettingsView.swift in Sources */,
 				2F8F3DF6299E9733004E6700 /* Texts.swift in Sources */,
 				28D274E02975C5EB00E2CA16 /* ColorExtension.swift in Sources */,
+				48BE25D029C0FA9A000A4CDC /* NetworkError.swift in Sources */,
 				2F8B6B2D29AA982000710391 /* NetworkHelper.swift in Sources */,
 				2F8B6B4129AD395E00710391 /* Camera&Gallery.swift in Sources */,
 				486CBBE629B541F900C8C2CD /* SettingsViewExtension.swift in Sources */,
@@ -445,6 +452,7 @@
 				48255968299A91C800882744 /* SettigsViewModel.swift in Sources */,
 				28A09B2029B03972000C7DBE /* HomeView.swift in Sources */,
 				2F184DBB29B66D250029D3C5 /* UserProfileExtension.swift in Sources */,
+				486CBBEA29C0F9BC00C8C2CD /* LeaderboardViewModel.swift in Sources */,
 				28A09B2A29B039CB000C7DBE /* ShopView.swift in Sources */,
 				28A09B2829B039CB000C7DBE /* TempleView.swift in Sources */,
 				2855C08F29ABD9DA00351002 /* UIPill.swift in Sources */,

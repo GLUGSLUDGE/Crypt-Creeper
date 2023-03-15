@@ -9,42 +9,55 @@
 import SwiftUI
 
 struct LeaderBoardFactionItem : View {
+    var top : Int
     var faction_name:String?
-    var faction_icon:String?
-    var faction_points:String?
+    var faction_icon:Int?
+    var faction_points:Int?
     var body: some View {
-        ZStack{
-            Rectangle()
-                .foregroundColor(.ui.popUpColor)
-                .border(Color.ui.text)
-            VStack{
-                Text(faction_name ?? "Faction")
-                    .foregroundColor(Color.ui.text)
-                    .font(.custom("m6x11", fixedSize: 24))
-                    .padding(7)
-                Image(faction_icon ?? "Ghost")
-                    .resizable()
-                    .frame(width: 75, height: 75)
-                Text(faction_points ?? "0")
-                    .foregroundColor(Color.ui.text)
-                    .font(.custom("m6x11", fixedSize: 24))
-                    .padding(7)
-            }
-        }
-        .frame(width: 150, height: 150)
-        .padding(6)
-    }
-
-}
+           ZStack{
+               Rectangle()
+                   .foregroundColor(.ui.popUpColor)
+                   .border(Color.ui.text)
+               VStack{
+                   Text(faction_name ?? "Faction")
+                       .foregroundColor(Color.ui.text)
+                       .font(.custom("m6x11", fixedSize: 24))
+                       .padding(7)
+                   Image(factionIcon(iconNumber: faction_icon ?? 1))
+                       .resizable()
+                       .frame(width: 75, height: 75)
+                   Text("\(faction_points ?? 0)")
+                       .foregroundColor(Color.ui.text)
+                       .font(.custom("m6x11", fixedSize: 24))
+                       .padding(7)
+               }
+           }
+           .frame(width: 150, height: 150)
+           .padding(6)
+       }
+    func factionIcon(iconNumber: Int) -> String {
+        let iconFaction = [
+            1: "Ghost",
+            2: "Hans",
+            3: "Mosca",
+            4: "Double_double",
+            5: "Uzzi",
+            6: "Tía",
+            7: "Kingeyes",
+            8: "Big_mud",
+        ]
+        return iconFaction[iconNumber] ?? "Ghost"
+       }
+   }
 
 struct LeaderBoardItem:View{
     var player_name:String?
-    var player_photo:Image?
+    var player_photo:String?
     var player_points:String?
     var player_fation:String?
     var body: some View {
         HStack{
-            Image("Ghost")
+            Image("\(player_photo ?? "Ghost")")
                 .resizable()
                 .frame(width: 75, height: 75)
                 .padding(4)
@@ -56,7 +69,7 @@ struct LeaderBoardItem:View{
                     Spacer()
                 }
                 HStack{
-                    Text("\(player_points ?? "999999999999")p")
+                    Text("\(player_points ?? "999999999999")")
                     Spacer()
                 }
                 HStack{
@@ -76,4 +89,5 @@ struct LeaderBoardItem:View{
         .padding(.horizontal, 8)
         
     }
+   
 }
