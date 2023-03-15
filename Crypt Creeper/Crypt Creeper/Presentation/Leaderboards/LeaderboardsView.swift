@@ -16,8 +16,6 @@ struct LeaderboardsView: View {
     var body: some View {
         if show {
             ZStack{
-                Color.ui.UIBackground
-                    .ignoresSafeArea()
                 PopUpsView(title: "LEADERBOARDS") {
                     Spacer()
                 }
@@ -130,6 +128,10 @@ struct LeaderboardsView: View {
 
 struct LeaderboardsView_Previews: PreviewProvider {
     static var previews: some View {
-        LeaderboardsView(show: .constant(true))
+        ZStack {
+            Color.ui.UIBackground
+                .ignoresSafeArea()
+            LeaderboardsView(show: .constant(true))
+        }
     }
 }
