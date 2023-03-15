@@ -25,23 +25,31 @@ struct LeaderboardsView: View {
                     PopUpsView(title: "FACTION LEADERBOARDS") {
                         ScrollView(.horizontal){
                             HStack{
-                                ForEach(Array(viewModel.topFactionScores.enumerated()) ,id: \.offset) { index ,factionScore in
-                                    LeaderBoardFactionItem(top: index+1,
-                                        faction_name: factionScore.name,
-                                        faction_icon: factionScore.faction_id,
-                                        faction_points: factionScore.points
-                                    )
+                                ForEach(viewModel.factionLeaderboard ,id: \.points) { faction in
+                                    LeaderBoardFactionItem(faction_name: faction.name, faction_icon: faction.faction_id, faction_points: faction.points)
                                 }
                             }.padding(.bottom, 8)
                         }
                     }.onAppear{
                         viewModel.getTopFactions { result, error in
-                            if let score = result{
-                                viewModel.topFactionScores = score
+                            if let leaderboard = result {
+                                DispatchQueue.main.async {
+                                    viewModel.factionLeaderboard = leaderboard.compactMap { factionDict in
+                                        do {
+                                            let data = try JSONSerialization.data(withJSONObject: factionDict, options: [])
+                                            let faction = try JSONDecoder().decode(FactionScoreResponseModel.self, from: data)
+                                            return faction
+                                        } catch {
+                                            print("Error decoding faction: \(error)")
+                                            return nil
+                                        }
+                                    }
+                                }
                             }
-                            if let error = error{
+                            if let error = error {
                                 print(error)
                             }
+                        
                         }
                     }
                     PopUpsView(title: "PLAYER LEADERBOARDS") {

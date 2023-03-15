@@ -9,10 +9,10 @@
 import SwiftUI
 
 struct LeaderBoardFactionItem : View {
-    var top : Int
+  
     var faction_name:String?
     var faction_icon:Int?
-    var faction_points:Int?
+    var faction_points:String?
     var body: some View {
            ZStack{
                Rectangle()
@@ -26,7 +26,7 @@ struct LeaderBoardFactionItem : View {
                    Image(factionIcon(iconNumber: faction_icon ?? 1))
                        .resizable()
                        .frame(width: 75, height: 75)
-                   Text("\(faction_points ?? 0)")
+                   Text(faction_points ?? "0")
                        .foregroundColor(Color.ui.text)
                        .font(.custom("m6x11", fixedSize: 24))
                        .padding(7)
