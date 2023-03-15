@@ -51,13 +51,14 @@ struct LeaderBoardFactionItem : View {
    }
 
 struct LeaderBoardItem:View{
+    var top :Int = 0
     var player_name:String?
     var player_photo:String?
-    var player_points:String?
+    var player_points:Int?
     var player_fation:String?
     var body: some View {
         HStack{
-            Image("\(player_photo ?? "Ghost")")
+            Image(uiImage: getImage(from: player_photo ?? ""))
                 .resizable()
                 .frame(width: 75, height: 75)
                 .padding(4)
@@ -65,11 +66,11 @@ struct LeaderBoardItem:View{
                 .padding(.leading, 1)
             VStack(spacing: 6){
                 HStack{
-                    Text("1- \(player_name ?? "Player")")
+                    Text("\(top)-\(player_name ?? "Player")")
                     Spacer()
                 }
                 HStack{
-                    Text("\(player_points ?? "999999999999")")
+                    Text("\(player_points ?? 999999999999)")
                     Spacer()
                 }
                 HStack{
@@ -87,7 +88,13 @@ struct LeaderBoardItem:View{
         .padding(3)
         .border(Color.ui.text, width: 2)
         .padding(.horizontal, 8)
-        
     }
-   
+    func getImage(from url: String) -> UIImage {
+        if let url = URL(string: url), let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
+            return image
+        } else {
+            return UIImage(named: "default") ?? UIImage()
+        }
+    }
 }
+
