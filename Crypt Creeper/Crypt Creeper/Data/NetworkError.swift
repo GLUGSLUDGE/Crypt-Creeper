@@ -2,14 +2,12 @@
 //  NetworkError.swift
 //  Crypt Creeper
 //
-//  Created by Diego Moreno on 7/3/23.
+//  Created by Osasu sanchez on 14/3/23.
 //
 
 import Foundation
-
 class NetworkError {
-    
-    enum networkErrorEnum: Error {
+    enum networkErrorEnum: Error{
         case invalidUrl
         case invalidResponse
         case invalidData
@@ -21,7 +19,7 @@ class NetworkError {
         case unknown
         case validationError(String)
         
-        var localizedDescription: String {
+        var customLocalizedDescription: String {
             switch self {
             case .invalidUrl:
                 return "The URL is not valid"
@@ -41,9 +39,10 @@ class NetworkError {
                 return "The request failed for an unknown reason"
             case .unknown:
                 return "An unknown error occurred"
-            case .validationError(let validationError):
-                return validationError
+            case .validationError(let messageErrors):
+                return messageErrors
             }
         }
     }
 }
+

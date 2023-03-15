@@ -29,7 +29,7 @@ class SettingsViewModel : ObservableObject {
     
     
     
-    func ChangeName(completion: @escaping (Result<String, Error>) -> Void) {
+    func ChangeName(completion: @escaping (_ result: String? , _ error: NetworkError.networkErrorEnum?) -> Void) {
        
         let url =  "http://127.0.0.1:8000/api/user/change-name"
 
@@ -39,12 +39,12 @@ class SettingsViewModel : ObservableObject {
             
             // Verificar si hay un error
             if let error = error {
-                completion(.failure(error))
+                completion(nil ,NetworkError.networkErrorEnum.badRequest)
                 return
             }
             // Verificar si se recibió una respuesta válida
             guard let data = data, let httpResponse = response as? HTTPURLResponse, (200..<599).contains(httpResponse.statusCode) else {
-                completion(.failure(NetworkError.networkErrorEnum.invalidResponse))
+                completion(nil,NetworkError.networkErrorEnum.invalidResponse)
                 return
             }
             
@@ -52,51 +52,54 @@ class SettingsViewModel : ObservableObject {
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: [])
                 if let responseJson = json as? [String: Any], let message = responseJson["message"] as? String {
-                    completion(.success(message))
-                } else {
-                    completion(.failure(NetworkError.networkErrorEnum.invalidData))
+                    completion(message, nil)
+                } else if let response = json as? [String: Any], let errors = response["Errors"] as? [String:Any]{
+                    let errorMessage = errors.map { _, value in
+                        "\(value)"
+                    }.joined(separator: "")
+                    completion(nil, NetworkError.networkErrorEnum.validationError(errorMessage))
                 }
             } catch {
-                completion(.failure(NetworkError.networkErrorEnum.invalidData))
+                completion(nil, NetworkError.networkErrorEnum.invalidData)
             }
         }
     }
-    func changePassword(completion: @escaping (Result<String, Error>) -> Void)  {
-        
-        
+    func changePassword(completion: @escaping (_ result: String? , _ error: NetworkError.networkErrorEnum?) -> ())  {
         let url =  "http://127.0.0.1:8000/api/user/change-password"
         let parametros : [String:Any] = [
             "password": pass,
             "new_password" : newPass,
             "repit_new_password" : repitNewPass]
         
-        NetworkHelper.shared.requestProvider(url: url, type:.POST , params: parametros) { data, response, error in
+        NetworkHelper.shared.requestProvider(url: url, type: .POST , params: parametros) { data, response, error in
             // Verificar si hay un error
             if let error = error {
-                completion(.failure(error))
+                completion(nil, NetworkError.networkErrorEnum.badRequest)
                 return
             }
             // Verificar si se recibió una respuesta válida
             guard let data = data, let httpResponse = response as? HTTPURLResponse, (200..<599).contains(httpResponse.statusCode) else {
-                completion(.failure(NetworkError.networkErrorEnum.invalidResponse))
+                completion(nil, NetworkError.networkErrorEnum.invalidResponse)
                 return
             }
-            
             // Procesar la respuesta
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: [])
                 if let responseJson = json as? [String: Any], let message = responseJson["message"] as? String {
-                    completion(.success(message))
-                } else {
-                    completion(.failure(NetworkError.networkErrorEnum.invalidData))
+                    completion(message, nil)
+                } else if let response = json as? [String: Any], let errors = response["Errors"] as? [String:Any]{
+                    let errorMessage = errors.map { _, value in
+                        "\(value)"
+                    }.joined(separator: "")
+                    completion(nil, NetworkError.networkErrorEnum.validationError(errorMessage))
                 }
             } catch {
-                completion(.failure(NetworkError.networkErrorEnum.invalidData))
+                completion(nil, NetworkError.networkErrorEnum.invalidData)
             }
         }
     }
     
-    func changePhoto(completion: @escaping (Result<String, Error>) -> Void){
+    func changePhoto(completion: @escaping (_ result: String? , _ error: NetworkError.networkErrorEnum?) -> Void){
         
       
         let  url =  "http://127.0.0.1:8000/api/user/change-photo"
@@ -104,33 +107,37 @@ class SettingsViewModel : ObservableObject {
         let parametros : [String: Any] = [
             "profile_pic": Base64.shared.convertImageToBase64(image: profile_pic ?? UIImage())]
         
-        NetworkHelper.shared.requestProvider(url: url, type:.POST , params: parametros) { data, response, error in
+        NetworkHelper.shared.requestProvider(url: url, type: .POST, params: parametros) { data, response, error in
             
             if let error = error {
-                completion(.failure(error))
+                completion(nil,NetworkError.networkErrorEnum.badRequest)
                 return
             }
             // Verificar si se recibió una respuesta válida
             guard let data = data, let httpResponse = response as? HTTPURLResponse, (200..<599).contains(httpResponse.statusCode) else {
-                completion(.failure(NetworkError.networkErrorEnum.invalidResponse))
+                completion(nil ,NetworkError.networkErrorEnum.invalidResponse)
                 return
             }
             // Procesar la respuesta
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: [])
                 if let responseJson = json as? [String: Any], let message = responseJson["message"] as? String {
-                    completion(.success(message))
-                } else {
-                    completion(.failure(NetworkError.networkErrorEnum.invalidData))
+                    completion(message, nil)
+                }  else if let response = json as? [String: Any], let errors = response["Errors"] as? [String:Any]{
+                    let errorMessage = errors.map { _, value in
+                        "\(value)"
+                    }.joined(separator: "")
+                    //             self.message = errorMessage
+                    completion(nil, NetworkError.networkErrorEnum.validationError(errorMessage))
                 }
             } catch {
-                completion(.failure(NetworkError.networkErrorEnum.invalidData))
+                completion(nil,NetworkError.networkErrorEnum.invalidData)
             }
         }
     }
     
     
-    func logOut(completion:@escaping (Result<String, Error>) -> Void){
+    func logOut(completion:@escaping (_ result: String? , _ error: NetworkError.networkErrorEnum?) -> Void){
         
        
         
@@ -138,7 +145,7 @@ class SettingsViewModel : ObservableObject {
         // Verificar si se recibió una respuesta válida
         NetworkHelper.shared.requestProvider(url: url) { data, response, error in
             guard let data = data, let httpResponse = response as? HTTPURLResponse, (200..<599).contains(httpResponse.statusCode) else {
-                completion(.failure(NetworkError.networkErrorEnum.invalidResponse))
+                completion(nil,NetworkError.networkErrorEnum.invalidResponse)
                 return
             }
     
@@ -146,17 +153,17 @@ class SettingsViewModel : ObservableObject {
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: [])
                 if let responseJson = json as? [String: Any], let message = responseJson["message"] as? String {
-                    completion(.success(message))
+                    completion(message,nil)
                 } else {
-                    completion(.failure(NetworkError.networkErrorEnum.invalidData))
+                    completion(nil,NetworkError.networkErrorEnum.invalidData)
                 }
             } catch {
-                completion(.failure(NetworkError.networkErrorEnum.invalidData))
+                completion(nil,NetworkError.networkErrorEnum.invalidData)
             }
         }
         
     }
-    func destryAccount(completion: @escaping (Result<String, Error>) -> Void) {
+    func destryAccount(completion: @escaping (_ result: String? , _ error: NetworkError.networkErrorEnum?) -> Void) {
        
         let url =  "http://127.0.0.1:8000/api/user/delete-user"
 
@@ -166,12 +173,12 @@ class SettingsViewModel : ObservableObject {
             
             // Verificar si hay un error
             if let error = error {
-                completion(.failure(error))
+                completion(nil , NetworkError.networkErrorEnum.badRequest)
                 return
             }
             // Verificar si se recibió una respuesta válida
             guard let data = data, let httpResponse = response as? HTTPURLResponse, (200..<599).contains(httpResponse.statusCode) else {
-                completion(.failure(NetworkError.networkErrorEnum.invalidResponse))
+                completion(nil ,NetworkError.networkErrorEnum.invalidResponse)
                 return
             }
             
@@ -179,12 +186,15 @@ class SettingsViewModel : ObservableObject {
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: [])
                 if let responseJson = json as? [String: Any], let message = responseJson["message"] as? String {
-                    completion(.success(message))
-                } else {
-                    completion(.failure(NetworkError.networkErrorEnum.invalidData))
+                    completion(message,nil)
+                }  else if let response = json as? [String: Any], let errors = response["Errors"] as? [String:Any]{
+                    let errorMessage = errors.map { _, value in
+                        "\(value)"
+                    }.joined(separator: "")
+                    completion(nil, NetworkError.networkErrorEnum.validationError(errorMessage))
                 }
             } catch {
-                completion(.failure(NetworkError.networkErrorEnum.invalidData))
+                completion(nil,NetworkError.networkErrorEnum.invalidData)
             }
         }
     }

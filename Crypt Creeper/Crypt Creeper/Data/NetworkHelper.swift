@@ -29,7 +29,7 @@ class NetworkHelper {
     // MARK: - Constants
     
     // Singleton
-    static let shared = NetworkHelper()
+  public static let shared = NetworkHelper()
     
     
     // MARK: - Private Methods

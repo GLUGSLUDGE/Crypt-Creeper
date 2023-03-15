@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 extension FactionsView {
-    
+   
     func popUp(image: String, title: String, id: Int) -> some View {
         PopUpsView(title: title) {
             Image(image)
@@ -22,11 +22,11 @@ extension FactionsView {
         )
     }
     
-    func sigError(){
-        if let window = UIApplication.shared.windows.first {
-            window.rootViewController = UIHostingController(rootView: LoginView())
-            window.makeKeyAndVisible()
+    func backToLogin(){
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+            withAnimation {
+                dismiss.callAsFunction()
+            }
         }
     }
-    
 }

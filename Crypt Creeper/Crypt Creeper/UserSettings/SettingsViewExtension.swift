@@ -31,20 +31,15 @@ extension SettingsView{
                         Button {
                             
                             shows.wrappedValue.toggle()
-                           
-                            self.viewModel.ChangeName { result in
-                                switch result {
-                                case .success(let message):
-                                    print(message)
+                            self.viewModel.ChangeName { result, error in
+                                if let message = result {
                                     self.viewModel.message = message
                                     self.viewModel.showAlet1.toggle()
                                     self.viewModel.userName = ""
-                                   
-                                case .failure(let error):
-                                    self.viewModel.message = error.localizedDescription
+                                } else if let error = error {
+                                    self.viewModel.message = error.customLocalizedDescription
                                     self.viewModel.showAlet1.toggle()
                                     self.viewModel.userName = ""
-                                    print(error)
                                 }
                             }
                         } label: {
@@ -70,6 +65,7 @@ extension SettingsView{
                         }
                         Spacer()
                     }})
+                .padding(.horizontal)
                 .frame(width: 300, height: 300)
             }
         }
@@ -98,16 +94,15 @@ extension SettingsView{
                             .padding(.horizontal, 20)
                         Button {
                             shows.wrappedValue.toggle()
-                            self.viewModel.changePassword() { result in
-                                switch result {
-                                case .success(let message):
+                            self.viewModel.changePassword() { result, error in
+                                if let message = result {
                                     self.viewModel.message = message
                                     self.viewModel.showAlet1.toggle()
                                     self.viewModel.pass = ""
                                     self.viewModel.newPass = ""
                                     self.viewModel.repitNewPass = ""
-                                case .failure(let error):
-                                    self.viewModel.message = error.localizedDescription
+                                } else if let error = error {
+                                    self.viewModel.message = error.customLocalizedDescription
                                     self.viewModel.showAlet1.toggle()
                                     self.viewModel.pass = ""
                                     self.viewModel.newPass = ""
@@ -141,6 +136,7 @@ extension SettingsView{
                         }
                         Spacer()
                     }})
+                .padding(.horizontal)
                 .frame(width: 300, height: 300)
             }
         }
@@ -185,14 +181,12 @@ extension SettingsView{
                         }
                         Button {
                             shows.wrappedValue.toggle()
-                            viewModel.changePhoto { result in
-                                switch result {
-                                case .success(let message):
+                            viewModel.changePhoto { result, error in
+                                if let message = result {
                                     self.viewModel.message = message
                                     self.viewModel.showAlet1.toggle()
-                                    print(message)
-                                case .failure(let error):
-                                    self.viewModel.message = error.localizedDescription
+                                } else if let error = error {
+                                    self.viewModel.message = error.customLocalizedDescription
                                     self.viewModel.showAlet1.toggle()
                                 }
                             }
@@ -217,15 +211,16 @@ extension SettingsView{
                         }
                         Spacer()
                     }})
+                .padding(.horizontal)
                 .frame(width: 300)
             }
         }
     }
     func logOut() {
         
-        viewModel.logOut {result in
-            switch result {
-            case .success(let message):
+        viewModel.logOut {result, error in
+           
+            if let message = result {
                 self.viewModel.message = message
                 self.viewModel.showAlet1.toggle()
                 if message == "closed session"{
@@ -239,8 +234,8 @@ extension SettingsView{
                         }
                     }}
                 print(message)
-            case .failure(let error):
-                viewModel.message = error.localizedDescription
+            } else if let error = error {
+                viewModel.message = error.customLocalizedDescription
             }
         }
     }
@@ -264,9 +259,8 @@ extension SettingsView{
                         }
                         Button {
                             shows.wrappedValue.toggle()
-                            self.viewModel.destryAccount { result in
-                                switch result {
-                                case .success(let message):
+                            self.viewModel.destryAccount { result, error in
+                                if let message = result {
                                     self.viewModel.message = message
                                     self.viewModel.showAlet1.toggle()
                                     self.viewModel.pass = ""
@@ -280,9 +274,10 @@ extension SettingsView{
                                                 }
                                             }
                                         }}
-                                case .failure(let error):
-                                    self.viewModel.message = error.localizedDescription
+                                } else if let error = error {
+                                    self.viewModel.message = error.customLocalizedDescription
                                     self.viewModel.showAlet1.toggle()
+                                    self.viewModel.pass = ""
                                 }
                             }
                         } label: {
@@ -307,6 +302,7 @@ extension SettingsView{
                         }
                         Spacer()
                     }})
+                .padding(.horizontal)
                 .frame(width: 300, height: 300)
             }
         }
