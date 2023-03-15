@@ -12,11 +12,9 @@ struct UserProfileView: View {
     
     // MARK: - Properties
     
-    let top: [Int] = [1, 2, 3, 4, 5, 6, 7, 8]
-    let arrayPoints: [Int] = [400, 500, 200, 100, 600]
-    let trophys: [Int] = [1, 2, 3, 4, 5]
-    
     @Binding var show: Bool
+    
+    @ObservedObject var viewModel: ViewModel = ViewModel()
     
     
     // MARK: - Body
@@ -24,63 +22,74 @@ struct UserProfileView: View {
     var body: some View {
         if show {
             ZStack {
-                PopUpsView(title: "(USERNAME) Profile",bodyContent:{
-                    VStack(spacing: 0) {
-                        HStack(spacing: 0) {
-                            profilePicture
-                            factionImage
-                        }
-                        PopUpsView(title: "Top Plays") {
-                            topPlaysScroll
-                        }
-                        .frame(height: 230)
-                        PopUpsView(title: "Achievements") {
-                            achievementsScroll
-                        }
-                    }
-                }).overlay(content: {
-                    VStack{
-                        HStack{
-                            Spacer()
-                            Button {
-                                show.toggle()
-                            } label: {
-                                Image("")
-                                    .resizable()
-                                    .frame(width: 30,height:30)
-                                    .padding(.trailing,15)
-                                    .padding(.top,20)
-                                    .foregroundColor(Color.clear)
+                PopUpsView(title: "\(viewModel.profile.name)'s Profile", bodyContent:{
+                    Spacer()
+                })
+                .padding(.horizontal, 8)
+                VStack {
+                    HStack(spacing: 0) {
+                        PopUpsView(title: "PFP") {
+                            AsyncImage(url: URL(string: "\(viewModel.profile.image)")) { phase in
+                                switch phase {
+                                case .empty:
+                                    ProgressView()
+                                case .success(let image):
+                                    image.resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                case .failure:
+                                    Image(systemName: "photo")
+                                default:
+                                    EmptyView()
+                                }
                             }
                         }
+                        .padding(.top, 40)
+                        PopUpsView(title: viewModel.facTitle) {
+                            ImageFromAssets(image: viewModel.facImage)
+                        }
+                        .frame(width: 190, height: 190)
+                        .padding(.top, 40)
+                    }
+                    PopUpsView(title: "Top Plays") {
+                        topPlaysScroll
+                    }
+                    PopUpsView(title: "Achievements") {
+                        achievementsScroll
+                    }
+                    .padding(.bottom)
+                }
+            }.overlay(content: {
+                VStack{
+                    HStack{
                         Spacer()
-                    }})
+                        Button {
+                            show.toggle()
+                        } label: {
+                            Image("")
+                                .resizable()
+                                .frame(width: 30,height:30)
+                                .padding(.trailing,15)
+                                .padding(.top,20)
+                                .foregroundColor(Color.clear)
+                        }
+                    }
+                    Spacer()
+                }})
+            .onAppear {
+                viewModel.getUser()
+                viewModel.getUserPoints()
             }
-            
         }
     }
     
     
     // MARK: - Accesory Views
     
-    var profilePicture: some View {
-        PopUpsView(title: "PFP") {
-            // TODO: - Cuando esté el backend poner la foto del usuario
-            ImageFromAssets(image: "Ghost")
-        }
-    }
-    
-    var factionImage: some View {
-        PopUpsView(title: "Tia") {
-            ImageFromAssets(image: "Tía")
-        }
-    }
-    
     var topPlaysScroll: some View {
         ScrollView(.horizontal) {
             LazyHStack {
-                ForEach(top, id: \.self) { topPlays in
-                    printTopPlays(topPlay: topPlays, points: arrayPoints.randomElement() ?? 0)
+                ForEach(Array(viewModel.userPoints.enumerated()), id: \.offset) { index, userPoints in
+                    printTopPlays(topPlay: index+1, points: userPoints)
                 }
             }
         }
@@ -89,9 +98,11 @@ struct UserProfileView: View {
     var achievementsScroll: some View {
         ScrollView {
             LazyVStack {
-                ForEach(trophys, id: \.self) { trophy in
-                    printAchievements(numTrophys: trophy)
-                }
+                achievements(image: "ICON_ENTITY_PLAYER", title: "Hi-Score", desc: "Obtain a 6 digit score")
+                achievements(image: "ICON_ENEMY_8", title: "Almost get it", desc: "Be defeated by the boss")
+                achievements(image: "ICON_C_SLOT", title: "Deep pockets", desc: "Reach three inventory slots")
+                achievements(image: "ICON_ENTITY_SHOP", title: "Pension plan", desc: "Get 100 coins")
+                achievements(image: "ICON_ENTITY_PORTAL", title: "Cleaner", desc: "Leave an empty floor")
             }
         }
     }

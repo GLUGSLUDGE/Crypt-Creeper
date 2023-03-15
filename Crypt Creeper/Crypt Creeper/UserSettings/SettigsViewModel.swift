@@ -8,13 +8,6 @@
 import Foundation
 import UIKit
 
-struct user : Codable {
-    let name : String
-    var password : String
-    var email : String
-    var faction_id : Int
-    var profile_pic : String
-}
 class SettingsViewModel : ObservableObject {
     
     @Published var userName = ""

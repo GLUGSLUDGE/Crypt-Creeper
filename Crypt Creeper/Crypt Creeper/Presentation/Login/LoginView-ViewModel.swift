@@ -23,12 +23,6 @@ extension LoginView {
         let userDefaults = UserDefaults.standard
         private var token: String = ""
         
-        struct User: Codable {
-            var name: String
-            var password: String
-        }
-        
-     
         
         func login(completion: @escaping (_ result: String? , _ error: NetworkError.networkErrorEnum?) -> Void) {
             let url = "http://127.0.0.1:8000/api/user/login"
