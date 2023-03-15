@@ -50,7 +50,6 @@
 		2F8F3DFD29A6888C004E6700 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8F3DFC29A6888C004E6700 /* SignUpView.swift */; };
 		2FD2184A29B7C7940051CA79 /* UserProfileView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD2184929B7C7940051CA79 /* UserProfileView-ViewModel.swift */; };
 		2FD2184D29B7C7DC0051CA79 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD2184C29B7C7DC0051CA79 /* UserModel.swift */; };
-		2FD2184F29B7C8770051CA79 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD2184E29B7C8770051CA79 /* NetworkError.swift */; };
 		48255968299A91C800882744 /* SettigsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48255967299A91C800882744 /* SettigsViewModel.swift */; };
 		4825596C29A0272800882744 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4825596B29A0272800882744 /* SettingsView.swift */; };
 		486CBBE629B541F900C8C2CD /* SettingsViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486CBBE529B541F900C8C2CD /* SettingsViewExtension.swift */; };
@@ -107,7 +106,6 @@
 		2F8F3DFC29A6888C004E6700 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		2FD2184929B7C7940051CA79 /* UserProfileView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserProfileView-ViewModel.swift"; sourceTree = "<group>"; };
 		2FD2184C29B7C7DC0051CA79 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
-		2FD2184E29B7C8770051CA79 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		48255967299A91C800882744 /* SettigsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettigsViewModel.swift; sourceTree = "<group>"; };
 		4825596B29A0272800882744 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		486CBBE529B541F900C8C2CD /* SettingsViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewExtension.swift; sourceTree = "<group>"; };
@@ -450,7 +448,6 @@
 				2F8B6B2D29AA982000710391 /* NetworkHelper.swift in Sources */,
 				2F8B6B4129AD395E00710391 /* Camera&Gallery.swift in Sources */,
 				486CBBE629B541F900C8C2CD /* SettingsViewExtension.swift in Sources */,
-				2FD2184F29B7C8770051CA79 /* NetworkError.swift in Sources */,
 				28A09B2C29B039CB000C7DBE /* GameOverView.swift in Sources */,
 				2FD2184D29B7C7DC0051CA79 /* UserModel.swift in Sources */,
 				2F8B6B2929AA73F500710391 /* SignUpExtensions.swift in Sources */,
