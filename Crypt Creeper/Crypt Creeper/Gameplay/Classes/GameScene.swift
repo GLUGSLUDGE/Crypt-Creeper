@@ -19,7 +19,7 @@ import SwiftUI
     @Published var swordPower:Int = 0
     @Published var shieldPower:Int = 0
     @Published var inventorySlots:[Item] = []
-    
+
     @Published var showShop:Bool = false
     @Published var showTemple:Bool = false
     @Published var showWin:Bool = false
@@ -62,7 +62,12 @@ import SwiftUI
             //Rerolls the floor
             break
         case ItemType.GREENP:
-            //Turns every monster into power 1
+            item.empty()
+            enumerateChildNodes(withName: "ENEMY") { node, stop in
+                let tile = node as? Tile
+                tile?.power = 1
+                self.updateTile(tile: tile!)
+            }
             break
         case ItemType.POTION:
             //Cure
@@ -72,8 +77,7 @@ import SwiftUI
             swordPower = item.power
             item.power = tPower
             if item.power == 0 {
-                item.sprite = Image("ICON_ENTITY_EMPTY")
-                item.type = ItemType.NONE
+                item.empty()
             } else {
                 item.sprite = Image("ICON_SWORD_\(item.power)")
             }
@@ -83,8 +87,7 @@ import SwiftUI
             shieldPower = item.power
             item.power = tPower
             if item.power == 0 {
-                item.sprite = Image("ICON_ENTITY_EMPTY")
-                item.type = ItemType.NONE
+                item.empty()
             } else {
                 item.sprite = Image("ICON_SHIELD_\(item.power)")
             }
@@ -818,6 +821,16 @@ import SwiftUI
         case .Boss:
             tile.name = "BOSS"
             tile.texture = SKTexture(imageNamed: "ICON_ENEMY_8")
+        }
+    }
+    func updateTile(tile: Tile){
+        if tile.power == 0 {
+            
+        } else {
+            tile.name = "ENEMY"
+            tile.texture = SKTexture(imageNamed: "ICON_ENEMY_"+String(tile.power))
+            tile.removeAllChildren()
+            addPowerLabel(tile: tile)
         }
     }
     //MARK: - Tile / other

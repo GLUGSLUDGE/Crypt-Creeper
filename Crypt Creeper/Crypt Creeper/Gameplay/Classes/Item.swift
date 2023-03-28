@@ -22,6 +22,7 @@ enum ItemType: CaseIterable{
 }
 
 class Item: Identifiable, ObservableObject{
+    @Published var sprite:Image = Image("ICON_ENTITY_EMPTY")
     var type:ItemType {
         willSet {
             objectWillChange.send()
@@ -64,9 +65,7 @@ class Item: Identifiable, ObservableObject{
             sprite = Image("ICON_C_SLOT")
         }
     }
-    var sprite:Image = Image("ICON_ENTITY_EMPTY")
     func empty() {
-        print("emptied object")
         type = ItemType.NONE
         price = 0
         power = 0

@@ -116,9 +116,13 @@ struct ContentView: View {
                                         .border(.white)
                                     Spacer()
                                 }
-                                
                             }
                             .frame(width: 90, height: 20, alignment: .center)
+                            .onTapGesture {
+                                scene.increaseInventory()
+                                scene.showShop = true
+                                scene.coins = 100
+                            }
                             Spacer()
                             Text("LVL: \(uiLevel)")
                                 .foregroundColor(Color.ui.text)
