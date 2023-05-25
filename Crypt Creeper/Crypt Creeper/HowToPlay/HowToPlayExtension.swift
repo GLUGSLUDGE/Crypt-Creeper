@@ -203,26 +203,8 @@ extension HowToPlayView {
     }
     func vTemple()-> some View {
         VStack{
-            Divider()
-                .frame(width: 330 ,height:7)
-                .background(Color.white)
-                .padding(.horizontal,10)
-                .padding(.top,65)
-                .overlay(alignment: .top){
-                    HStack{
-                        Image("ICON_ENTITY_TEMPLE")
-                            .resizable()
-                            .frame(width: 100 ,height:100)
-                            .scaledToFit()
-                            .padding(.bottom,60)
-                        Text("TEMPLE")
-                            .font(.system(size: 32,weight:.heavy,design: .rounded))
-                            .foregroundColor(.white)
-                            .padding(.bottom,65)
-                            .padding(.leading, 10)
-                        Spacer()
-                    }
-                }
+            dividerImage(setImage: "ICON_ENTITY_TEMPLE", setText: "TEMPLE")
+            
             textView(text: "In the temple you may spend experience points on upgrades.")
             
             columView(setImage: "ICON_C_MAXHEALTH", setText: "MAX LIFE + (up to 6).")
