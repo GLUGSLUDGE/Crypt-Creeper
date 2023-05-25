@@ -53,12 +53,12 @@ struct LeaderBoardFactionItem : View {
 struct LeaderBoardItem:View{
     var top :Int = 0
     var player_name:String?
-    var player_photo:String?
+    var player_photo:String = "https://picsum.photos/200/300"
     var player_points:Int?
     var player_fation:String?
     var body: some View {
         HStack{
-            AsyncImage(url: URL(string: "\(player_photo)")) { phase in
+            AsyncImage(url: URL(string: "\( player_photo ?? "")" )) { phase in
                 switch phase {
                 case .empty:
                     Image("Ghost")

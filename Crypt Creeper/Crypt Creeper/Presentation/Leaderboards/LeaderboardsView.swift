@@ -64,8 +64,8 @@ struct LeaderboardsView: View {
                         ScrollView(){
                             VStack{
                                 if !viewModel.playerLeaderboard.isEmpty{
-                                    ForEach(viewModel.playerLeaderboard,id: \.points) { palyesScore in
-                                        LeaderBoardItem(player_name: palyesScore.username,player_photo: palyesScore.photo ,player_points: palyesScore.points, player_fation: palyesScore.faction )
+                                    ForEach(Array(viewModel.playerLeaderboard.enumerated()), id: \.1.points) { (index, palyesScore) in
+                                        LeaderBoardItem(top: index+1,player_name: palyesScore.username ,player_points: palyesScore.points, player_fation: palyesScore.faction )
                                     }
                                 }else{
                                     LeaderBoardItem()
