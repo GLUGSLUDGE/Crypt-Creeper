@@ -66,7 +66,6 @@ class LeaderboardViewModel : ObservableObject {
                 if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any], let leaderboard = json["LEADERBOARD"] as? [[String:Any]] {
                     
                     completion(leaderboard, nil)
-                    print(leaderboard)
                 }
                 
             } catch {
@@ -95,7 +94,6 @@ class LeaderboardViewModel : ObservableObject {
                 if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any], let leaderboard = json["LEADERBOARD"] as? [[String:Any]] {
                     
                     completion(leaderboard, nil)
-                    print(leaderboard)
                 }
                 
             } catch {

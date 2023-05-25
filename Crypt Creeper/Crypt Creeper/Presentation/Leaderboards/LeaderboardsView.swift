@@ -65,7 +65,7 @@ struct LeaderboardsView: View {
                             VStack{
                                 if !viewModel.playerLeaderboard.isEmpty{
                                     ForEach(viewModel.playerLeaderboard,id: \.points) { palyesScore in
-                                        LeaderBoardItem(top:1,player_name: palyesScore.username,player_photo: palyesScore.photo ,player_points: palyesScore.points, player_fation: palyesScore.faction )
+                                        LeaderBoardItem(player_name: palyesScore.username,player_photo: palyesScore.photo ,player_points: palyesScore.points, player_fation: palyesScore.faction )
                                     }
                                 }else{
                                     LeaderBoardItem()

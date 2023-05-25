@@ -58,10 +58,10 @@ struct LeaderBoardItem:View{
     var player_fation:String?
     var body: some View {
         HStack{
-            AsyncImage(url: URL(string: "\( player_photo)")) { phase in
+            AsyncImage(url: URL(string: "\(player_photo)")) { phase in
                 switch phase {
                 case .empty:
-                    Image(systemName: "photo")
+                    Image("Ghost")
                         .resizable()
                         .frame(width: 75, height: 75)
                         .padding(4)
@@ -87,7 +87,7 @@ struct LeaderBoardItem:View{
             }
             VStack(spacing: 6){
                 HStack{
-                    Text("\(top)-\(player_name ?? "Player")")
+                    Text("\(player_name ?? "Player")")
                     Spacer()
                 }
                 HStack{
