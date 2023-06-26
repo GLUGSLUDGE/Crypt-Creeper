@@ -85,15 +85,6 @@ struct WinView: View {
         }
         .navigationBarBackButtonHidden(true)
         .onAppear{
-            vm.getScoreFromPlayer { score, error  in
-                if let score = score {
-                    if currentScore > score {
-                        vm.showHighscoreLabel = true
-                    }
-                } else if let error = error {
-                    print(error)
-                }
-            }
         }
     }
 }
@@ -106,7 +97,7 @@ struct WinView_Previews: PreviewProvider {
 
 class GameOverViewModel: ObservableObject {
     @Published var showHighscoreLabel = false
-   
+   /*
     func getScoreFromPlayer(completion: @escaping (_ maxScore: Int?, _ error: NetworkError?) -> ()) {
         let url = "http://127.0.0.1:8000/api/play/get_higher_points"
         
@@ -136,5 +127,5 @@ class GameOverViewModel: ObservableObject {
     }
     func onError(error: String){
         print(error)
-    }
+    }*/
 }

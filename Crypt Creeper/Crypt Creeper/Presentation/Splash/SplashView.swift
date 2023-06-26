@@ -15,22 +15,13 @@ struct SplashView: View {
     @State private var isActive: Bool = false
     @State private var size = 0.8
     @State private var opacity = 0.5
-    @State var userDefaults = UserDefaults.standard
-    
     
     // MARK: - Body
     
     var body: some View {
         NavigationView {
             if isActive {
-                if userDefaults.string(forKey: "savedToken") != nil {
-                    
-                   
-                    HomeView()
-                    
-                } else {
-                    LoginView()
-                }
+                HomeView()
             } else {
                 ZStack {
                     Color.accentColor
@@ -53,8 +44,6 @@ struct SplashView: View {
                         }
                     }
                     .onAppear {
-                        let tokenm = userDefaults.string(forKey: "savedToken")
-                        NetworkHelper.shared.setToken(tokens: "\(tokenm ?? "")")
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                             withAnimation {
                                 self.isActive = true

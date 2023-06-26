@@ -18,11 +18,7 @@ struct PopUps : View {
                     VStack{
                         ScrollView(){
                             VStack{
-                                LeaderBoardItem()
-                                LeaderBoardItem()
-                                LeaderBoardItem()
-                                LeaderBoardItem()
-                                LeaderBoardItem()
+                                
                             }
                         }
                         Text("hola")
