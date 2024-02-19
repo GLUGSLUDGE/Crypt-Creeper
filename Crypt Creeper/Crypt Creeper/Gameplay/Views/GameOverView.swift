@@ -78,15 +78,7 @@ struct GameOverView: View {
         }
         .navigationBarBackButtonHidden(true)
         .onAppear {
-            vm.getScoreFromPlayer { score, error  in
-                if let score = score {
-                    if currentScore > score {
-                        vm.showHighscoreLabel = true
-                    }
-                } else if let error = error {
-                    print(error)
-                }
-            }
+            
         }
     }
 }

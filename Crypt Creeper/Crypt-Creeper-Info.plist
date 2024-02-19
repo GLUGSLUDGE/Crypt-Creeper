@@ -2,8 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSCameraUsageDescription</key>
-	<string>We need the camera permission</string>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIColorName</key>
+		<string>.white</string>
+		<key>UIImageName</key>
+		<string>ImageGlugLogo</string>
+	</dict>
 	<key>UIAppFonts</key>
 	<array>
 		<string>m6x11.ttf</string>

@@ -96,9 +96,6 @@ struct HomeView: View {
             }
             .ignoresSafeArea()
             HowToPlayView(show: $showHowToPlay)
-            UserProfileView(show: $showProfile)
-            SettingsView(show: $showSettings)
-            LeaderboardsView(show: $showLeaderboards)
         }
         .navigationBarBackButtonHidden()
     }
